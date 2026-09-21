@@ -13,14 +13,24 @@ export default defineNuxtConfig({
     { path: '~/components', pathPrefix: false }
   ],
 
-  app: {
-    head: {
-      htmlAttrs: { lang: 'es' }
+  runtimeConfig: {
+    public: {
+      // No domain confirmed yet — falls back to localhost so canonical/OG
+      // URLs are still well-formed in dev. Set NUXT_PUBLIC_SITE_URL for
+      // real deploys once Diego picks the domain. Never hardcode a guess
+      // here.
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
     }
   },
 
+  // html lang/dir and hreflang alternates come from @nuxtjs/i18n's
+  // useLocaleHead() in app.vue — no static htmlAttrs here, it would be
+  // wrong for the /en/ route.
+
   i18n: {
-    baseUrl: '/',
+    // Needs to be an absolute origin (not '/') for hreflang alternates to
+    // be generated as absolute URLs, which is what search engines expect.
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     defaultLocale: 'es',
     strategy: 'prefix_except_default',
     locales: [

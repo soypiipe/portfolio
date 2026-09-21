@@ -39,9 +39,9 @@ onMounted(() => {
         <span
           class="relative flex h-8 w-8 items-center justify-center border border-hairline bg-surface font-mono text-xs font-medium tracking-wider text-primary"
         >
-          <span class="absolute -top-1 -left-1 font-mono text-[10px] leading-none text-accent">[</span>
+          <span class="absolute -top-1 -left-1 font-mono text-[10px] leading-none text-accent-hover">[</span>
           DA
-          <span class="absolute -bottom-1 -right-1 font-mono text-[10px] leading-none text-accent">]</span>
+          <span class="absolute -bottom-1 -right-1 font-mono text-[10px] leading-none text-accent-hover">]</span>
         </span>
         <span class="flex flex-col leading-none">
           <span class="font-sans text-sm font-medium tracking-tight text-primary">{{ t('nav.brand') }}</span>
@@ -58,7 +58,7 @@ onMounted(() => {
           class="flex items-center gap-1.5 transition-colors hover:text-primary"
           :class="activeId === link.href.slice(1) ? 'text-primary' : ''"
         >
-          <span class="text-[10px]" :class="activeId === link.href.slice(1) ? 'text-accent' : 'text-secondary/60'">{{ link.id }}.</span>
+          <span class="text-[10px]" :class="activeId === link.href.slice(1) ? 'text-accent-hover' : 'text-secondary/60'">{{ link.id }}.</span>
           <span>{{ t(link.labelKey) }}</span>
         </a>
       </nav>
@@ -70,9 +70,9 @@ onMounted(() => {
           class="flex items-center border border-hairline bg-surface/80 px-2 py-1 font-mono text-[11px] transition-colors hover:border-secondary"
           :aria-label="otherLocale === 'en' ? 'Switch to English' : 'Cambiar a español'"
         >
-          <span :class="locale === 'es' ? 'text-accent font-medium' : 'text-secondary'">ES</span>
+          <span :class="locale === 'es' ? 'text-accent-hover font-medium' : 'text-secondary'">ES</span>
           <span class="mx-1.5 text-hairline">/</span>
-          <span :class="locale === 'en' ? 'text-accent font-medium' : 'text-secondary'">EN</span>
+          <span :class="locale === 'en' ? 'text-accent-hover font-medium' : 'text-secondary'">EN</span>
         </NuxtLink>
 
         <a
@@ -80,12 +80,12 @@ onMounted(() => {
           class="hidden items-center gap-1.5 font-mono text-xs text-secondary transition-colors hover:text-primary lg:inline-flex"
         >
           <span>{{ t('nav.cv') }}</span>
-          <span class="text-accent">↓</span>
+          <span class="text-accent-hover">↓</span>
         </a>
 
         <a
           href="#contacto"
-          class="flex h-9 items-center justify-center border border-accent bg-accent px-4 font-sans text-xs font-medium tracking-wide text-bg transition-all hover:-translate-y-0.5 hover:bg-accent-hover hover:border-accent-hover"
+          class="flex h-9 items-center justify-center border border-accent-hover bg-accent-hover px-4 font-sans text-xs font-medium tracking-wide text-bg transition-all hover:-translate-y-0.5 hover:brightness-110"
         >
           {{ t('nav.hablemos') }}
         </a>
@@ -125,7 +125,7 @@ onMounted(() => {
           :class="activeId === link.href.slice(1) ? 'text-primary' : ''"
           @click="closeMobile"
         >
-          <span class="text-xs" :class="activeId === link.href.slice(1) ? 'text-accent' : 'text-secondary/60'">{{ link.id }}.</span>
+          <span class="text-xs" :class="activeId === link.href.slice(1) ? 'text-accent-hover' : 'text-secondary/60'">{{ link.id }}.</span>
           <span>{{ t(link.labelKey) }}</span>
         </a>
       </nav>
@@ -135,16 +135,16 @@ onMounted(() => {
           :to="switchLocalePath(otherLocale)"
           class="flex items-center border border-hairline bg-surface/80 px-2 py-1 font-mono text-[11px]"
         >
-          <span :class="locale === 'es' ? 'text-accent font-medium' : 'text-secondary'">ES</span>
+          <span :class="locale === 'es' ? 'text-accent-hover font-medium' : 'text-secondary'">ES</span>
           <span class="mx-1.5 text-hairline">/</span>
-          <span :class="locale === 'en' ? 'text-accent font-medium' : 'text-secondary'">EN</span>
+          <span :class="locale === 'en' ? 'text-accent-hover font-medium' : 'text-secondary'">EN</span>
         </NuxtLink>
         <a href="/cv/diego-amado-cv.pdf" class="font-mono text-xs text-secondary">{{ t('nav.cv') }}</a>
       </div>
 
       <a
         href="#contacto"
-        class="flex h-11 items-center justify-center border border-accent bg-accent font-sans text-sm font-medium text-bg"
+        class="flex h-11 items-center justify-center border border-accent-hover bg-accent-hover font-sans text-sm font-medium text-bg"
         @click="closeMobile"
       >
         {{ t('nav.hablemos') }}

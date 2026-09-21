@@ -20,7 +20,7 @@ const { t } = useI18n()
         <div class="flex flex-col justify-center lg:col-span-7 lg:pr-4">
           <div class="mb-4 inline-flex w-fit items-center gap-2 motion-safe:animate-fade-up">
             <div
-              class="flex items-center gap-2 border border-hairline bg-surface px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest text-accent"
+              class="flex items-center gap-2 border border-hairline bg-surface px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest text-accent-hover"
             >
               <span class="h-1.5 w-1.5 bg-accent" />
               {{ t('hero.eyebrow') }}
@@ -52,7 +52,7 @@ const { t } = useI18n()
             >
               <span class="h-1.5 w-1.5 bg-accent transition-transform group-hover:scale-125" />
               <span>{{ t('hero.ctaPrimary') }}</span>
-              <span class="font-mono text-secondary transition-colors group-hover:text-accent">→</span>
+              <span class="font-mono text-secondary transition-colors group-hover:text-accent-hover">→</span>
             </a>
 
             <a
@@ -60,7 +60,7 @@ const { t } = useI18n()
               class="flex h-11 items-center gap-2 border border-transparent px-5 font-mono text-xs uppercase tracking-wider text-secondary transition-all hover:-translate-y-0.5 hover:border-hairline hover:text-primary"
             >
               <span>{{ t('hero.ctaSecondary') }}</span>
-              <span class="font-mono text-accent">↓</span>
+              <span class="font-mono text-accent-hover">↓</span>
             </a>
           </div>
 
@@ -89,20 +89,23 @@ const { t } = useI18n()
             </div>
 
             <div class="relative aspect-[4/3] overflow-hidden border border-hairline bg-bg">
-              <img
-                src="/images/hero-placeholder-ai.jpg"
-                :alt="t('hero.photoAlt')"
-                width="1200"
-                height="896"
-                loading="eager"
-                fetchpriority="high"
-                class="h-full w-full object-cover grayscale-[92%] contrast-[108%] brightness-[97%]"
-              >
+              <picture>
+                <source srcset="/images/hero-placeholder-ai.webp" type="image/webp">
+                <img
+                  src="/images/hero-placeholder-ai.jpg"
+                  :alt="t('hero.photoAlt')"
+                  width="1200"
+                  height="896"
+                  loading="eager"
+                  fetchpriority="high"
+                  class="h-full w-full object-cover grayscale-[92%] contrast-[108%] brightness-[97%]"
+                >
+              </picture>
             </div>
 
             <div class="mt-2 flex items-center justify-between border-t border-hairline px-1 pt-2 font-mono text-[10px] text-secondary">
               <span class="text-secondary/80">PLACEHOLDER // POR REEMPLAZAR</span>
-              <span class="font-mono text-accent">EST. 2025</span>
+              <span class="font-mono text-accent-hover">EST. 2025</span>
             </div>
           </div>
 

@@ -1,2 +1,9 @@
-User-Agent: *
-Disallow:
+# Deliberately blocking all crawling for now — content isn't locked yet
+# (About bio is still a draft, hero photo is an AI placeholder, contact
+# info isn't filled in — see docs/progress.md, Fase 8 "Content lock").
+# Flip this to allow once the site is actually ready to be found and
+# deployed to a real domain.
+User-agent: *
+Disallow: /
+
+Sitemap: /sitemap.xml

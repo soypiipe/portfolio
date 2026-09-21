@@ -10,7 +10,7 @@ const { t } = useI18n()
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
         <div class="lg:col-span-3">
           <div class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-secondary">
-            <span class="text-accent">03.</span>
+            <span class="text-accent-hover">03.</span>
             <span>{{ t('projects.eyebrow') }}</span>
           </div>
         </div>

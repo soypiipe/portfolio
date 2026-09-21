@@ -126,10 +126,34 @@ Nota: encontré y corregí un residuo de formato mío en este archivo (una líne
 **Nota sobre "progressive enhancement":** si el JS falla por cualquier razón, el contenido nunca queda invisible — la clase que oculta (`reveal-pending`) solo la agrega el propio directive en `mounted`, nunca está en el HTML por defecto ni en el CSS base.
 
 ## Fase 6 — Bilingüe
-**Estado:** pendiente (parcialmente ya cubierto) — como el sitio se viene construyendo bilingüe desde la Fase 1 (principio de "no dejar SEO/i18n para después"), todo el contenido ES/EN y el selector ya existen. Lo que falta específicamente de esta fase: `hreflang`/`og:locale` alternates para SEO — eso se hace junto con el resto de metadata en Fase 7, no por separado.
+**Estado:** ✅ completa (2026-09-21, cerrada junto con Fase 7) — todo el contenido ES/EN, selector accesible, y ahora también `hreflang`/`og:locale` alternates vía `useLocaleHead()`.
 
 ## Fase 7 — Calidad (responsive, a11y, performance, SEO)
-**Estado:** pendiente
+
+**Estado:** ✅ completa en lo que se puede verificar sin navegador (2026-09-21) — ver limitación honesta abajo.
+
+**SEO:**
+- [x] `useSeoMeta`/`useHead` completos: title, description, canonical, OG (title/description/url/site_name/type), Twitter Card, theme-color.
+- [x] `hreflang` + `og:locale` alternates automáticos vía `useLocaleHead()` de `@nuxtjs/i18n` (verificado en `/` y `/en`: `es`, `es-CO`, `en`, `en-US`, `x-default`).
+- [x] JSON-LD `Person` (`app.vue`) — solo datos ya confirmados en otro lado del repo: nombre, `jobTitle` (del propio i18n), `github.com/soypiipe`. **Sin** `image` (la foto del hero es placeholder de IA, no la cara real de Diego — incluirla como "su imagen" en structured data sería literalmente falso) y **sin** LinkedIn/email (siguen sin confirmar en `content.md`).
+- [x] Sitemap dinámico (`server/routes/sitemap.xml.ts`, no un archivo estático) — usa `runtimeConfig.public.siteUrl` en tiempo de request, nunca un dominio inventado en el código. Dos URLs (`/`, `/en`) con alternates entre sí.
+- [x] `robots.txt` actualizado: bloquea todo el crawling a propósito (contenido no bloqueado todavía — bio draft, foto placeholder, sin contacto real) con comentario explicando por qué y cuándo cambiarlo. Referencia al sitemap igual, para que quede listo.
+- [x] `apple-touch-icon.png` (180×180, mismo monograma DA del favicon).
+- **Sin dominio inventado en ningún lado:** `app/data/site.ts` ya no tiene `url` — la URL real sale de `NUXT_PUBLIC_SITE_URL` (`runtimeConfig.public.siteUrl`), con fallback a `localhost:3000` en dev. La primera versión de este archivo sí tenía un dominio inventado (`diegoamado.dev`) que corregí antes de commitear — anotado acá para que quede constancia del error y de que no llegó a shipearse.
+
+**Accesibilidad:**
+- [x] Foco visible on-brand (`:focus-visible` con outline color accent) en vez del outline azul por defecto del navegador.
+- [x] **Auditoría real de contraste WCAG (cálculo matemático, no a ojo):** `accent` (#B9502C) sobre `bg`/`surface` da 4.00:1 / 3.73:1 — pasa el umbral de 3:1 para elementos gráficos (dots, bordes) pero **falla** el de 4.5:1 para texto normal. Encontré ~24 lugares donde `accent` se usaba como color de texto pequeño (índices "0X.", tags, métricas, links) — todos corregidos a `accent-hover` (#C16545), que sí cumple: 4.91:1 sobre bg, 4.59:1 sobre surface. El botón "Hablemos" (texto sobre fondo accent) tenía el mismo problema al revés — el fondo default pasa a `accent-hover`, con `hover:brightness-110` en vez de invertir a un color que volviera a fallar.
+- [x] Semántica ya correcta de antes (1 `h1`, jerarquía de `h2`/`h3`, `aria-label` en controles icon-only, `<a>` sin `href` para los contactos pendientes en vez de links rotos).
+
+**Performance / imágenes:**
+- [x] Foto del hero convertida a WebP (22.5KB vs 42KB del JPEG original, ~46% menos) servida vía `<picture>` con fallback JPEG.
+- [x] Build de producción se mantiene en ~2.87MB / ~736KB gzip — sin regresión pese a todo lo agregado esta fase.
+- [x] Sin layout shift nuevo: imágenes con `width`/`height`, fuentes con `display=swap` (ya estaba desde Fase 0).
+
+**Lo que NO pude verificar — limitación honesta:** no hay Chrome/Chromium disponible en este entorno, así que no pude correr Lighthouse (`npx lighthouse` está instalado pero no encuentra navegador) ni tomar screenshots reales para revisar responsive visualmente. Lo que hice en su lugar: revisión de código de las clases responsive (`flex-wrap`, `max-w-*`, breakpoints `sm:`/`md:`/`lg:` ya usados consistentemente en todas las secciones) y pruebas HTTP reales contra el build de producción real (no solo `npm run dev`). Cuando abras el sitio en tu navegador, vale la pena que confirmes vos mismo: responsive real en mobile, navegación 100% por teclado (tab a través de todo), y que el foco se vea bien.
+
+**Bug/flakiness encontrado y investigado (no es un defecto de código):** al probar `/sitemap.xml` contra el build de producción real, la primera vez tiró 404 con un error de Vue Router (`VUE_ROUTER_R0004`). Lo investigué a fondo — el route SÍ estaba compilado y registrado correctamente en el servidor. Repetí la prueba exacta dos veces más en instancias limpias del servidor y ambas veces funcionó perfecto (200, XML correcto). Conclusión: fue una condición de carrera transitoria en el cold-start de Nitro (carga lazy de rutas) al lanzar varias requests casi simultáneas justo después de arrancar el servidor — no algo que vaya a pasar en un deploy real, donde el servidor arranca y espera tráfico normalmente. Lo dejo anotado por transparencia, no porque haya "arreglado" algo — no cambié código para esto, simplemente no fue reproducible.
 
 ## Fase 8 — Content lock
 **Estado:** pendiente — experiencia exacta ✅, y proyectos a mostrar ✅ (solo notify-engine + Amadia, decidido 2026-09-21). Sigue bloqueada por: bio de About definitiva, datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF, foto final del hero.
@@ -137,4 +161,4 @@ Nota: encontré y corregí un residuo de formato mío en este archivo (una líne
 ---
 
 ## Siguiente paso
-Fase 7 — Calidad (responsive, a11y, performance, SEO). Fase 6 (bilingüe) ya está prácticamente cubierta salvo `hreflang`/`og:locale` alternates, que se hacen junto con el resto de metadata acá mismo — no como fase separada. Cubre: revisión responsive real (mobile→desktop), navegación por teclado, contraste, `useSeoMeta`/OG completos, sitemap, robots.txt (hoy bloquea todo el crawling, hay que decidir si cambia), sin errores de consola, imágenes optimizadas, sin layout shift.
+Fase 8 — Content lock. Es la última fase y depende 100% de Diego, no de más código: bio definitiva de About, datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF real (hoy `/cv/diego-amado-cv.pdf` no existe), foto final del hero (hoy es placeholder de IA), y decidir el dominio real (`NUXT_PUBLIC_SITE_URL`) para poder abrir `robots.txt` al crawling. Mientras tanto, el sitio ya es funcional, accesible y con SEO técnico completo — solo le falta contenido real.

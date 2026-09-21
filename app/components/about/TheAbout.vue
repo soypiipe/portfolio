@@ -13,7 +13,7 @@ const labelKeys = ['analisis', 'desarrollo', 'automatizacion', 'ia', 'aprendizaj
         <!-- Index + eyebrow, left rail -->
         <div class="lg:col-span-3">
           <div class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-secondary">
-            <span class="text-accent">02.</span>
+            <span class="text-accent-hover">02.</span>
             <span>{{ t('about.eyebrow') }}</span>
           </div>
         </div>

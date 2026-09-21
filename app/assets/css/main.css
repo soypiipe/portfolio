@@ -12,6 +12,13 @@ body {
   @apply bg-accent/20 text-primary;
 }
 
+/* Visible focus for keyboard navigation, on-brand instead of the browser
+   default. `:focus-visible` so it doesn't show on mouse clicks. */
+:focus-visible {
+  outline: 2px solid theme('colors.accent');
+  outline-offset: 2px;
+}
+
 .grid-bg {
   background-size: 48px 48px;
   background-image:
@@ -21,7 +28,7 @@ body {
 
 /*
  * Section reveal on scroll. The `reveal` class only ever gets added by the
- * v-reveal directive (app/plugins/reveal.client.ts) *after* it has already
+ * v-reveal directive (app/plugins/reveal.ts) *after* it has already
  * applied `reveal-pending` — so if JS fails to load, nothing ever gets
  * `reveal-pending` and content stays visible by default. `reveal` alone
  * just carries the transition; `reveal-pending` is what hides it.

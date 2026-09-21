@@ -16,7 +16,7 @@ function dateRange(entry: ExperienceEntry) {
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
         <div class="lg:col-span-3">
           <div class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-secondary">
-            <span class="text-accent">04.</span>
+            <span class="text-accent-hover">04.</span>
             <span>{{ t('experience.eyebrow') }}</span>
           </div>
         </div>
@@ -34,7 +34,7 @@ function dateRange(entry: ExperienceEntry) {
                   <h3 class="font-sans text-xl font-bold text-primary sm:text-2xl">
                     {{ pick(entry.role) }}
                   </h3>
-                  <p class="font-mono text-xs uppercase tracking-widest text-accent">
+                  <p class="font-mono text-xs uppercase tracking-widest text-accent-hover">
                     {{ entry.company }} · {{ pick(entry.companyCountry) }}
                   </p>
                 </div>
@@ -67,7 +67,7 @@ function dateRange(entry: ExperienceEntry) {
                   <p class="mt-1 max-w-2xl font-sans text-sm leading-relaxed text-secondary">
                     {{ pick(achievement.description) }}
                   </p>
-                  <p class="mt-1.5 font-mono text-xs text-accent">
+                  <p class="mt-1.5 font-mono text-xs text-accent-hover">
                     {{ pick(achievement.metric) }}
                   </p>
                 </div>

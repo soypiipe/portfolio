@@ -34,7 +34,7 @@ const dateRangeLabel = computed(() => {
 
     <!-- Content -->
     <div class="sm:col-span-9">
-      <div class="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-accent">
+      <div class="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-accent-hover">
         <span>{{ t(project.kindKey) }}</span>
         <template v-if="project.role">
           <span class="text-hairline">/</span>
@@ -69,7 +69,7 @@ const dateRangeLabel = computed(() => {
           <p class="mt-1 max-w-2xl font-sans text-sm leading-relaxed text-secondary">
             {{ pick(achievement.description) }}
           </p>
-          <p class="mt-1.5 font-mono text-xs text-accent">
+          <p class="mt-1.5 font-mono text-xs text-accent-hover">
             {{ pick(achievement.metric) }}
           </p>
         </div>
