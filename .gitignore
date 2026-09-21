@@ -1,0 +1,35 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+.vscode
+*.swp
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# AI tooling / local assistant config — never part of the deployed project
+.claude/
+.claude
+.mcp.json
+.cursor/
+.windsurf/
+CLAUDE.local.md
+*.claude-scratch*

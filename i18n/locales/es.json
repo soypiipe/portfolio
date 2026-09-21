@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "brand": "Diego Amado",
+    "inicio": "Inicio",
+    "sobreMi": "Sobre mí",
+    "proyectos": "Proyectos",
+    "experiencia": "Experiencia",
+    "stack": "Stack",
+    "contacto": "Contacto",
+    "cv": "Descargar CV",
+    "hablemos": "Hablemos"
+  },
+  "hero": {
+    "eyebrow": "Ingeniero de Sistemas · Software Engineer",
+    "name": "Diego Amado",
+    "statement": "Construyo sistemas digitales que convierten problemas complejos en soluciones simples.",
+    "supporting": "Desarrollo web, automatización e inteligencia artificial para resolver problemas reales.",
+    "ctaPrimary": "Ver proyectos",
+    "ctaSecondary": "Descargar CV",
+    "availability": "Disponible para nuevos proyectos",
+    "photoAlt": "Espacio de trabajo minimalista con laptop, código en pantalla y paisaje de montaña de fondo (imagen de referencia, pendiente de reemplazo)"
+  },
+  "footer": {
+    "role": "Ingeniero de Sistemas · Software Engineer",
+    "rights": "Todos los derechos reservados."
+  }
+}
