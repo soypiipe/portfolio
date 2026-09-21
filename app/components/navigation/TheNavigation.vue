@@ -58,7 +58,7 @@ onMounted(() => {
           class="flex items-center gap-1.5 transition-colors hover:text-primary"
           :class="activeId === link.href.slice(1) ? 'text-primary' : ''"
         >
-          <span class="text-[10px]" :class="activeId === link.href.slice(1) ? 'text-accent-hover' : 'text-secondary/60'">{{ link.id }}.</span>
+          <span class="text-[10px]" :class="activeId === link.href.slice(1) ? 'text-accent-hover' : 'text-secondary/80'">{{ link.id }}.</span>
           <span>{{ t(link.labelKey) }}</span>
         </a>
       </nav>
@@ -125,7 +125,7 @@ onMounted(() => {
           :class="activeId === link.href.slice(1) ? 'text-primary' : ''"
           @click="closeMobile"
         >
-          <span class="text-xs" :class="activeId === link.href.slice(1) ? 'text-accent-hover' : 'text-secondary/60'">{{ link.id }}.</span>
+          <span class="text-xs" :class="activeId === link.href.slice(1) ? 'text-accent-hover' : 'text-secondary/80'">{{ link.id }}.</span>
           <span>{{ t(link.labelKey) }}</span>
         </a>
       </nav>

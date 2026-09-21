@@ -37,7 +37,7 @@ const actions = [
             <li v-for="action in actions" :key="action.key">
               <a
                 aria-disabled="true"
-                class="inline-flex items-center gap-2 border border-hairline px-4 py-2.5 font-mono text-xs uppercase tracking-wide text-secondary/70"
+                class="inline-flex items-center gap-2 border border-hairline px-4 py-2.5 font-mono text-xs uppercase tracking-wide text-secondary/80"
               >
                 <Icon :name="action.icon" class="h-4 w-4 shrink-0" aria-hidden="true" />
                 {{ t(`contact.actions.${action.key}`) }}
@@ -45,7 +45,7 @@ const actions = [
             </li>
           </ul>
 
-          <p class="mt-4 font-mono text-xs text-secondary/60">
+          <p class="mt-4 font-mono text-xs text-secondary/80">
             {{ t('contact.pendingNote') }}
           </p>
         </div>

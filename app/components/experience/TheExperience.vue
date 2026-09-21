@@ -40,7 +40,7 @@ function dateRange(entry: ExperienceEntry) {
                 </div>
                 <div class="shrink-0 text-left font-mono text-xs text-secondary sm:text-right">
                   <div>{{ dateRange(entry) }}</div>
-                  <div class="text-secondary/70">{{ pick(entry.modality) }} · {{ pick(entry.location) }}</div>
+                  <div class="text-secondary/80">{{ pick(entry.modality) }} · {{ pick(entry.location) }}</div>
                 </div>
               </div>
 

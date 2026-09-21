@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Font loading is in app.vue (preconnect + <link rel="stylesheet">), not a
+   CSS @import here — @import is render-blocking (the browser can't even
+   discover it until it's already parsed this whole file); a <link> in the
+   document head is discovered immediately and loads in parallel. Found via
+   a real Lighthouse run ("Render-blocking requests"). */
 
 @tailwind base;
 @tailwind components;

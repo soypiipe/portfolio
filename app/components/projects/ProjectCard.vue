@@ -27,7 +27,7 @@ const dateRangeLabel = computed(() => {
         <span class="absolute -top-1 -left-1 h-2 w-2 border-t border-l border-accent" aria-hidden="true" />
         <span class="absolute -bottom-1 -right-1 h-2 w-2 border-b border-r border-accent" aria-hidden="true" />
       </div>
-      <div v-if="dateRangeLabel" class="font-mono text-[11px] text-secondary/70 sm:text-left">
+      <div v-if="dateRangeLabel" class="font-mono text-[11px] text-secondary/80 sm:text-left">
         {{ dateRangeLabel }}
       </div>
     </div>

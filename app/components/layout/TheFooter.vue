@@ -12,7 +12,7 @@ const year = new Date().getFullYear()
         <span class="border border-hairline px-1.5 py-0.5 text-primary">DA</span>
         <div class="flex flex-col leading-tight">
           <span class="text-primary">{{ t('nav.brand') }}</span>
-          <span class="text-secondary/70">{{ t('footer.role') }}</span>
+          <span class="text-secondary/80">{{ t('footer.role') }}</span>
         </div>
       </div>
 
@@ -22,7 +22,7 @@ const year = new Date().getFullYear()
         </a>
       </nav>
 
-      <span class="text-secondary/70">© {{ year }} Diego Amado. {{ t('footer.rights') }}</span>
+      <span class="text-secondary/80">© {{ year }} Diego Amado. {{ t('footer.rights') }}</span>
     </div>
   </footer>
 </template>

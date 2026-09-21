@@ -85,7 +85,7 @@ const { t } = useI18n()
 
             <div class="mb-2 flex items-center justify-between border-b border-hairline px-1 pb-2 font-mono text-[10px] text-secondary">
               <span class="tracking-widest">FIG. 01 // DEV_WORKSPACE</span>
-              <span class="text-secondary/60 tracking-widest">REF · IA</span>
+              <span class="text-secondary/80 tracking-widest">REF · IA</span>
             </div>
 
             <div class="relative aspect-[4/3] overflow-hidden border border-hairline bg-bg">
@@ -109,7 +109,7 @@ const { t } = useI18n()
             </div>
           </div>
 
-          <div class="mt-2.5 flex items-center justify-between px-1 font-mono text-[10px] text-secondary/60">
+          <div class="mt-2.5 flex items-center justify-between px-1 font-mono text-[10px] text-secondary/80">
             <span>// HARDWARE & COGNITIVE CRAFT</span>
           </div>
         </div>

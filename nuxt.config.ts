@@ -33,6 +33,13 @@ export default defineNuxtConfig({
     baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     defaultLocale: 'es',
     strategy: 'prefix_except_default',
+    // Explicitly off: the module's default browser-language detection was
+    // silently 302-redirecting "/" to "/en" for any visitor (or crawler)
+    // with an English Accept-Language header — found via a real Lighthouse
+    // run ("Avoid multiple page redirects"). Spanish is the primary
+    // language by design (see CLAUDE.md); visitors switch manually via the
+    // nav toggle. This also keeps "/" a single stable, crawlable URL.
+    detectBrowserLanguage: false,
     locales: [
       { code: 'es', language: 'es-CO', name: 'Español', file: 'es.json' },
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json' }
