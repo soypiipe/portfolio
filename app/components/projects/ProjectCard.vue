@@ -2,9 +2,19 @@
 import type { Project } from '~/data/projects'
 
 const props = defineProps<{ project: Project; index: number }>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const { pick } = useLocalized()
 
 const initial = computed(() => t(props.project.nameKey).charAt(0))
+
+const description = computed(() =>
+  props.project.summary ? pick(props.project.summary) : t(props.project.descriptionKey ?? '')
+)
+
+const dateRangeLabel = computed(() => {
+  if (!props.project.startDate) return null
+  return formatDateRange(props.project.startDate, props.project.endDate, props.project.current, locale.value, t('common.present'))
+})
 </script>
 
 <template>
@@ -17,12 +27,19 @@ const initial = computed(() => t(props.project.nameKey).charAt(0))
         <span class="absolute -top-1 -left-1 h-2 w-2 border-t border-l border-accent" aria-hidden="true" />
         <span class="absolute -bottom-1 -right-1 h-2 w-2 border-b border-r border-accent" aria-hidden="true" />
       </div>
+      <div v-if="dateRangeLabel" class="font-mono text-[11px] text-secondary/70 sm:text-left">
+        {{ dateRangeLabel }}
+      </div>
     </div>
 
     <!-- Content -->
     <div class="sm:col-span-9">
-      <div class="mb-2 font-mono text-[11px] uppercase tracking-widest text-accent">
-        {{ t(project.kindKey) }}
+      <div class="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest text-accent">
+        <span>{{ t(project.kindKey) }}</span>
+        <template v-if="project.role">
+          <span class="text-hairline">/</span>
+          <span class="text-secondary normal-case">{{ pick(project.role) }}</span>
+        </template>
       </div>
 
       <h3 class="mb-2 font-sans text-xl font-bold text-primary sm:text-2xl">
@@ -30,10 +47,35 @@ const initial = computed(() => t(props.project.nameKey).charAt(0))
       </h3>
 
       <p class="mb-4 max-w-2xl font-sans text-sm leading-relaxed text-secondary sm:text-base">
-        {{ t(project.descriptionKey) }}
+        {{ description }}
       </p>
 
-      <ul class="flex flex-wrap gap-x-5 gap-y-2" :aria-label="t('projects.techAriaLabel', { name: t(project.nameKey) })">
+      <ul v-if="project.responsibilities" class="mb-6 flex flex-col gap-2">
+        <li
+          v-for="(item, i) in pick(project.responsibilities)"
+          :key="i"
+          class="flex gap-2.5 font-sans text-sm leading-relaxed text-secondary"
+        >
+          <span class="mt-2 h-1 w-1 shrink-0 bg-hairline" aria-hidden="true" />
+          <span>{{ item }}</span>
+        </li>
+      </ul>
+
+      <div v-if="project.achievements?.length" class="mb-6 flex flex-col gap-4 border-l-2 border-accent pl-4">
+        <div v-for="(achievement, i) in project.achievements" :key="i">
+          <p class="font-mono text-[11px] uppercase tracking-widest text-primary">
+            {{ pick(achievement.title) }}
+          </p>
+          <p class="mt-1 max-w-2xl font-sans text-sm leading-relaxed text-secondary">
+            {{ pick(achievement.description) }}
+          </p>
+          <p class="mt-1.5 font-mono text-xs text-accent">
+            {{ pick(achievement.metric) }}
+          </p>
+        </div>
+      </div>
+
+      <ul class="mb-4 flex flex-wrap gap-x-5 gap-y-2" :aria-label="t('projects.techAriaLabel', { name: t(project.nameKey) })">
         <li
           v-for="tech in project.technologies"
           :key="tech.name"
@@ -44,16 +86,19 @@ const initial = computed(() => t(props.project.nameKey).charAt(0))
         </li>
       </ul>
 
-      <a
-        v-if="project.href"
-        :href="project.href"
-        target="_blank"
-        rel="noopener"
-        class="group mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-secondary transition-colors hover:text-primary"
-      >
-        <span>{{ t('projects.viewMore') }}</span>
-        <span class="transition-transform group-hover:translate-x-0.5">→</span>
-      </a>
+      <div v-if="project.links?.length" class="flex flex-wrap gap-4">
+        <a
+          v-for="link in project.links"
+          :key="link.url"
+          :href="link.url"
+          target="_blank"
+          rel="noopener"
+          class="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-secondary transition-colors hover:text-primary"
+        >
+          <span>{{ pick(link.label) }}</span>
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </a>
+      </div>
     </div>
   </article>
 </template>

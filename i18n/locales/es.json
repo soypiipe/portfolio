@@ -1,4 +1,7 @@
 {
+  "common": {
+    "present": "Presente"
+  },
   "nav": {
     "brand": "Diego Amado",
     "inicio": "Inicio",
@@ -35,7 +38,6 @@
   "projects": {
     "eyebrow": "Proyectos",
     "heading": "Proyectos seleccionados",
-    "viewMore": "Ver más",
     "techAriaLabel": "Tecnologías de {name}",
     "miattend": {
       "name": "Miattend",
@@ -46,12 +48,15 @@
       "name": "Amadia Technology",
       "kind": "Proyecto propio",
       "description": "Desarrollo de soluciones web, automatización e inteligencia artificial para negocios."
+    },
+    "notifyEngine": {
+      "name": "notify-engine",
+      "kind": "Proyecto personal / portafolio"
     }
   },
   "experience": {
     "eyebrow": "Experiencia",
-    "heading": "Experiencia profesional",
-    "present": "Presente"
+    "heading": "Experiencia profesional"
   },
   "contact": {
     "eyebrow": "Contacto",

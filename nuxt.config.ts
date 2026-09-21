@@ -71,12 +71,19 @@ export default defineNuxtConfig({
         'simple-icons:html5',
         'simple-icons:css3',
         'simple-icons:qlik',
+        'simple-icons:typeorm',
+        'simple-icons:redis',
+        'simple-icons:opentelemetry',
+        'simple-icons:grafana',
+        'simple-icons:resend',
+        'simple-icons:slack',
         'lucide:workflow',
         'lucide:sparkles',
         'lucide:database',
         'lucide:mail',
         'lucide:file-down',
-        'lucide:webhook'
+        'lucide:webhook',
+        'lucide:layers'
       ]
     }
   }

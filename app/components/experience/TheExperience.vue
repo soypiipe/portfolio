@@ -3,30 +3,10 @@ import { experience } from '~/data/experience'
 import type { ExperienceEntry } from '~/data/experience'
 
 const { t, locale } = useI18n()
-
-function pick<T extends { es: string; en: string }>(text: T) {
-  return locale.value === 'en' ? text.en : text.es
-}
-
-function pickList(list: { es: string[]; en: string[] }) {
-  return locale.value === 'en' ? list.en : list.es
-}
-
-function formatMonth(ym: string) {
-  const parts = ym.split('-')
-  const year = Number(parts[0])
-  const month = Number(parts[1])
-  const date = new Date(year, month - 1, 1)
-  return new Intl.DateTimeFormat(locale.value === 'en' ? 'en-US' : 'es-CO', {
-    month: 'short',
-    year: 'numeric'
-  }).format(date)
-}
+const { pick } = useLocalized()
 
 function dateRange(entry: ExperienceEntry) {
-  const start = formatMonth(entry.startDate)
-  const end = entry.current || !entry.endDate ? t('experience.present') : formatMonth(entry.endDate)
-  return `${start} — ${end}`
+  return formatDateRange(entry.startDate, entry.endDate, entry.current, locale.value, t('common.present'))
 }
 </script>
 
@@ -70,7 +50,7 @@ function dateRange(entry: ExperienceEntry) {
 
               <ul class="mb-6 flex flex-col gap-2">
                 <li
-                  v-for="(item, i) in pickList(entry.responsibilities)"
+                  v-for="(item, i) in pick(entry.responsibilities)"
                   :key="i"
                   class="flex gap-2.5 font-sans text-sm leading-relaxed text-secondary"
                 >
