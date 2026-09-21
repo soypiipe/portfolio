@@ -64,11 +64,19 @@ export default defineNuxtConfig({
         'simple-icons:openai',
         'simple-icons:whatsapp',
         'simple-icons:linkedin',
+        'simple-icons:rabbitmq',
+        'simple-icons:githubactions',
+        'simple-icons:express',
+        'simple-icons:javascript',
+        'simple-icons:html5',
+        'simple-icons:css3',
+        'simple-icons:qlik',
         'lucide:workflow',
         'lucide:sparkles',
         'lucide:database',
         'lucide:mail',
-        'lucide:file-down'
+        'lucide:file-down',
+        'lucide:webhook'
       ]
     }
   }

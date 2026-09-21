@@ -51,8 +51,7 @@
   "experience": {
     "eyebrow": "Experience",
     "heading": "Professional experience",
-    "pending": "Professional history pending confirmation.",
-    "pendingNote": "This section gets filled in with the final CV — real dates and roles, nothing provisional."
+    "present": "Present"
   },
   "contact": {
     "eyebrow": "Contact",
