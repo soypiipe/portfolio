@@ -28,5 +28,45 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json' }
     ],
     langDir: 'locales/'
+  },
+
+  icon: {
+    // Icon names come from app/data/*.ts (dynamic `:name` bindings), so
+    // the module's static-usage scan can't see them — without this it
+    // falls back to bundling the ENTIRE simple-icons + lucide collections
+    // (~5MB) instead of the ~24 icons we actually use. Server bundle is
+    // off entirely: no runtime icon-fetch route needed for a fixed list.
+    provider: 'none',
+    serverBundle: false,
+    clientBundle: {
+      scan: true,
+      icons: [
+        'simple-icons:vuedotjs',
+        'simple-icons:react',
+        'simple-icons:angular',
+        'simple-icons:typescript',
+        'simple-icons:nodedotjs',
+        'simple-icons:nestjs',
+        'simple-icons:python',
+        'simple-icons:dotnet',
+        'simple-icons:microsoftsqlserver',
+        'simple-icons:postgresql',
+        'simple-icons:mysql',
+        'simple-icons:mongodb',
+        'simple-icons:docker',
+        'simple-icons:linux',
+        'simple-icons:nginx',
+        'simple-icons:amazonaws',
+        'simple-icons:git',
+        'simple-icons:github',
+        'simple-icons:visualstudiocode',
+        'simple-icons:claude',
+        'simple-icons:openai',
+        'simple-icons:whatsapp',
+        'lucide:workflow',
+        'lucide:sparkles',
+        'lucide:database'
+      ]
+    }
   }
 })

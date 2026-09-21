@@ -32,6 +32,22 @@
       "aprendizaje": "Continuous learning"
     }
   },
+  "projects": {
+    "eyebrow": "Projects",
+    "heading": "Selected projects",
+    "viewMore": "View more",
+    "techAriaLabel": "Technologies used in {name}",
+    "miattend": {
+      "name": "Miattend",
+      "kind": "Real project",
+      "description": "Platform for appointment and service management."
+    },
+    "amadia": {
+      "name": "Amadia Technology",
+      "kind": "Own project",
+      "description": "Web solutions, automation and artificial intelligence development for businesses."
+    }
+  },
   "stack": {
     "eyebrow": "Stack",
     "heading": "Technologies I work with",

@@ -71,6 +71,18 @@ Notas:
 **A partir de ahora:** cada cambio se verifica con lint + typecheck + build, y el dev server queda corriendo en `http://localhost:3311` para revisión en vivo (no lo mato al terminar cada tarea).
 
 ## Fase 3 — Proyectos
+
+**Estado:** ✅ completa (2026-09-21)
+
+- [x] `app/data/projects.ts` tipado — solo Miattend y Amadia Technology (los dos confirmados en `content.md`); el tercero sigue "por confirmar", no se inventó
+- [x] `ProjectCard.vue` reusable, layout tipo "dossier editorial" (filas separadas por hairline, no cards con imagen falsa — no hay capturas reales de los proyectos, y fabricar una imagen que parezca screenshot real del producto de un cliente sería engañoso, no solo un placeholder genérico)
+- [x] Cada proyecto usa el campo real "Status" de `content.md` como tag ("Proyecto real" / "Proyecto propio") en vez de inventar una frase de contexto
+- [x] Tecnologías con ícono (reusa el mismo sistema de `@nuxt/icon` del Stack)
+- [x] `href` opcional — se omite si no hay URL confirmada (ninguno de los dos la tiene todavía), no se inventa un link
+- [x] Insertado en `index.vue` entre About y Stack (orden correcto según nav)
+- [x] Bilingüe
+
+**Fix de performance encontrado en esta fase:** al agregar los íconos de Proyectos, el build server saltó de ~3MB a ~9MB. Causa: `@nuxt/icon` en modo `serverBundle: 'auto'` no puede detectar qué íconos se usan cuando el nombre viene de datos dinámicos (`:name="tech.icon"`), así que empaquetó las colecciones `simple-icons` y `lucide` COMPLETAS (miles de íconos) en vez de los ~24 que realmente usamos. Se corrigió configurando `clientBundle.icons` con la lista explícita en `nuxt.config.ts` (`provider: 'none'`, `serverBundle: false`) — el build volvió a ~2.8MB, confirmado: "Nuxt Icon client bundle consist of 25 icons with 45.99KB". Si se agregan tecnologías/íconos nuevos en el futuro, hay que sumarlos a esa lista o dejarán de renderizar.
 **Estado:** pendiente
 
 ## Fase 4 — Experiencia + Contacto
@@ -91,4 +103,4 @@ Notas:
 ---
 
 ## Siguiente paso
-Fase 3 — Proyectos: `ProjectCard` reusable + datos tipados, con solo Miattend y Amadia Technology (el tercer proyecto está "TO BE CONFIRMED" en `content.md` — no inventar uno). Insertar en `index.vue` entre About y Stack.
+Fase 4 — Experiencia + Contacto: timeline (horizontal en desktop, vertical en mobile) con placeholders explícitos hasta tener el CV real — `content.md` dice "usar placeholders hasta que el usuario dé la historia exacta del CV, no inventar fechas ni cargos". Contacto con acciones a Email/WhatsApp/LinkedIn/GitHub/CV, todos placeholder por ahora (`content.md`: "EMAIL_TO_ADD", etc.). Se inserta entre Proyectos y Stack.

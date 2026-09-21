@@ -11,11 +11,12 @@ useSeoMeta({
   <div>
     <TheHero />
     <TheAbout />
+    <TheProjects />
     <!--
-      TODO Fase 3/4: cuando existan TheProjects y TheExperience, van AQUÍ,
-      entre About y Stack — el orden visual debe coincidir con el del nav
-      (Inicio, Sobre mí, Proyectos, Experiencia, Stack, Contacto).
-      TheStack ya quedó numerado como "05." previendo ese orden final.
+      TODO Fase 4: TheExperience va AQUÍ, entre Proyectos y Stack — el
+      orden visual debe coincidir con el del nav (Inicio, Sobre mí,
+      Proyectos, Experiencia, Stack, Contacto). TheStack ya quedó
+      numerado como "05." previendo ese orden final.
     -->
     <TheStack />
   </div>
