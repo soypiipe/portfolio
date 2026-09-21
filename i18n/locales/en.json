@@ -20,6 +20,30 @@
     "availability": "Available for new projects",
     "photoAlt": "Minimalist workspace with a laptop, code on screen and a mountain landscape in the background (reference image, to be replaced)"
   },
+  "about": {
+    "eyebrow": "About",
+    "heading": "More than writing code, I design systems.",
+    "body": "I'm a systems engineer and software developer. I'm interested in building solutions that combine development, automation and artificial intelligence to solve real problems in a clear, maintainable and efficient way. I keep learning constantly — new tools, new languages, new ways to solve the same problem better.",
+    "labels": {
+      "analisis": "Analysis",
+      "desarrollo": "Development",
+      "automatizacion": "Automation",
+      "ia": "AI",
+      "aprendizaje": "Continuous learning"
+    }
+  },
+  "stack": {
+    "eyebrow": "Stack",
+    "heading": "Technologies I work with",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "Data",
+      "infra": "Infrastructure",
+      "tools": "Tools",
+      "ai": "AI"
+    }
+  },
   "footer": {
     "role": "Systems Engineer · Software Engineer",
     "rights": "All rights reserved."

@@ -1,8 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/eslint'],
+  // Off on purpose: the devtools overlay shows a floating Nuxt-branded
+  // button in the browser during `npm run dev` — not something we want
+  // visible while reviewing the site itself.
+  devtools: { enabled: false },
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/eslint', '@nuxt/icon'],
 
   css: ['~/assets/css/main.css'],
 

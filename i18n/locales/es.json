@@ -20,6 +20,30 @@
     "availability": "Disponible para nuevos proyectos",
     "photoAlt": "Espacio de trabajo minimalista con laptop, código en pantalla y paisaje de montaña de fondo (imagen de referencia, pendiente de reemplazo)"
   },
+  "about": {
+    "eyebrow": "Sobre mí",
+    "heading": "Más que escribir código, diseño sistemas.",
+    "body": "Soy ingeniero de sistemas y desarrollador de software. Me interesa construir soluciones que combinen desarrollo, automatización e inteligencia artificial para resolver problemas reales de forma clara, mantenible y eficiente. Aprendo de forma constante — nuevas herramientas, nuevos lenguajes, nuevas formas de resolver el mismo problema mejor.",
+    "labels": {
+      "analisis": "Análisis",
+      "desarrollo": "Desarrollo",
+      "automatizacion": "Automatización",
+      "ia": "IA",
+      "aprendizaje": "Aprendizaje continuo"
+    }
+  },
+  "stack": {
+    "eyebrow": "Stack",
+    "heading": "Tecnologías con las que trabajo",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "Data",
+      "infra": "Infraestructura",
+      "tools": "Herramientas",
+      "ai": "IA"
+    }
+  },
   "footer": {
     "role": "Ingeniero de Sistemas · Software Engineer",
     "rights": "Todos los derechos reservados."

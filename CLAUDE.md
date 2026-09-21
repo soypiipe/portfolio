@@ -188,6 +188,14 @@ Before considering the first version complete, verify:
 - mobile navigation works
 - no horizontal overflow
 
+## Engineering principles
+
+Standing rules for every session working on this codebase, not just the initial scaffold:
+
+- **Best practices by default.** Follow standard Nuxt/Vue/TypeScript conventions and secure-by-default habits (no secrets committed, no `v-html` on untrusted input, validate anything that touches a form or external data) without being asked each time.
+- **Only what's actually needed.** No dependency, abstraction, component, or config gets added "just in case." If a plain `<button>` does the job, it doesn't need a `Button.vue` wrapper yet. Prefer the platform/Nuxt built-ins over a library. This matters as much as the visual direction — don't let the project accumulate unused packages or speculative structure.
+- **SEO is not a later phase, it's a default.** Even while a section is still a placeholder, ship it with correct semantic HTML (one `h1`, proper heading order), meaningful `alt` text, and real `useSeoMeta`/`useHead` where relevant — not deferred entirely to the SEO phase. That phase is for the full audit (sitemap, robots, structured data, OG images), not for retrofitting basics that should have been there from Phase 0.
+
 ## Development behavior
 
 Work in phases. Do not build the whole site in one giant step.
