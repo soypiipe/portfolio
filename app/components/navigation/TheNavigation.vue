@@ -10,6 +10,25 @@ const isMobileOpen = ref(false)
 function closeMobile() {
   isMobileOpen.value = false
 }
+
+// Scrollspy: highlights the nav link for whichever section is currently
+// crossing the middle band of the viewport. Client-only — defaults to
+// "inicio" during SSR, which is correct for a fresh page load anyway.
+const activeId = ref('inicio')
+
+onMounted(() => {
+  const sections = document.querySelectorAll('main section[id]')
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) activeId.value = entry.target.id
+      }
+    },
+    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+  )
+  sections.forEach((section) => observer.observe(section))
+  onUnmounted(() => observer.disconnect())
+})
 </script>
 
 <template>
@@ -37,8 +56,9 @@ function closeMobile() {
           :key="link.id"
           :href="link.href"
           class="flex items-center gap-1.5 transition-colors hover:text-primary"
+          :class="activeId === link.href.slice(1) ? 'text-primary' : ''"
         >
-          <span class="text-[10px] text-secondary/60">{{ link.id }}.</span>
+          <span class="text-[10px]" :class="activeId === link.href.slice(1) ? 'text-accent' : 'text-secondary/60'">{{ link.id }}.</span>
           <span>{{ t(link.labelKey) }}</span>
         </a>
       </nav>
@@ -65,7 +85,7 @@ function closeMobile() {
 
         <a
           href="#contacto"
-          class="flex h-9 items-center justify-center border border-accent bg-accent px-4 font-sans text-xs font-medium tracking-wide text-bg transition-colors hover:bg-accent-hover hover:border-accent-hover"
+          class="flex h-9 items-center justify-center border border-accent bg-accent px-4 font-sans text-xs font-medium tracking-wide text-bg transition-all hover:-translate-y-0.5 hover:bg-accent-hover hover:border-accent-hover"
         >
           {{ t('nav.hablemos') }}
         </a>
@@ -102,9 +122,10 @@ function closeMobile() {
           :key="link.id"
           :href="link.href"
           class="flex items-center gap-2 transition-colors hover:text-primary"
+          :class="activeId === link.href.slice(1) ? 'text-primary' : ''"
           @click="closeMobile"
         >
-          <span class="text-xs text-secondary/60">{{ link.id }}.</span>
+          <span class="text-xs" :class="activeId === link.href.slice(1) ? 'text-accent' : 'text-secondary/60'">{{ link.id }}.</span>
           <span>{{ t(link.labelKey) }}</span>
         </a>
       </nav>

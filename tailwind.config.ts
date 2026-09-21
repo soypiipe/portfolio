@@ -27,12 +27,17 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace']
       },
       animation: {
-        'grid-drift': 'grid-drift 70s linear infinite'
+        'grid-drift': 'grid-drift 70s linear infinite',
+        'fade-up': 'fade-up 0.6s ease both'
       },
       keyframes: {
         'grid-drift': {
           from: { backgroundPosition: '0px 0px' },
           to: { backgroundPosition: '48px 48px' }
+        },
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(12px)' },
+          to: { opacity: '1', transform: 'translateY(0)' }
         }
       }
     }

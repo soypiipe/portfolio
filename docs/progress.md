@@ -112,7 +112,18 @@ Notas:
 Nota: encontré y corregí un residuo de formato mío en este archivo (una línea "Estado: pendiente" huérfana quedó de una edición anterior) antes de empezar esta fase.
 
 ## Fase 5 — Motion
-**Estado:** pendiente
+
+**Estado:** ✅ completa (2026-09-21)
+
+- [x] **Entrada escalonada del hero:** eyebrow → nombre → statement → supporting → CTAs → disponibilidad → foto, con `motion-safe:animate-fade-up` y `[animation-delay:Xms]` crecientes (0/80/160/240/320/400/200ms). Keyframe `fade-up` en `tailwind.config.ts`.
+- [x] **Section reveal on scroll:** directiva `v-reveal` (`app/plugins/reveal.ts`) con IntersectionObserver, aplicada a About/Proyectos/Experiencia/Stack/Contacto (Hero no, ese usa la entrada escalonada de arriba). Fade + lift de 16px al entrar en viewport, una sola vez.
+- [x] **Hover elevation (2px):** CTAs del hero, botón "Hablemos" del nav, links "Ver código" de proyectos — `hover:-translate-y-0.5` sobre `transition-all`.
+- [x] **Estado activo del nav en scroll:** IntersectionObserver sobre `main section[id]`, resalta el link (texto + índice) de la sección visible. Funciona en desktop y mobile.
+- [x] Nada de animación infinita nueva — el único loop sigue siendo el grid del hero (Fase 1). Todo respeta `prefers-reduced-motion` (verificado: el chequeo vive en el propio `mounted` del directive, y hay guard doble en CSS para `reveal-pending`).
+
+**Bug real encontrado y corregido:** el plugin del directive `v-reveal` lo hice primero como `reveal.client.ts` (solo cliente) — Vue SSR igual intenta resolver el directive al renderizar en el servidor, y como no estaba registrado ahí, tiraba `Cannot read properties of undefined (reading 'getSSRProps')` → HTTP 500 en toda la página. Se corrigió registrándolo como plugin universal (`reveal.ts`, sin sufijo `.client`) — el trabajo real sigue siendo 100% client-only porque vive dentro de `mounted`, que nunca corre en SSR de todas formas. Verificado tanto en dev como corriendo el build de producción real (`node .output/server/index.mjs`), no solo `npm run dev`.
+
+**Nota sobre "progressive enhancement":** si el JS falla por cualquier razón, el contenido nunca queda invisible — la clase que oculta (`reveal-pending`) solo la agrega el propio directive en `mounted`, nunca está en el HTML por defecto ni en el CSS base.
 
 ## Fase 6 — Bilingüe
 **Estado:** pendiente (parcialmente ya cubierto) — como el sitio se viene construyendo bilingüe desde la Fase 1 (principio de "no dejar SEO/i18n para después"), todo el contenido ES/EN y el selector ya existen. Lo que falta específicamente de esta fase: `hreflang`/`og:locale` alternates para SEO — eso se hace junto con el resto de metadata en Fase 7, no por separado.
@@ -126,4 +137,4 @@ Nota: encontré y corregí un residuo de formato mío en este archivo (una líne
 ---
 
 ## Siguiente paso
-Fase 5 — Motion: entrada escalonada del hero, section reveal on scroll, hover elevation, transiciones de estado activo en nav. Respetar `prefers-reduced-motion` en todo (ya se hizo para el grid del hero y el dot de disponibilidad; falta el resto). Nada de animación infinita decorativa fuera del grid ya aprobado.
+Fase 7 — Calidad (responsive, a11y, performance, SEO). Fase 6 (bilingüe) ya está prácticamente cubierta salvo `hreflang`/`og:locale` alternates, que se hacen junto con el resto de metadata acá mismo — no como fase separada. Cubre: revisión responsive real (mobile→desktop), navegación por teclado, contraste, `useSeoMeta`/OG completos, sitemap, robots.txt (hoy bloquea todo el crawling, hay que decidir si cambia), sin errores de consola, imágenes optimizadas, sin layout shift.

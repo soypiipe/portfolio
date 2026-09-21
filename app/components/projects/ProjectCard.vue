@@ -93,7 +93,7 @@ const dateRangeLabel = computed(() => {
           :href="link.url"
           target="_blank"
           rel="noopener"
-          class="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-secondary transition-colors hover:text-primary"
+          class="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-secondary transition-all hover:-translate-y-0.5 hover:text-primary"
         >
           <span>{{ pick(link.label) }}</span>
           <span class="transition-transform group-hover:translate-x-0.5">→</span>

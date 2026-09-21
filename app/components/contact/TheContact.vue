@@ -15,7 +15,7 @@ const actions = [
 </script>
 
 <template>
-  <section id="contacto" class="border-t border-hairline">
+  <section id="contacto" v-reveal class="border-t border-hairline">
     <div class="mx-auto max-w-7xl px-6 py-20 md:py-28">
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
         <div class="lg:col-span-3">
