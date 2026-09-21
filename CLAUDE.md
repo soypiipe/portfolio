@@ -154,14 +154,14 @@ Do not generate fake professional biography details to fill the space.
 
 ## Sections
 
-Implement in this order:
+Final page order (must match the nav's own link order):
 
 1. Navigation
 2. Hero
 3. About
-4. Technology / Stack
-5. Selected Projects
-6. Experience
+4. Selected Projects
+5. Experience
+6. Technology / Stack
 7. Contact
 8. Footer
 
@@ -200,20 +200,17 @@ Standing rules for every session working on this codebase, not just the initial 
 
 Work in phases. Do not build the whole site in one giant step.
 
-Phase 1: scaffold and design tokens.
-Phase 2: navigation + hero.
-Phase 3: about + stack.
-Phase 4: projects.
-Phase 5: experience + contact.
-Phase 6: bilingual content.
-Phase 7: motion + responsive polish.
-Phase 8: SEO/accessibility/performance.
-Phase 9: final visual QA.
+Phases are defined in `docs/implementation-plan.md`. **`docs/progress.md` is
+the live source of truth** for what's actually done, what deviated from plan
+and why, and what's next — read it before assuming project state, and update
+it as you go (not only when a phase closes). Do not keep a second copy of the
+phase list anywhere else, including here — it will drift out of sync.
 
-At the end of every phase:
-- run the relevant checks
-- inspect the result
-- report what changed
-- identify unresolved placeholders
+Workflow for every change, not just at the end of a phase:
+- run lint + typecheck + build; fix what they catch before moving on
+- keep the dev server running (don't kill it) so changes can be reviewed live
+- report what changed and identify unresolved placeholders
+- commit at the end of each meaningful unit of work — without AI/assistant
+  attribution in the author or commit message
 
 Do not silently invent missing content.

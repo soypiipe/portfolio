@@ -39,14 +39,9 @@
     "eyebrow": "Proyectos",
     "heading": "Proyectos seleccionados",
     "techAriaLabel": "Tecnologías de {name}",
-    "miattend": {
-      "name": "Miattend",
-      "kind": "Proyecto real",
-      "description": "Plataforma para gestión de citas y atención."
-    },
     "amadia": {
       "name": "Amadia Technology",
-      "kind": "Proyecto propio",
+      "kind": "Construyendo mi empresa",
       "description": "Desarrollo de soluciones web, automatización e inteligencia artificial para negocios."
     },
     "notifyEngine": {

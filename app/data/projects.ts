@@ -28,33 +28,11 @@ export interface Project {
   links?: ProjectLink[]
 }
 
-// Miattend y Amadia Technology: los dos confirmados en docs/content.md, tal
-// cual estaban (no se tocaron). El "tercer proyecto" de content.md sigue
-// como "TO BE CONFIRMED" — no se inventa.
+// Solo notify-engine y Amadia Technology, a pedido explícito de Diego
+// (2026-09-21). Miattend queda fuera de la selección por ahora — sigue
+// confirmado y real en docs/content.md, no se borró de ahí, solo no se
+// muestra en esta sección todavía.
 export const projects: Project[] = [
-  {
-    id: 'miattend',
-    nameKey: 'projects.miattend.name',
-    kindKey: 'projects.miattend.kind',
-    descriptionKey: 'projects.miattend.description',
-    technologies: [
-      { name: 'Vue.js', icon: 'simple-icons:vuedotjs' },
-      { name: 'Node.js', icon: 'simple-icons:nodedotjs' },
-      { name: 'SQL Server', icon: 'simple-icons:microsoftsqlserver' }
-    ]
-  },
-  {
-    id: 'amadia',
-    nameKey: 'projects.amadia.name',
-    kindKey: 'projects.amadia.kind',
-    descriptionKey: 'projects.amadia.description',
-    technologies: [
-      { name: 'Node.js', icon: 'simple-icons:nodedotjs' },
-      { name: 'IA', icon: 'lucide:sparkles' },
-      { name: 'WhatsApp', icon: 'simple-icons:whatsapp' },
-      { name: 'RAG', icon: 'lucide:database' }
-    ]
-  },
   {
     id: 'notify-engine',
     nameKey: 'projects.notifyEngine.name',
@@ -135,6 +113,18 @@ export const projects: Project[] = [
     // liveDemo venía null, se omite.
     links: [
       { label: { es: 'Ver código', en: 'View code' }, url: 'https://github.com/soypiipe/notify-engine' }
+    ]
+  },
+  {
+    id: 'amadia',
+    nameKey: 'projects.amadia.name',
+    kindKey: 'projects.amadia.kind',
+    descriptionKey: 'projects.amadia.description',
+    technologies: [
+      { name: 'Node.js', icon: 'simple-icons:nodedotjs' },
+      { name: 'IA', icon: 'lucide:sparkles' },
+      { name: 'WhatsApp', icon: 'simple-icons:whatsapp' },
+      { name: 'RAG', icon: 'lucide:database' }
     ]
   }
 ]

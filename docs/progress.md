@@ -91,6 +91,10 @@ Notas:
 - **Refactor de paso:** extraje la lógica de fechas (`formatMonth`/`formatDateRange`) a `app/utils/date.ts` y el patrón `pick()` de textos bilingües a `app/composables/useLocalized.ts`, porque ya se repetía en Experiencia y en Proyectos. `TheExperience.vue` también se actualizó para usar estos compartidos en vez de su copia local.
 - Íconos nuevos (TypeORM, Redis, OpenTelemetry, Grafana, Resend, Slack; BullMQ no tiene logo en Simple Icons, se usó un ícono genérico de Lucide) — bundle final: 43 íconos, 64.71KB. Build se mantuvo en ~2.87MB.
 
+**Segunda actualización (2026-09-21): Diego pidió dejar solo notify-engine y Amadia.** Miattend queda fuera de la sección por ahora (a pedido explícito, no eliminado de `content.md` — sigue siendo un proyecto real confirmado ahí, solo no se muestra acá). notify-engine pasó a ir primero en el array (es el que tiene `featured`/toda la info rica). El tag de Amadia cambió de "Proyecto propio" a **"Construyendo mi empresa"** — Diego pidió que se especifique que es su intento de construir su propia empresa, no solo un proyecto personal genérico. Se quitaron las claves i18n de `projects.miattend.*` de ambos locales por quedar sin uso (mismo criterio que con `viewMore` antes — nada de claves muertas).
+
+**También se corrigió `CLAUDE.md` (el de este proyecto):** tenía su propia lista de fases (Phase 1–9) que ya no coincidía con `docs/implementation-plan.md`/`docs/progress.md` (Phase 0–8) — números y agrupación distintos, puro desfase acumulado. Se reemplazó esa lista duplicada por un puntero a `docs/progress.md` como fuente de verdad única, para que no se vuelva a desincronizar. También se corrigió el orden de "## Sections" ahí: decía Stack antes de Proyectos, pero el orden real construido (y el que importa, porque coincide con el nav) es Proyectos → Experiencia → Stack.
+
 ## Fase 4 — Experiencia + Contacto
 
 **Estado:** ✅ completa (2026-09-21)
@@ -117,7 +121,7 @@ Nota: encontré y corregí un residuo de formato mío en este archivo (una líne
 **Estado:** pendiente
 
 ## Fase 8 — Content lock
-**Estado:** pendiente — experiencia exacta ✅ y notify-engine ✅ ya confirmados (2026-09-21). Sigue bloqueada por: bio de About definitiva, ¿tercer proyecto además de notify-engine? (content.md seguía con uno "por confirmar" antes de que apareciera notify-engine — vale la pena que Diego confirme si notify-engine lo reemplaza o si hay otro más), datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF, foto final del hero.
+**Estado:** pendiente — experiencia exacta ✅, y proyectos a mostrar ✅ (solo notify-engine + Amadia, decidido 2026-09-21). Sigue bloqueada por: bio de About definitiva, datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF, foto final del hero.
 
 ---
 
