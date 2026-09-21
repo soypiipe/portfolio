@@ -63,9 +63,12 @@ export default defineNuxtConfig({
         'simple-icons:claude',
         'simple-icons:openai',
         'simple-icons:whatsapp',
+        'simple-icons:linkedin',
         'lucide:workflow',
         'lucide:sparkles',
-        'lucide:database'
+        'lucide:database',
+        'lucide:mail',
+        'lucide:file-down'
       ]
     }
   }

@@ -83,16 +83,25 @@ Notas:
 - [x] Bilingüe
 
 **Fix de performance encontrado en esta fase:** al agregar los íconos de Proyectos, el build server saltó de ~3MB a ~9MB. Causa: `@nuxt/icon` en modo `serverBundle: 'auto'` no puede detectar qué íconos se usan cuando el nombre viene de datos dinámicos (`:name="tech.icon"`), así que empaquetó las colecciones `simple-icons` y `lucide` COMPLETAS (miles de íconos) en vez de los ~24 que realmente usamos. Se corrigió configurando `clientBundle.icons` con la lista explícita en `nuxt.config.ts` (`provider: 'none'`, `serverBundle: false`) — el build volvió a ~2.8MB, confirmado: "Nuxt Icon client bundle consist of 25 icons with 45.99KB". Si se agregan tecnologías/íconos nuevos en el futuro, hay que sumarlos a esa lista o dejarán de renderizar.
-**Estado:** pendiente
 
 ## Fase 4 — Experiencia + Contacto
-**Estado:** pendiente
+
+**Estado:** ✅ completa (2026-09-21)
+
+- [x] `TheExperience.vue` — sin timeline con datos falsos: como `content.md` prohíbe explícitamente inventar fechas/cargos y no hay ni un dato real todavía, muestra un placeholder honesto (borde punteado + texto) en vez de fabricar entradas. Cuando exista el CV definitivo, pasa a `app/data/experience.ts` tipado igual que `projects.ts`.
+- [x] `TheContact.vue` — headline/supporting exactos de `ux-ui.md` §11. Botones para Email/WhatsApp/LinkedIn/GitHub/CV sin `href` (son `<a>` sin `href`, que HTML no trata como interactivos — ni link roto ni dato inventado) porque `content.md` los marca como `EMAIL_TO_ADD` etc., ninguno confirmado.
+- [x] `TheFooter.vue` — este sí completo sin restricciones: DA + nombre + rol, nav (reusa `app/data/navigation.ts`), año dinámico (`new Date().getFullYear()`). Va en `layouts/default.vue`, no en la página, para que aparezca en todo el sitio.
+- [x] Orden final del DOM ya coincide con el nav: Hero → About → Proyectos → Experiencia → Stack → Contacto.
+- [x] 3 íconos nuevos (`simple-icons:linkedin`, `lucide:mail`, `lucide:file-down`) sumados a la lista explícita de `nuxt.config.ts` — bundle de íconos: 28 íconos, 47.10KB.
+- [x] Build se mantuvo en ~2.82MB (sin regresión del fix de Fase 3).
+
+Nota: encontré y corregí un residuo de formato mío en este archivo (una línea "Estado: pendiente" huérfana quedó de una edición anterior) antes de empezar esta fase.
 
 ## Fase 5 — Motion
 **Estado:** pendiente
 
 ## Fase 6 — Bilingüe
-**Estado:** pendiente
+**Estado:** pendiente (parcialmente ya cubierto) — como el sitio se viene construyendo bilingüe desde la Fase 1 (principio de "no dejar SEO/i18n para después"), todo el contenido ES/EN y el selector ya existen. Lo que falta específicamente de esta fase: `hreflang`/`og:locale` alternates para SEO — eso se hace junto con el resto de metadata en Fase 7, no por separado.
 
 ## Fase 7 — Calidad (responsive, a11y, performance, SEO)
 **Estado:** pendiente
@@ -103,4 +112,4 @@ Notas:
 ---
 
 ## Siguiente paso
-Fase 4 — Experiencia + Contacto: timeline (horizontal en desktop, vertical en mobile) con placeholders explícitos hasta tener el CV real — `content.md` dice "usar placeholders hasta que el usuario dé la historia exacta del CV, no inventar fechas ni cargos". Contacto con acciones a Email/WhatsApp/LinkedIn/GitHub/CV, todos placeholder por ahora (`content.md`: "EMAIL_TO_ADD", etc.). Se inserta entre Proyectos y Stack.
+Fase 5 — Motion: entrada escalonada del hero, section reveal on scroll, hover elevation, transiciones de estado activo en nav. Respetar `prefers-reduced-motion` en todo (ya se hizo para el grid del hero y el dot de disponibilidad; falta el resto). Nada de animación infinita decorativa fuera del grid ya aprobado.

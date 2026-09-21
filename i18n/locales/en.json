@@ -48,6 +48,25 @@
       "description": "Web solutions, automation and artificial intelligence development for businesses."
     }
   },
+  "experience": {
+    "eyebrow": "Experience",
+    "heading": "Professional experience",
+    "pending": "Professional history pending confirmation.",
+    "pendingNote": "This section gets filled in with the final CV — real dates and roles, nothing provisional."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Have a project in mind?",
+    "supporting": "Let's talk about how I can help.",
+    "pendingNote": "Contact details go live once they're confirmed.",
+    "actions": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "cv": "CV"
+    }
+  },
   "stack": {
     "eyebrow": "Stack",
     "heading": "Technologies I work with",
