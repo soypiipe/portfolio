@@ -4,6 +4,8 @@ export interface StackItem {
   // currentColor, matches our palette instead of showing brand colors).
   // `lucide:*` = generic concept icon, for things that aren't a single brand.
   icon: string
+  // Honest depth marker, shown next to the name. Omitted = working proficiency.
+  level?: 'fundamentals'
 }
 
 export interface StackCategory {
@@ -21,9 +23,9 @@ export const stackCategories: StackCategory[] = [
     labelKey: 'stack.categories.frontend',
     items: [
       { name: 'Vue.js', icon: 'simple-icons:vuedotjs' },
-      { name: 'React', icon: 'simple-icons:react' },
       { name: 'Angular', icon: 'simple-icons:angular' },
-      { name: 'TypeScript', icon: 'simple-icons:typescript' }
+      { name: 'TypeScript', icon: 'simple-icons:typescript' },
+      { name: 'React', icon: 'simple-icons:react', level: 'fundamentals' }
     ]
   },
   {

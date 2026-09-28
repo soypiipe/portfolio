@@ -251,6 +251,10 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - **WebP del hero:** el placeholder es de 512×382 (menor que su marco); Lighthouse solo marcaba compresión (~12KB). No se optimiza un placeholder que se va a reemplazar. **Receta para la foto final:** exportar a 2 anchos (~800 y ~1600px de lado largo, relación 4:3) en WebP calidad ~75–80 (+ AVIF si se quiere), servirlos con `srcset`/`sizes` en el `<picture>`, mantener `width`/`height` reales (hoy dicen 1200×896 aunque el archivo es 512×382), `fetchpriority="high"` y `loading="eager"` como ahora (es el LCP).
 - **Lighthouse final (build de producción, `/`, 3 corridas):** Performance 78–86 (el TBT oscila 160–390ms entre corridas; FCP 2.6–2.7s, LCP 3.4s, CLS 0), Accessibility 100, Best Practices 100, SEO 69. **El único audit de SEO que falla es `is-crawlable`** (el `Disallow: /` deliberado); canonical, hreflang, meta description, títulos y links pasan.
 
+## React en el Stack (2026-09-28)
+
+**Estado:** ✅ resuelto. Antes React aparecía al mismo nivel que Vue/NestJS, en tensión con el gap conocido (solo fundamentos; el CV dice "React (fundamentos)"). Ahora sigue listado pero con una etiqueta **"FUNDAMENTOS" / "FUNDAMENTALS"** al lado del nombre (mono 11px, `text-secondary/80`, contraste AA), y pasó al final de Frontend (Vue.js, Angular, TypeScript, React). Implementación: campo opcional `level?: 'fundamentals'` en `StackItem` (`app/data/stack.ts`), clave `stack.levels.fundamentals` en ambos locales y un `<span>` condicional en `TheStack.vue`. Sirve para cualquier otra tecnología que se quiera marcar así (basta el campo `level`; si se necesitaran más niveles, agregar el valor al tipo y su clave i18n). Verificado en el build de producción en 1280px (ES) y 390px (EN): sin overflow horizontal ni errores de consola.
+
 ## Fase 8 — Content lock
 **Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine + Amadia), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional). Faltan solo: **bio definitiva de About** y **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
 
@@ -262,7 +266,6 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - Bio definitiva de About (hoy es el draft de `content.md` + una frase de aprendizaje continuo).
 - Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`, y prepararla con la receta de la sección de rendimiento (2 anchos, WebP/AVIF, `srcset`).
 - Dominio definitivo: cuando se decida, definir `NUXT_PUBLIC_SITE_URL` (build + runtime). **Abrir `robots.txt` al crawling** solo cuando estén la bio y la foto finales *y* el dominio sea el definitivo (ver arriba).
-- React en el Stack: hoy se lista al mismo nivel que Vue/NestJS, pero es un gap conocido (solo fundamentos; el CV lo dice así: "React (fundamentos)"). Pendiente de decidir si se quita o se marca como "familiaridad".
 - Amadia: cuando tenga contenido real (contexto, resultado, links), agregarlo a `projects.ts` y la fila pasa a ser expandible sola.
 - Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.
 

@@ -81,6 +81,9 @@
       "infra": "Infrastructure",
       "tools": "Tools",
       "ai": "AI"
+    },
+    "levels": {
+      "fundamentals": "fundamentals"
     }
   },
   "error": {

@@ -33,6 +33,9 @@ const { t } = useI18n()
                 >
                   <Icon :name="item.icon" class="h-[18px] w-[18px] shrink-0 text-secondary transition-colors group-hover:text-accent" aria-hidden="true" />
                   {{ item.name }}
+                  <span v-if="item.level" class="font-mono text-[11px] uppercase tracking-wide text-secondary/80">
+                    {{ t(`stack.levels.${item.level}`) }}
+                  </span>
                 </span>
               </dd>
             </div>
