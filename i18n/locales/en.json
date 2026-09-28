@@ -84,6 +84,15 @@
       "ai": "AI"
     }
   },
+  "error": {
+    "notFoundCode": "404",
+    "notFoundTitle": "Page not found",
+    "notFoundText": "The page you're looking for doesn't exist or has moved.",
+    "genericCode": "Error",
+    "genericTitle": "Something went wrong",
+    "genericText": "An unexpected error occurred. Please try again in a moment.",
+    "home": "Back to home"
+  },
   "footer": {
     "role": "Systems Engineer · Software Engineer",
     "rights": "All rights reserved."

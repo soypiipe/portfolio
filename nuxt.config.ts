@@ -9,6 +9,16 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Files in public/ have stable URLs (no content hash), so they can't be
+  // `immutable` like /_nuxt/* — a day of browser cache is a safe middle
+  // ground: repeat visits skip the download, and swapping the real hero
+  // photo or favicon later shows up within a day.
+  routeRules: {
+    '/images/**': { headers: { 'cache-control': 'public, max-age=86400' } },
+    '/favicon.ico': { headers: { 'cache-control': 'public, max-age=86400' } },
+    '/apple-touch-icon.png': { headers: { 'cache-control': 'public, max-age=86400' } }
+  },
+
   components: [
     { path: '~/components', pathPrefix: false }
   ],
@@ -100,7 +110,8 @@ export default defineNuxtConfig({
         'lucide:mail',
         'lucide:file-down',
         'lucide:webhook',
-        'lucide:layers'
+        'lucide:layers',
+        'lucide:arrow-left'
       ]
     }
   }

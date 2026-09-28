@@ -208,6 +208,16 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 
 **No verificado (necesita tus ojos):** si el naranja te parece bien de intensidad en tu monitor (el 8% se midió, la percepción depende del panel — está a un número de distancia de subirlo o bajarlo), y la sensación real del retraso con un mouse físico. Lighthouse sigue sin re-medirse desde la iteración anterior.
 
+## Cierre de pendientes técnicos — 404/500, cache, Lighthouse
+
+**Estado:** ✅ completa (2026-09-28). Solo se agregó lo que faltaba; nada de lo que ya funcionaba se modificó (contenido, layout, paleta, motion, componentes existentes intactos).
+
+**1. Página de error personalizada (`app/error.vue`, nuevo).** Reemplaza la de Nuxt por defecto (anotada desde la Fase 2). Mismo lenguaje visual (monograma DA, grid de fondo, tipografía y botón del resto del sitio), bilingüe (`error.*` en ambos locales; el idioma sale del prefijo de la URL, así `/en/lo-que-sea` sale en inglés). Distingue 404 ("Página no encontrada") de cualquier otro error ("Algo salió mal"). `noindex`, `<html lang/dir>` propio (como `error.vue` reemplaza a `app.vue`, hay que repetirlo ahí), un solo `h1`, y el botón vuelve al inicio del locale actual con `clearError({ redirect })`. Ícono nuevo `lucide:arrow-left` sumado a `clientBundle.icons` (bundle: 44 íconos, 64.9KB). Verificado contra el build de producción: `/no-existe` → 404 en ES, `/en/no-existe` → 404 en EN, y captura en 1280px y 390px.
+
+**2. Cache de assets estáticos (`routeRules` en `nuxt.config.ts`).** `/images/**`, `/favicon.ico` y `/apple-touch-icon.png` ahora salen con `cache-control: public, max-age=86400`. Un día y no más: no tienen hash en el nombre (a diferencia de `/_nuxt/*`, que ya era `immutable`), y la foto real del hero va a reemplazar a la actual. Lighthouse pasó de marcar ~22KB sin cache a ~9KB (solo el WebP del hero, que sigue marcado porque un día es menos de lo que Lighthouse considera "eficiente"; es el costo consciente de poder cambiar la foto sin esperar).
+
+**3. Lighthouse re-medido** (build de producción, `/`, 4 corridas): **Performance 61–64**, **Accessibility 100**, **Best Practices 100**, **SEO 69** (el 69 sigue siendo 100% el `Disallow: /` a propósito). CLS 0. En EN, mismo rango. Antes de la iteración de legibilidad/motion eran 69: la baja de ~5–7 puntos es real pero pequeña (FCP ~4.3s, LCP ~5.4s, TBT ~300ms, bajo el throttling agresivo de Lighthouse). Una primera corrida en frío dio 43 con TBT 1340ms y no se repitió en las siguientes cuatro; no es representativa. **Lo que domina FCP:** la hoja de Google Fonts (bloqueante, ~850ms simulados) y el CSS de entrada. **No se arregló:** la solución real es autoalojar las fuentes (o `@nuxt/fonts`), lo que cambia cómo se cargan la tipografía de todo el sitio; queda como decisión tuya, no algo para meter sin preguntar. El LCP es la foto del hero (ya con `fetchpriority=high`, WebP y descubrible en el HTML inicial), y hay ~12KB de ahorro posible en su tamaño servido que se resuelve solo con la foto final. `bf-cache` falla por "Internal error" de Chrome en headless, no accionable.
+
 ## Fase 8 — Content lock
 **Estado:** pendiente — experiencia exacta ✅, y proyectos a mostrar ✅ (solo notify-engine + Amadia, decidido 2026-09-21). Sigue bloqueada por: bio de About definitiva, datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF, foto final del hero.
 
@@ -226,9 +236,8 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.
 
 **Técnicos (no bloqueados, menor prioridad):**
-- Página 404/500 personalizada (`app/error.vue`) — anotada desde la Fase 2 y nunca hecha; hoy es la de Nuxt por defecto.
-- Performance (Lighthouse en build de producción, 2026-09-21: Perf 69 / A11y 100 / BP 100 / SEO 69): FCP ~4.1s y LCP ~5.3s bajo el throttling de Lighthouse; ~180KB de JS sin usar (hidratación de Nuxt); headers de cache de assets estáticos (~22KB). **Hay que re-medir** después de esta iteración: cambió el CSS, el fondo y el markup de Experiencia/Proyectos, y no se volvió a correr Lighthouse.
+- Performance (Lighthouse en build de producción, re-medido 2026-09-28: Perf 61–64 / A11y 100 / BP 100 / SEO 69): FCP ~4.3s y LCP ~5.4s bajo el throttling de Lighthouse; ~190KB de JS sin usar (hidratación de Nuxt). La mejora más grande disponible es autoalojar las fuentes en vez de Google Fonts (ver el cierre de pendientes técnicos arriba) — decisión pendiente, cambia cómo se carga la tipografía.
 - Verificación manual pendiente en navegador/dispositivo real: responsive visual fino y navegación por teclado completa (parcialmente cubierto por el test headless de esta iteración: Tab/Enter/Space en el accordion).
 - Si se agregan tecnologías nuevas con ícono, sumarlas a `clientBundle.icons` en `nuxt.config.ts` o no van a renderizar.
 
-**Siguiente paso:** Fase 8 depende de ti (contenido). Del lado técnico, lo más útil es re-correr Lighthouse y la página 404.
+**Siguiente paso:** Fase 8 depende de ti (contenido). Del lado técnico no queda nada obligatorio; lo único opcional es decidir si se autoalojan las fuentes para mejorar FCP.

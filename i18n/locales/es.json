@@ -84,6 +84,15 @@
       "ai": "IA"
     }
   },
+  "error": {
+    "notFoundCode": "404",
+    "notFoundTitle": "Página no encontrada",
+    "notFoundText": "La ruta que buscas no existe o cambió de lugar.",
+    "genericCode": "Error",
+    "genericTitle": "Algo salió mal",
+    "genericText": "Ocurrió un error inesperado. Intenta de nuevo en un momento.",
+    "home": "Volver al inicio"
+  },
   "footer": {
     "role": "Ingeniero de Sistemas · Software Engineer",
     "rights": "Todos los derechos reservados."
