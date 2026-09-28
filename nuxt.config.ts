@@ -108,7 +108,6 @@ export default defineNuxtConfig({
         'simple-icons:docker',
         'simple-icons:linux',
         'simple-icons:nginx',
-        'simple-icons:amazonaws',
         'simple-icons:git',
         'simple-icons:github',
         'simple-icons:visualstudiocode',

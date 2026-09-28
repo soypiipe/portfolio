@@ -55,7 +55,7 @@ export const stackCategories: StackCategory[] = [
       { name: 'Docker', icon: 'simple-icons:docker' },
       { name: 'Linux', icon: 'simple-icons:linux' },
       { name: 'Nginx', icon: 'simple-icons:nginx' },
-      { name: 'AWS', icon: 'simple-icons:amazonaws' },
+      { name: 'AWS', icon: 'simple-icons:amazonwebservices' },
       { name: 'CI/CD', icon: 'lucide:workflow' }
     ]
   },

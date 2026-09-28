@@ -100,7 +100,7 @@ export const projects: Project[] = [
       { name: 'PostgreSQL', icon: 'simple-icons:postgresql' },
       { name: 'TypeORM', icon: 'simple-icons:typeorm' },
       { name: 'BullMQ', icon: 'lucide:layers' },
-      { name: 'AWS SQS', icon: 'simple-icons:amazonaws' },
+      { name: 'AWS SQS', icon: 'simple-icons:amazonwebservices' },
       { name: 'Redis', icon: 'simple-icons:redis' },
       { name: 'Docker', icon: 'simple-icons:docker' },
       { name: 'OpenTelemetry', icon: 'simple-icons:opentelemetry' },
