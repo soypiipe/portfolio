@@ -5,6 +5,10 @@ const { t, locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
 const otherLocale = computed(() => (locale.value === 'es' ? 'en' : 'es'))
+// switchLocalePath carries over the current #hash. Drop it: the page keeps
+// the reader's scroll position across the switch, so a stale "#contacto"
+// would only mislead (and would jump there on reload).
+const switchPath = computed(() => switchLocalePath(otherLocale.value).split('#')[0])
 const isMobileOpen = ref(false)
 
 function closeMobile() {
@@ -68,7 +72,7 @@ onMounted(() => {
       <!-- Trailing controls (tablet and up) -->
       <div class="hidden items-center gap-5 sm:flex">
         <NuxtLink
-          :to="switchLocalePath(otherLocale)"
+          :to="switchPath"
           class="flex items-center border border-hairline bg-surface/80 px-2.5 py-1.5 font-mono text-xs transition-colors hover:border-secondary"
           :aria-label="otherLocale === 'en' ? 'Switch to English' : 'Cambiar a español'"
         >
@@ -136,7 +140,7 @@ onMounted(() => {
 
       <div class="flex items-center gap-4 border-t border-hairline pt-6">
         <NuxtLink
-          :to="switchLocalePath(otherLocale)"
+          :to="switchPath"
           class="flex items-center border border-hairline bg-surface/80 px-2.5 py-1.5 font-mono text-xs sm:hidden"
         >
           <span :class="locale === 'es' ? 'text-accent-hover font-medium' : 'text-secondary'">ES</span>

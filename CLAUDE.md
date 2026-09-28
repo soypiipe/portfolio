@@ -21,7 +21,9 @@ Primary goals:
 - Large negative space.
 - Subtle motion only.
 - No visual noise.
-- No gradients.
+- No gradients. (One approved exception: `CursorGlow.vue`, a very faint ambient
+  light that trails the mouse on desktop — a dynamic lighting layer, not a
+  decorative gradient in the design. Keep it that faint.)
 - No excessive glassmorphism.
 - No floating 3D objects just for decoration.
 - No generic "AI portfolio" aesthetic.

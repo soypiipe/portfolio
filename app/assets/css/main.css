@@ -54,13 +54,13 @@ body {
 }
 
 /*
- * Section reveal on scroll. The `reveal` class only ever gets added by the
- * v-reveal directive (app/plugins/reveal.ts) *after* it has already
- * applied `reveal-pending` — so if JS fails to load, nothing ever gets
- * `reveal-pending` and content stays visible by default. `reveal` alone
- * just carries the transition; `reveal-pending` is what hides it. The
- * directive drops `reveal` again once the entrance ends, so it never
- * delays the element's own hover transitions afterwards.
+ * Section reveal on scroll. Both classes only ever get added by the
+ * v-reveal directive (app/plugins/reveal.ts), after mount — so if JS fails
+ * to load, nothing is ever hidden and content stays visible by default.
+ * `reveal` alone just carries the transition; `reveal-pending` is what
+ * hides it. The directive drops `reveal` once an entrance ends, so it never
+ * delays the element's own hover transitions afterwards, and re-adds it
+ * when the element re-enters after having left the viewport completely.
  */
 .reveal {
   transition:
@@ -69,6 +69,7 @@ body {
 }
 .reveal-pending {
   opacity: 0;
+  /* Keep this shift below the exit margin in reveal.ts (32px). */
   transform: translateY(28px);
 }
 @media (prefers-reduced-motion: reduce) {

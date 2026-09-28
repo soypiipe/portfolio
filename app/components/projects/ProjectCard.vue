@@ -32,9 +32,11 @@ const panelId = computed(() => `project-${props.project.id}`)
       class="-mx-3 px-3 sm:-mx-4 sm:px-4"
       :class="{ 'transition-colors hover:bg-surface/50': expandable, 'bg-surface/50': open }"
     >
-      <div class="border-t border-hairline py-8 group-first:border-t-0">
-        <!-- Compact state -->
-        <div class="relative grid grid-cols-1 gap-6 sm:grid-cols-12 sm:gap-8">
+      <div class="border-t border-hairline group-first:border-t-0">
+        <!-- Compact state. Same rules as TheExperience: this block is the click
+             target (see the note there), so no transform between it and the
+             button, and real links inside need `relative z-20`. -->
+        <div class="relative -mx-3 grid grid-cols-1 gap-6 px-3 py-8 sm:-mx-4 sm:grid-cols-12 sm:gap-8 sm:px-4">
           <!-- Index + placeholder mark -->
           <div class="flex items-center gap-4 sm:col-span-3 sm:flex-col sm:items-start sm:gap-3">
             <span class="font-mono text-[13px] text-accent-hover">{{ String(index + 1).padStart(2, '0') }}</span>
@@ -57,17 +59,16 @@ const panelId = computed(() => `project-${props.project.id}`)
               </template>
             </div>
 
-            <h3 class="mb-3 font-sans text-2xl font-bold leading-tight text-primary sm:text-3xl" :class="{ 'transition-transform group-hover:translate-x-1': expandable }">
-              <!-- Stretched button: the whole compact block is the click target. -->
+            <h3 class="mb-3 font-sans text-2xl font-bold leading-tight text-primary sm:text-3xl">
               <button
                 v-if="expandable"
                 type="button"
-                class="text-left outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-accent"
+                class="text-left outline-none after:absolute after:inset-0 after:z-10 after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-accent"
                 :aria-expanded="open"
                 :aria-controls="panelId"
                 @click="emit('toggle', $event.currentTarget as HTMLElement)"
               >
-                {{ name }}
+                <span class="inline-block transition-transform group-hover:translate-x-1">{{ name }}</span>
               </button>
               <template v-else>{{ name }}</template>
             </h3>
@@ -84,7 +85,7 @@ const panelId = computed(() => `project-${props.project.id}`)
         <!-- Expanded state -->
         <Collapse v-if="expandable" :id="panelId" :open="open">
           <div class="grid grid-cols-1 sm:grid-cols-12 sm:gap-8">
-            <div class="pt-8 sm:col-span-9 sm:col-start-4">
+            <div class="pb-8 sm:col-span-9 sm:col-start-4">
               <template v-if="project.responsibilities">
                 <h4 class="mb-4 font-mono text-xs uppercase tracking-widest text-secondary">{{ t('common.work') }}</h4>
                 <ul class="mb-8 flex flex-col gap-3">

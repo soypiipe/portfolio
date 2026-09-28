@@ -3,6 +3,7 @@
     <!-- No bg on this wrapper on purpose: the page background lives on <body>
          so the fixed TheBackground layer (z -10) sits between it and the content. -->
     <TheBackground />
+    <CursorGlow />
     <TheNavigation />
     <main>
       <slot />

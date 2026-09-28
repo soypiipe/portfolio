@@ -4,7 +4,7 @@ import type { ExperienceEntry } from '~/data/experience'
 
 const { t, locale } = useI18n()
 const { pick } = useLocalized()
-const { openId, toggle } = useAccordion()
+const { openId, toggle } = useAccordion('experience')
 
 function dateRange(entry: ExperienceEntry) {
   return formatDateRange(entry.startDate, entry.endDate, entry.current, locale.value, t('common.present'))
@@ -33,22 +33,27 @@ function dateRange(entry: ExperienceEntry) {
                 class="-mx-3 px-3 transition-colors hover:bg-surface/50 sm:-mx-4 sm:px-4"
                 :class="{ 'bg-surface/50': openId === entry.id }"
               >
-                <div class="border-t border-hairline py-8 group-first:border-t-0">
-                  <!-- Compact state: enough to identify the role without opening it. -->
-                  <div class="relative grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 sm:grid-cols-[3rem_1fr_auto] sm:gap-x-6">
+                <div class="border-t border-hairline group-first:border-t-0">
+                  <!-- Compact state: enough to identify the role without opening it.
+                       This block (padding included, edge to edge) is the click target:
+                       it is the positioned ancestor the button's ::after stretches over.
+                       Nothing between it and the button may have a transform/filter, or
+                       that element becomes the ::after's box instead (that was the bug
+                       that shrank the target to just the title on hover). A real link
+                       placed in here needs `relative z-20` to stay above the overlay. -->
+                  <div class="relative -mx-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-3 px-3 py-8 sm:-mx-4 sm:grid-cols-[3rem_1fr_auto] sm:gap-x-6 sm:px-4">
                     <span class="pt-2 font-mono text-[13px] text-accent-hover">{{ String(index + 1).padStart(2, '0') }}</span>
 
                     <div class="min-w-0">
-                      <h3 class="font-sans text-2xl font-bold leading-tight text-primary transition-transform group-hover:translate-x-1 sm:text-3xl">
-                        <!-- The button's ::after stretches over the whole compact block, so the entire row is the click target. -->
+                      <h3 class="font-sans text-2xl font-bold leading-tight text-primary sm:text-3xl">
                         <button
                           type="button"
-                          class="text-left outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-accent"
+                          class="text-left outline-none after:absolute after:inset-0 after:z-10 after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-accent"
                           :aria-expanded="openId === entry.id"
                           :aria-controls="`exp-${entry.id}`"
                           @click="toggle(entry.id, $event.currentTarget as HTMLElement)"
                         >
-                          {{ entry.company }}
+                          <span class="inline-block transition-transform group-hover:translate-x-1">{{ entry.company }}</span>
                         </button>
                       </h3>
                       <p class="mt-1.5 font-sans text-base text-primary/90 sm:text-lg">
@@ -72,7 +77,7 @@ function dateRange(entry: ExperienceEntry) {
 
                   <!-- Expanded state: everything else. -->
                   <Collapse :id="`exp-${entry.id}`" :open="openId === entry.id">
-                    <div class="pt-8 sm:pl-[4.5rem]">
+                    <div class="pb-8 sm:pl-[4.5rem]">
                       <p class="mb-6 font-mono text-[13px] text-secondary">
                         {{ pick(entry.modality) }} · {{ pick(entry.location) }}
                       </p>

@@ -2,7 +2,7 @@
 import { projects } from '~/data/projects'
 
 const { t } = useI18n()
-const { openId, toggle } = useAccordion()
+const { openId, toggle } = useAccordion('projects')
 </script>
 
 <template>

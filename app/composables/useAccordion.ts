@@ -1,9 +1,14 @@
 /**
  * One-open-at-a-time state for the expandable Experience / Projects rows.
  * Clicking the open row closes it; clicking another closes the previous one.
+ *
+ * `key` names the list. The state lives in `useState` (not a local ref) so it
+ * survives the page remount that happens when the language is switched: the
+ * open row stays open, the page keeps its height, and the reader keeps their
+ * place.
  */
-export function useAccordion() {
-  const openId = ref<string | null>(null)
+export function useAccordion(key: string) {
+  const openId = useState<string | null>(`accordion-${key}`, () => null)
 
   function toggle(id: string, trigger?: HTMLElement | null) {
     openId.value = openId.value === id ? null : id
