@@ -50,11 +50,6 @@
     "eyebrow": "Projects",
     "heading": "Selected projects",
     "techAriaLabel": "Technologies used in {name}",
-    "amadia": {
-      "name": "Amadia Technology",
-      "kind": "Building my company",
-      "description": "Web solutions, automation and artificial intelligence development for businesses."
-    },
     "notifyEngine": {
       "name": "notify-engine",
       "kind": "Personal / portfolio project"

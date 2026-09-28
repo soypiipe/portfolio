@@ -19,7 +19,7 @@ const dateRangeLabel = computed(() => {
 })
 
 // A project only gets an expanded state if there is actually something more
-// to show (Amadia has just a description and stack — nothing to expand).
+// to show (a project with just a description and stack has nothing to expand).
 const expandable = computed(
   () => !!(props.project.responsibilities || props.project.achievements?.length || props.project.links?.length)
 )

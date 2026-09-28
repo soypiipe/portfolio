@@ -269,12 +269,18 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 1. **Frase sobre IA (aplicada), sin nombrar Amadia.** Al final del párrafo 3: "Por mi cuenta construyo agentes con IA y automatizaciones, y uso IA a diario como parte de mi forma de desarrollar." / "On my own I build AI agents and automations, and I use AI daily as part of how I develop." Motivo: el hero, el Stack y las etiquetas presentan IA/automatización como parte central, y el texto de About era 100% backend. **Decisión de Diego: no nombrar Amadia en About** porque todavía no tiene su primer cliente; una primera propuesta ("…para negocios reales") se descartó por exagerar. La frase actual solo afirma lo verificable: proyectos propios con agentes/automatización y uso diario de Claude Code (está en el CV).
 2. **Etiquetas de capacidades (aplicadas):** de "Análisis / Desarrollo / Automatización / IA / Aprendizaje continuo" a **"Backend / Arquitectura / Sistemas asíncronos / Cloud y DevOps / IA"** (EN: Backend / Architecture / Asynchronous systems / Cloud & DevOps / AI), para que coincidan con el texto. Claves i18n antiguas eliminadas (`analisis`, `desarrollo`, `automatizacion`, `aprendizaje`; nuevas: `backend`, `arquitectura`, `asincronos`, `cloud`; `ia` se mantiene). Verificado en producción (1280px ES/EN y 390px): sin overflow ni errores de consola.
 3. **"Más de seis años" (sin cambiar, decisión de Diego):** las fechas de Experiencia empiezan en feb 2018 (~8 años a la fecha; ~7 desde el primer empleo no junior, jul 2019). "Más de seis" es verdadero y coincide con el CV, pero un reclutador que sume las fechas verá una diferencia. Recomendación: si se cambia, hacerlo en el About *y* en el CV a la vez ("más de siete"), aprovechando la próxima edición del documento original del CV.
-4. **Amadia en Proyectos:** sigue listado como "Construyendo mi empresa" (decisión previa de Diego). Se le ofreció quitarlo también de ahí por el mismo motivo; pendiente de su respuesta.
+4. **Amadia en Proyectos: quitada** (ver sección "Amadia fuera de Proyectos" abajo).
 
 **Nota menor no tocada:** el `aria-label="Capacidades"` de la lista de etiquetas en `TheAbout.vue` está escrito en español fijo, también en la versión EN. Conviene pasarlo a una clave i18n cuando se vuelva a tocar ese componente.
 
+## Amadia fuera de Proyectos (2026-09-28)
+
+**Estado:** ✅ hecho, a pedido de Diego: Amadia Technology todavía no tiene su primer cliente, así que no se muestra ni en About (ver arriba) ni en Proyectos. Ahora la sección muestra solo **notify-engine**. Cambios: entrada `amadia` eliminada de `app/data/projects.ts`; claves `projects.amadia.*` eliminadas de ES y EN (sin claves muertas); ícono `lucide:sparkles` (solo lo usaba Amadia) quitado de `clientBundle.icons` en `nuxt.config.ts` (bundle: 44 → 43 íconos, 64.4KB); comentarios de `projects.ts` y `ProjectCard.vue` actualizados. **No se tocó** la lógica de `ProjectCard` que decide si una fila es expandible (sigue siendo genérica y se necesitará cuando vuelva un proyecto sin detalle). Amadia sigue viva en `00-mapa.md` y `docs/content.md`. Verificado en el build de producción (1280px ES y 390px EN): una sola fila, 0 apariciones de "Amadia" en el HTML, íconos renderizando, sin overflow ni errores de consola.
+
+**Observación (no cambiada):** el título de la sección sigue siendo "Proyectos seleccionados" / "Selected projects" (plural) con un solo proyecto. Se dejó así por ahora porque es contenido ya aprobado; si se prefiere, pasarlo a singular o esperar a sumar un segundo proyecto.
+
 ## Fase 8 — Content lock
-**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine + Amadia), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional), About ✅ (2026-09-28). Falta solo la **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
+**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional), About ✅ (2026-09-28). Falta solo la **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
 
 ---
 
@@ -283,7 +289,7 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 **Bloqueados por contenido tuyo (Fase 8):**
 - Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`, y prepararla con la receta de la sección de rendimiento (2 anchos, WebP/AVIF, `srcset`).
 - Dominio definitivo: cuando se decida, definir `NUXT_PUBLIC_SITE_URL` (build + runtime). **Abrir `robots.txt` al crawling** solo cuando la foto final esté puesta *y* el dominio sea el definitivo (ver arriba). La bio ya está.
-- Amadia: cuando tenga contenido real (contexto, resultado, links), agregarlo a `projects.ts` y la fila pasa a ser expandible sola.
+- Amadia (fuera de Proyectos desde 2026-09-28, aún sin primer cliente): cuando tenga primer cliente o resultados que se puedan afirmar, volver a agregarla en `app/data/projects.ts` (el historial de git conserva la entrada, con sus textos en `projects.amadia.*` de i18n) y la fila pasa a ser compacta/no expandible hasta que tenga contexto, resultado y links. Si vuelve `lucide:sparkles`, agregarlo otra vez a `clientBundle.icons`.
 - Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.
 
 **Técnicos (no bloqueados, menor prioridad):**

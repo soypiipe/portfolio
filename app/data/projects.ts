@@ -28,10 +28,10 @@ export interface Project {
   links?: ProjectLink[]
 }
 
-// Solo notify-engine y Amadia Technology, a pedido explícito de Diego
-// (2026-09-21). Miattend queda fuera de la selección por ahora — sigue
-// confirmado y real en docs/content.md, no se borró de ahí, solo no se
-// muestra en esta sección todavía.
+// Solo notify-engine, a pedido explícito de Diego. Miattend (2026-09-21) y
+// Amadia Technology (2026-09-28, aún sin primer cliente) quedan fuera por
+// ahora — siguen reales en docs/content.md y 00-mapa.md, solo no se muestran
+// en esta sección todavía.
 export const projects: Project[] = [
   {
     id: 'notify-engine',
@@ -113,18 +113,6 @@ export const projects: Project[] = [
     // liveDemo venía null, se omite.
     links: [
       { label: { es: 'Ver código', en: 'View code' }, url: 'https://github.com/soypiipe/notify-engine' }
-    ]
-  },
-  {
-    id: 'amadia',
-    nameKey: 'projects.amadia.name',
-    kindKey: 'projects.amadia.kind',
-    descriptionKey: 'projects.amadia.description',
-    technologies: [
-      { name: 'Node.js', icon: 'simple-icons:nodedotjs' },
-      { name: 'IA', icon: 'lucide:sparkles' },
-      { name: 'WhatsApp', icon: 'simple-icons:whatsapp' },
-      { name: 'RAG', icon: 'lucide:database' }
     ]
   }
 ]

@@ -130,7 +130,6 @@ export default defineNuxtConfig({
         'simple-icons:resend',
         'simple-icons:slack',
         'lucide:workflow',
-        'lucide:sparkles',
         'lucide:database',
         'lucide:mail',
         'lucide:file-down',
