@@ -18,22 +18,63 @@ function closeMobile() {
 }
 
 // Scrollspy: highlights the nav link for whichever section is currently
-// crossing the middle band of the viewport. Client-only — defaults to
+// crossing the band at 40% of the viewport height. Client-only — defaults to
 // "inicio" during SSR, which is correct for a fresh page load anyway.
+//
+// Exception: at the very bottom of the page the last section wins. On tall
+// viewports the page can't scroll far enough to bring the last section (a
+// short one) up to the band, so it would never be marked — not even after
+// clicking its own nav link.
 const activeId = ref('inicio')
+const BAND = 0.4
 
 onMounted(() => {
-  const sections = document.querySelectorAll('main section[id]')
+  const sections = [...document.querySelectorAll<HTMLElement>('main section[id]')]
+  const lastId = sections[sections.length - 1]?.id
+  const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+
   const observer = new IntersectionObserver(
     (entries) => {
+      if (lastId && atBottom()) {
+        activeId.value = lastId
+        return
+      }
       for (const entry of entries) {
         if (entry.isIntersecting) activeId.value = entry.target.id
       }
     },
-    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    { rootMargin: `-${BAND * 100}% 0px -55% 0px`, threshold: 0 }
   )
   sections.forEach((section) => observer.observe(section))
-  onUnmounted(() => observer.disconnect())
+
+  // The observer only fires when a section crosses the band, so entering and
+  // leaving the bottom of the page needs its own check.
+  let wasAtBottom = false
+  function onScrollOrResize() {
+    const bottom = atBottom()
+    if (bottom === wasAtBottom) return
+    wasAtBottom = bottom
+    if (bottom) {
+      if (lastId) activeId.value = lastId
+      return
+    }
+    // Left the bottom: go back to the section that sits on the band.
+    const y = window.innerHeight * BAND
+    const current = sections.find((section) => {
+      const rect = section.getBoundingClientRect()
+      return rect.top <= y && rect.bottom > y
+    })
+    if (current) activeId.value = current.id
+  }
+  window.addEventListener('scroll', onScrollOrResize, { passive: true })
+  window.addEventListener('resize', onScrollOrResize, { passive: true })
+  onScrollOrResize()
+
+  onUnmounted(() => {
+    observer.disconnect()
+    window.removeEventListener('scroll', onScrollOrResize)
+    window.removeEventListener('resize', onScrollOrResize)
+  })
 })
 </script>
 
