@@ -45,3 +45,12 @@ After each phase:
 5. continue only after the phase is coherent
 
 If information is missing, use a clearly marked placeholder instead of inventing it.
+
+## License
+
+The source code is released under the [MIT License](LICENSE).
+
+The personal content of the site — biography, work history, project write-ups,
+photographs and the name and likeness of Diego Amado (`app/data/`, `i18n/`,
+`public/`) — is not covered by that license. All rights reserved; please do
+not reuse it without permission.
