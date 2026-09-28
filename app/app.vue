@@ -12,16 +12,6 @@ useHead(() => ({
   link: [
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-    // Preconnect lets the browser start the connection before it even
-    // parses the stylesheet link below; a plain <link rel="stylesheet">
-    // (vs. the old CSS @import) is discovered immediately instead of only
-    // after the rest of main.css has downloaded and parsed.
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'
-    },
     ...(i18nHead.value.link ?? [])
   ],
   meta: [{ name: 'theme-color', content: '#0C0A09' }, ...(i18nHead.value.meta ?? [])]
@@ -44,8 +34,8 @@ useHead({
 
 // Person structured data — only facts confirmed elsewhere in this repo.
 // No `image` (the hero photo is an AI placeholder, not a real photo of
-// Diego) and no LinkedIn/email (still unconfirmed placeholders in
-// docs/content.md). github.com/soypiipe is his real, confirmed account.
+// Diego) and no email/phone (not something to hand to crawlers). GitHub and
+// LinkedIn are his real, confirmed profiles (app/data/contact.ts).
 useHead({
   script: [
     {
@@ -56,7 +46,7 @@ useHead({
         name: site.name,
         url: config.public.siteUrl,
         jobTitle: t('hero.eyebrow'),
-        sameAs: ['https://github.com/soypiipe']
+        sameAs: ['https://github.com/soypiipe', 'https://www.linkedin.com/in/diegoamadodev']
       })
     }
   ]

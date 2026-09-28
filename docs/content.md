@@ -93,11 +93,10 @@ Use placeholders until the user provides the exact CV history.
 
 ## Contact
 
-Use placeholders:
-EMAIL_TO_ADD
-WHATSAPP_TO_ADD
-LINKEDIN_TO_ADD
-GITHUB_TO_ADD
+Confirmed values live in `app/data/contact.ts` (single source of truth):
+email, WhatsApp, LinkedIn and GitHub are set (2026-09-28).
+
+Still a placeholder:
 CV_TO_ADD
 
 Never invent these values.

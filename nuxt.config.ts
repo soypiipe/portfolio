@@ -5,9 +5,32 @@ export default defineNuxtConfig({
   // button in the browser during `npm run dev` — not something we want
   // visible while reviewing the site itself.
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/eslint', '@nuxt/icon'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@nuxt/eslint', '@nuxt/icon', '@nuxt/fonts'],
 
   css: ['~/assets/css/main.css'],
+
+  // Self-hosted fonts: downloaded at build time and served from our own
+  // origin (no third-party connection, no render-blocking stylesheet from
+  // Google). Only the weights and the latin subset the site actually uses
+  // (Spanish accents live in latin). The module also preloads them and
+  // generates a metric-adjusted fallback so swapping in the real font
+  // causes no layout shift.
+  fonts: {
+    provider: 'google',
+    // preload is off by default for fonts that ship a unicode-range (Google's
+    // do), but both files here are used in the first paint, so preload them.
+    defaults: { subsets: ['latin'], styles: ['normal'], preload: true },
+    families: [
+      { name: 'Inter', provider: 'google', weights: [400, 500, 700] },
+      { name: 'JetBrains Mono', provider: 'google', weights: [400, 500] }
+    ]
+  },
+
+  // Pre-compress every static asset (JS, CSS, ...) to .gz and .br at build
+  // time. Without this the Node server sends them raw (~445KB of JS over
+  // the wire vs ~150KB compressed). HTML from SSR is not covered — a
+  // reverse proxy or CDN in front normally compresses that.
+  nitro: { compressPublicAssets: true },
 
   // Files in public/ have stable URLs (no content hash), so they can't be
   // `immutable` like /_nuxt/* — a day of browser cache is a safe middle

@@ -1,17 +1,9 @@
 <script setup lang="ts">
+import { contactActions } from '~/data/contact'
+
 const { t } = useI18n()
 
-// Sin href real a propósito — content.md marca estos datos como
-// EMAIL_TO_ADD / WHATSAPP_TO_ADD / etc., ninguno confirmado todavía.
-// <a> sin href no es interactivo (no es tabbable, no parece un link roto)
-// hasta que se complete con el dato real.
-const actions = [
-  { key: 'email', icon: 'lucide:mail' },
-  { key: 'whatsapp', icon: 'simple-icons:whatsapp' },
-  { key: 'linkedin', icon: 'simple-icons:linkedin' },
-  { key: 'github', icon: 'simple-icons:github' },
-  { key: 'cv', icon: 'lucide:file-down' }
-] as const
+const hasPendingChannel = contactActions.some((action) => !action.href)
 </script>
 
 <template>
@@ -34,8 +26,21 @@ const actions = [
           </p>
 
           <ul v-reveal="240" class="flex flex-wrap gap-4">
-            <li v-for="action in actions" :key="action.key">
+            <li v-for="action in contactActions" :key="action.key">
+              <!-- Channels without a confirmed href stay as a bare <a>: not
+                   focusable, not a link, just a dimmed label. -->
               <a
+                v-if="action.href"
+                :href="action.href"
+                :target="action.external ? '_blank' : undefined"
+                :rel="action.external ? 'noopener noreferrer' : undefined"
+                class="inline-flex items-center gap-2.5 border border-hairline px-5 py-3 font-mono text-[13px] uppercase tracking-wide text-primary transition-all hover:-translate-y-0.5 hover:border-accent-hover"
+              >
+                <Icon :name="action.icon" class="h-[18px] w-[18px] shrink-0" aria-hidden="true" />
+                {{ t(`contact.actions.${action.key}`) }}
+              </a>
+              <a
+                v-else
                 aria-disabled="true"
                 class="inline-flex items-center gap-2.5 border border-hairline px-5 py-3 font-mono text-[13px] uppercase tracking-wide text-secondary/80"
               >
@@ -45,7 +50,7 @@ const actions = [
             </li>
           </ul>
 
-          <p class="mt-5 font-mono text-[13px] text-secondary/80">
+          <p v-if="hasPendingChannel" class="mt-5 font-mono text-[13px] text-secondary/80">
             {{ t('contact.pendingNote') }}
           </p>
         </div>
