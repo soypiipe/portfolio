@@ -228,27 +228,49 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 
 **Lighthouse (build de producción, `/`, 4 corridas antes → 4 después):** Performance **62–69 → 83–85**, FCP 4.2s → 2.6s, LCP 4.9–5.4s → 3.3s, TBT ~200–420ms → 200–260ms, CLS 0. Accessibility/Best Practices sin cambios (100/100) y SEO 69 por el `Disallow: /` deliberado. Lo que queda: ~190KB de JS sin usar (hidratación de Nuxt) y el WebP del hero sobredimensionado (~12KB), que se resuelve con la foto final.
 
-**3. Datos de contacto reales (Fase 8, parcial).** Nuevo `app/data/contact.ts` (tipado, el `href` es opcional: sin `href` el botón sigue siendo un `<a>` inerte y atenuado, igual que antes). Activos: **Email** (`mailto:diego_amado@outlook.com`), **WhatsApp** (`https://wa.me/573214048069`), **LinkedIn** (`https://www.linkedin.com/in/diegoamadodev`) y **GitHub** (`https://github.com/soypiipe`, ya confirmado en `00-mapa.md`). Los de web abren en pestaña nueva con `rel="noopener noreferrer"`. **CV sigue pendiente** (sin PDF), y la nota bajo los botones pasó de "los datos de contacto se activan cuando estén confirmados" a "El CV estará disponible pronto." / "My CV will be available soon."; la nota solo se muestra mientras quede algún canal sin `href`. JSON-LD `Person`: `sameAs` ahora incluye LinkedIn (el email/teléfono no se ponen en datos estructurados a propósito). **Ojo:** el correo llegó como `diego_amado_outlook.com` (sin `@`); se interpretó como `diego_amado@outlook.com` — confirmar que es correcto.
+**3. Datos de contacto reales (Fase 8, parcial).** Nuevo `app/data/contact.ts` (tipado, el `href` es opcional: sin `href` el botón sigue siendo un `<a>` inerte y atenuado, igual que antes). Activos: **Email** (`mailto:diego_amado@outlook.com`), **WhatsApp** (`https://wa.me/573214048069`), **LinkedIn** (`https://www.linkedin.com/in/diegoamadodev`) y **GitHub** (`https://github.com/soypiipe`, ya confirmado en `00-mapa.md`). Los de web abren en pestaña nueva con `rel="noopener noreferrer"`. **CV** quedó inerte en ese momento (aún sin PDF); se activó en la sección siguiente. JSON-LD `Person`: `sameAs` ahora incluye LinkedIn (el email/teléfono no se ponen en datos estructurados a propósito). *(Correo corregido después: es `diego_amado_@outlook.com`, con guion bajo antes de la `@`; ver la sección siguiente.)*
+
+## CV bilingüe, dominio provisional y rendimiento (2026-09-28)
+
+**Estado:** ✅ completa. Sin cambios de identidad visual, layout, paleta ni motion.
+
+**1. CV en PDF, un archivo por idioma.** Diego dejó `Diego-Ariza-CV-ES.pdf` y `Diego-Ariza-CV-EN.pdf` sueltos en `public/`. Ahora viven en **`public/cv/diego-amado-cv-es.pdf`** y **`public/cv/diego-amado-cv-en.pdf`** (carpeta propia, nombre en minúsculas con guiones y coherente con la marca del sitio; los originales con "Ariza" en el nombre se quitaron de `public/` para que no se sirvan; copia de respaldo fuera del repo en `~/cv-originales-backup/`). Cambios en los archivos, hechos con `pypdf`, sin tocar el texto (se verificó la extracción de texto idéntica al original):
+- **Color:** el CV original usaba azul marino (`#1F3864`) en nombre, títulos de sección y líneas. Se cambió solo ese color (9 operadores de color) por el **rust `#B9502C`** del portfolio (4.95:1 sobre blanco, pasa AA). **Fondo blanco a propósito:** un CV se imprime y lo leen ATS/reclutadores; uno oscuro sería peor práctica.
+- **Metadata:** Title ("Diego Amado — CV (Español/English)"), Author "Diego Amado" (antes "Un-named"), Subject, idioma del documento (`es-CO`/`en-US`) y `DisplayDocTitle` (el visor muestra el título, no el nombre del archivo). Streams recomprimidos: ~51KB cada uno.
+- **Nombre dentro del PDF:** dice "DIEGO FELIPE ARIZA AMADO" (nombre completo con ambos apellidos, contenido del propio CV). No se modificó; el sitio sigue usando "Diego Amado".
+
+**Selección por idioma:** `app/data/contact.ts` exporta `cvHref = { es, en }`; Nav (desktop y menú móvil), Hero y Contacto usan `pick(cvHref)` (el mismo `useLocalized` de todo el sitio), así que el link cambia al instante si el visitante cambia de idioma, sin recargar. Todos llevan `download` (descarga directa, nombre del archivo = el de la URL). Verificado en Chrome headless: en `/` los links apuntan al `-es.pdf`; tras cambiar a EN en cliente, al `-en.pdf`; al volver a ES, de nuevo `-es.pdf`, sin errores de consola. Cache de `/cv/**`: `max-age=3600` (1h, el CV cambia más que las imágenes); `Content-Type: application/pdf`. Se eliminó el código muerto: la nota "CV estará disponible pronto" y su clave i18n `contact.pendingNote`, y la rama de botón inerte (ya no queda ningún canal sin `href`, que ahora es obligatorio en `ContactAction`).
+
+**2. Correo corregido:** `diego_amado_@outlook.com` (así aparece también en los dos CVs).
+
+**3. Dominio provisional `diegoamado.dev`.** Es el default de `runtimeConfig.public.siteUrl` y de `i18n.baseUrl` en `nuxt.config.ts`; se sobreescribe con `NUXT_PUBLIC_SITE_URL` (para cambiar de dominio: variable de entorno **en el build y en runtime**, no código). Verificado que canonical, `hreflang`, `og:url`, JSON-LD, `sitemap.xml` y la línea `Sitemap:` de `robots.txt` salen todos con `https://diegoamado.dev`. **`robots.txt` sigue bloqueando todo (`Disallow: /`) a propósito**, aunque ya hay dominio: (a) el dominio no es el definitivo — indexar ahora y cambiar después pierde el posicionamiento y crea duplicados; (b) el contenido no está cerrado (bio en draft, foto del hero es un placeholder de IA rotulado en la UI). Cuando se cierren bio + foto y el dominio sea el definitivo: cambiar `Disallow: /` por `Disallow:` en `server/routes/robots.txt.ts`.
+
+**4. Rendimiento — qué se probó y qué no (con medición).**
+- **Probado y revertido: i18n "solo runtime"** (`i18n.bundle: { runtimeOnly: true, dropMessageCompiler: true }`). Ahorraba ~16KB de JS (~5KB comprimido), pero **rompe el sitio en el navegador**: el HTML del servidor sale bien, pero la hidratación falla (`unhandled node type: 0`) y la página queda en blanco. Los mensajes que llegan por `/_i18n/.../messages.json` sí necesitan el compilador en el cliente. No vale el riesgo ni la ganancia; no reintentar sin un test de hidratación en navegador real.
+- **"JS sin usar" (~190KB): no es accionable.** Se inspeccionaron los chunks: 281KB es el runtime de Nuxt (router, i18n, unhead, ícono), 115KB es Vue; lo "sin usar" en la carga inicial es código de framework, no de la app. Recortarlo implicaría quitar i18n/router, que es justo el SEO bilingüe.
+- **WebP del hero:** el placeholder es de 512×382 (menor que su marco); Lighthouse solo marcaba compresión (~12KB). No se optimiza un placeholder que se va a reemplazar. **Receta para la foto final:** exportar a 2 anchos (~800 y ~1600px de lado largo, relación 4:3) en WebP calidad ~75–80 (+ AVIF si se quiere), servirlos con `srcset`/`sizes` en el `<picture>`, mantener `width`/`height` reales (hoy dicen 1200×896 aunque el archivo es 512×382), `fetchpriority="high"` y `loading="eager"` como ahora (es el LCP).
+- **Lighthouse final (build de producción, `/`, 3 corridas):** Performance 78–86 (el TBT oscila 160–390ms entre corridas; FCP 2.6–2.7s, LCP 3.4s, CLS 0), Accessibility 100, Best Practices 100, SEO 69. **El único audit de SEO que falla es `is-crawlable`** (el `Disallow: /` deliberado); canonical, hreflang, meta description, títulos y links pasan.
 
 ## Fase 8 — Content lock
-**Estado:** pendiente — experiencia exacta ✅, proyectos a mostrar ✅ (solo notify-engine + Amadia, decidido 2026-09-21) y datos de contacto ✅ (Email/WhatsApp/LinkedIn/GitHub, 2026-09-28). Sigue bloqueada por: bio de About definitiva, CV en PDF, foto final del hero y dominio real.
+**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine + Amadia), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional). Faltan solo: **bio definitiva de About** y **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
 
 ---
 
 ## Pendientes abiertos
 
-**Bloqueados por contenido tuyo (Fase 8 — content lock):**
+**Bloqueados por contenido tuyo (Fase 8):**
 - Bio definitiva de About (hoy es el draft de `content.md` + una frase de aprendizaje continuo).
-- CV en PDF real — hoy `/cv/diego-amado-cv.pdf` no existe y hay 2 links que apuntan ahí (hero, nav; el de Contacto está inerte a propósito). Al tenerlo: agregar `href` al item `cv` en `app/data/contact.ts` (la nota "CV estará disponible pronto" desaparece sola).
-- Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`.
-- Dominio real (`NUXT_PUBLIC_SITE_URL`) para abrir `robots.txt` al crawling (hoy bloquea todo a propósito).
-- React en el Stack: hoy se lista al mismo nivel que Vue/NestJS, pero es un gap conocido (solo fundamentos). Pendiente de decidir si se quita o se marca como "familiaridad".
+- Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`, y prepararla con la receta de la sección de rendimiento (2 anchos, WebP/AVIF, `srcset`).
+- Dominio definitivo: cuando se decida, definir `NUXT_PUBLIC_SITE_URL` (build + runtime). **Abrir `robots.txt` al crawling** solo cuando estén la bio y la foto finales *y* el dominio sea el definitivo (ver arriba).
+- React en el Stack: hoy se lista al mismo nivel que Vue/NestJS, pero es un gap conocido (solo fundamentos; el CV lo dice así: "React (fundamentos)"). Pendiente de decidir si se quita o se marca como "familiaridad".
 - Amadia: cuando tenga contenido real (contexto, resultado, links), agregarlo a `projects.ts` y la fila pasa a ser expandible sola.
 - Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.
 
 **Técnicos (no bloqueados, menor prioridad):**
-- Performance (Lighthouse en build de producción, 2026-09-28: Perf 83–85 / A11y 100 / BP 100 / SEO 69): ver la sección de fuentes + compresión arriba. Queda ~190KB de JS sin usar (hidratación de Nuxt) y el WebP del hero sobredimensionado (se resuelve con la foto final).
-- Verificación manual pendiente en navegador/dispositivo real: responsive visual fino y navegación por teclado completa (parcialmente cubierto por el test headless de esta iteración: Tab/Enter/Space en el accordion).
+- Verificación manual pendiente en navegador/dispositivo real: responsive visual fino, navegación por teclado completa, y que el CV se descargue bien en móvil (iOS Safari abre PDFs en visor en vez de descargar, comportamiento normal del navegador).
+- Si cambia el CV: reemplazar los PDFs en `public/cv/` conservando los nombres (y, si se recolorea de nuevo, el rust es `#B9502C`).
 - Si se agregan tecnologías nuevas con ícono, sumarlas a `clientBundle.icons` en `nuxt.config.ts` o no van a renderizar.
+- Si se agrega un idioma: una línea en `cvHref` (`app/data/contact.ts`) + su PDF en `public/cv/`.
+- Rendimiento: no queda nada de bajo riesgo por mejorar (ver sección 4). Compresión del HTML de SSR (~145KB → ~39KB) depende del proxy/CDN del deploy: verificar que `gzip`/`br` esté activo ahí.
 
-**Siguiente paso:** Fase 8 depende de ti (contenido). Del lado técnico no queda nada obligatorio.
+**Siguiente paso:** Fase 8 depende de ti (bio y foto). Del lado técnico no queda nada obligatorio.

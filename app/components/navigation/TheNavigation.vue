@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { cvHref } from '~/data/contact'
 import { navLinks } from '~/data/navigation'
 
 const { t, locale } = useI18n()
+const { pick } = useLocalized()
 const switchLocalePath = useSwitchLocalePath()
 
 const otherLocale = computed(() => (locale.value === 'es' ? 'en' : 'es'))
@@ -82,7 +84,8 @@ onMounted(() => {
         </NuxtLink>
 
         <a
-          href="/cv/diego-amado-cv.pdf"
+          :href="pick(cvHref)"
+          download
           class="link-line hidden items-center gap-1.5 font-mono text-[13px] text-secondary transition-colors hover:text-primary xl:inline-flex"
         >
           <span>{{ t('nav.cv') }}</span>
@@ -147,7 +150,7 @@ onMounted(() => {
           <span class="mx-1.5 text-hairline">/</span>
           <span :class="locale === 'en' ? 'text-accent-hover font-medium' : 'text-secondary'">EN</span>
         </NuxtLink>
-        <a href="/cv/diego-amado-cv.pdf" class="font-mono text-[13px] text-secondary">{{ t('nav.cv') }}</a>
+        <a :href="pick(cvHref)" download class="font-mono text-[13px] text-secondary">{{ t('nav.cv') }}</a>
       </div>
 
       <a

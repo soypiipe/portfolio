@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { cvHref } from '~/data/contact'
+
 const { t } = useI18n()
+const { pick } = useLocalized()
 </script>
 
 <template>
@@ -51,7 +54,8 @@ const { t } = useI18n()
             </a>
 
             <a
-              href="/cv/diego-amado-cv.pdf"
+              :href="pick(cvHref)"
+              download
               class="group flex h-12 items-center gap-2 border border-transparent px-5 font-mono text-[13px] uppercase tracking-wider text-secondary transition-all hover:-translate-y-0.5 hover:border-hairline hover:text-primary active:translate-y-0"
             >
               <span>{{ t('hero.ctaSecondary') }}</span>

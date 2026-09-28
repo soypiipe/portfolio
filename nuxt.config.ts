@@ -39,7 +39,9 @@ export default defineNuxtConfig({
   routeRules: {
     '/images/**': { headers: { 'cache-control': 'public, max-age=86400' } },
     '/favicon.ico': { headers: { 'cache-control': 'public, max-age=86400' } },
-    '/apple-touch-icon.png': { headers: { 'cache-control': 'public, max-age=86400' } }
+    '/apple-touch-icon.png': { headers: { 'cache-control': 'public, max-age=86400' } },
+    // CVs get updated more often than the images: one hour.
+    '/cv/**': { headers: { 'cache-control': 'public, max-age=3600' } }
   },
 
   components: [
@@ -48,11 +50,11 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      // No domain confirmed yet — falls back to localhost so canonical/OG
-      // URLs are still well-formed in dev. Set NUXT_PUBLIC_SITE_URL for
-      // real deploys once Diego picks the domain. Never hardcode a guess
-      // here.
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+      // Provisional domain (not the final one). Everything that needs an
+      // absolute URL — canonical, OG, hreflang, sitemap, robots — reads it
+      // from here, so switching domains is one env var
+      // (NUXT_PUBLIC_SITE_URL), not a code change.
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://diegoamado.dev'
     }
   },
 
@@ -63,7 +65,7 @@ export default defineNuxtConfig({
   i18n: {
     // Needs to be an absolute origin (not '/') for hreflang alternates to
     // be generated as absolute URLs, which is what search engines expect.
-    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://diegoamado.dev',
     defaultLocale: 'es',
     strategy: 'prefix_except_default',
     // Explicitly off: the module's default browser-language detection was
