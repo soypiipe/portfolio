@@ -4,7 +4,7 @@ const { t } = useI18n()
 // Fixed, known set of keys — simpler and safer than tm()/rt() here, which
 // return the raw message node (not the resolved string) for object trees.
 const paragraphKeys = ['p1', 'p2', 'p3', 'p4'] as const
-const labelKeys = ['analisis', 'desarrollo', 'automatizacion', 'ia', 'aprendizaje'] as const
+const labelKeys = ['backend', 'arquitectura', 'asincronos', 'cloud', 'ia'] as const
 </script>
 
 <template>

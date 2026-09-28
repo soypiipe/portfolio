@@ -35,15 +35,15 @@
     "paragraphs": {
       "p1": "Soy ingeniero de sistemas y llevo más de seis años construyendo software en producción.",
       "p2": "Trabajo principalmente en backend con Node.js, NestJS y TypeScript: APIs, arquitectura modular y sistemas asíncronos con colas de mensajes. También me muevo en infraestructura, con AWS, Docker y pipelines de CI/CD, y en frontend con Angular y Vue cuando el proyecto lo necesita.",
-      "p3": "He trabajado los últimos cuatro años en remoto, como referente técnico de mi equipo y sin dejar de escribir código. Me interesa la arquitectura de software y todo lo que haga que un sistema sea más simple de entender y de mantener.",
+      "p3": "He trabajado los últimos cuatro años en remoto, como referente técnico de mi equipo y sin dejar de escribir código. Me interesa la arquitectura de software y todo lo que haga que un sistema sea más simple de entender y de mantener. Por mi cuenta construyo agentes con IA y automatizaciones, y uso IA a diario como parte de mi forma de desarrollar.",
       "p4": "Vivo en Santander, Colombia."
     },
     "labels": {
-      "analisis": "Análisis",
-      "desarrollo": "Desarrollo",
-      "automatizacion": "Automatización",
-      "ia": "IA",
-      "aprendizaje": "Aprendizaje continuo"
+      "backend": "Backend",
+      "arquitectura": "Arquitectura",
+      "asincronos": "Sistemas asíncronos",
+      "cloud": "Cloud y DevOps",
+      "ia": "IA"
     }
   },
   "projects": {
