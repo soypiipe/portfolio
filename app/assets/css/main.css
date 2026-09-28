@@ -8,6 +8,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Single easing curve for the whole site: fast start, long soft landing,
+     no overshoot. Referenced by tailwind.config.ts and the rules below. */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 body {
   @apply bg-bg text-primary font-sans antialiased;
 }
@@ -23,11 +29,28 @@ body {
   outline-offset: 2px;
 }
 
-.grid-bg {
-  background-size: 48px 48px;
-  background-image:
-    linear-gradient(to right, rgba(44, 38, 32, 0.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(44, 38, 32, 0.35) 1px, transparent 1px);
+/*
+ * Hairline that draws itself under a link on hover / when active. Only
+ * transform is animated (scaleX), so it stays on the compositor.
+ */
+.link-line {
+  position: relative;
+}
+.link-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: theme('colors.accent-hover');
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-soft);
+}
+.link-line:hover::after,
+.link-line[aria-current='true']::after {
+  transform: scaleX(1);
 }
 
 /*
@@ -35,14 +58,18 @@ body {
  * v-reveal directive (app/plugins/reveal.ts) *after* it has already
  * applied `reveal-pending` — so if JS fails to load, nothing ever gets
  * `reveal-pending` and content stays visible by default. `reveal` alone
- * just carries the transition; `reveal-pending` is what hides it.
+ * just carries the transition; `reveal-pending` is what hides it. The
+ * directive drops `reveal` again once the entrance ends, so it never
+ * delays the element's own hover transitions afterwards.
  */
 .reveal {
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.8s var(--ease-soft) var(--reveal-delay, 0ms),
+    transform 0.8s var(--ease-soft) var(--reveal-delay, 0ms);
 }
 .reveal-pending {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(28px);
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal-pending {

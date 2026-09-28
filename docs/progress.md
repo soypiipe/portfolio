@@ -167,10 +167,52 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 
 **Bug/flakiness encontrado y investigado (no es un defecto de código):** al probar `/sitemap.xml` contra el build de producción real, la primera vez tiró 404 con un error de Vue Router (`VUE_ROUTER_R0004`). Lo investigué a fondo — el route SÍ estaba compilado y registrado correctamente en el servidor. Repetí la prueba exacta dos veces más en instancias limpias del servidor y ambas veces funcionó perfecto (200, XML correcto). Conclusión: fue una condición de carrera transitoria en el cold-start de Nitro (carga lazy de rutas) al lanzar varias requests casi simultáneas justo después de arrancar el servidor — no algo que vaya a pasar en un deploy real, donde el servidor arranca y espera tráfico normalmente. Lo dejo anotado por transparencia, no porque haya "arreglado" algo — no cambié código para esto, simplemente no fue reproducible.
 
+## Iteración post-Fase 7 — legibilidad, contenido progresivo y motion
+
+**Estado:** ✅ completa (2026-09-27). Sin cambios de identidad visual (layout, paleta, grid, foto, tipografía, DA, metadata técnica intactos).
+
+**1. Escala tipográfica (jerarquía revisada, no un `scale(1.1)` global):**
+- Hero: nombre `xl:text-[5.5rem]` (antes tope 72px), statement 22/28px (antes 20/24), supporting 16/18px (antes 14/16).
+- Títulos de sección `h2`: 36/48px (antes 30/36). Títulos de proyecto/experiencia `h3`: 24/30px (antes 20/24).
+- Cuerpo: 16–18px (antes 14–16); About 18/20px. Descripciones compactas 16/18px.
+- Metadata técnica sigue pequeña y secundaria, pero sube un escalón: 10→11px, 11→12px, 12→13px (mono). Nav 13px (antes 12), botones 13px con alto 48px (antes 44).
+- **Nav desktop pasa de `md` a `xl`:** con la fuente más grande la barra completa se desbordaba en 768–1279px (overflow horizontal de 157px medido en tablet). Debajo de `xl` ahora hay hamburguesa; entre `sm` y `xl` el toggle ES/EN y "Hablemos" siguen visibles en el header (y se ocultan del panel para no duplicarse).
+
+**2. Experiencia como accordion editorial:** estado compacto = índice, empresa (h3), cargo · país, periodo, `summary` existente, primeras 5 tecnologías en una línea + "+N", y pista "VER DETALLES +". Expandido = modalidad/ubicación, responsabilidades, resultados (logros con métrica), stack completo con íconos. Solo se muestra contenido que ya existía en `app/data/experience.ts` — nada nuevo. Uno abierto a la vez (decisión mía: en una lista de solo 3 items, tener varios abiertos empuja demasiado el resto fuera de pantalla). Toda la fila es el área de click (botón dentro del `h3` con `::after` estirado, para no meter contenido de bloque dentro de un `<button>`); `aria-expanded`/`aria-controls`, Enter/Space, y el contenido colapsado es `inert` (fuera del tab order y del árbol de accesibilidad) pero sigue en el DOM/SSR, así que sigue siendo indexable. Si al abrir una fila la anterior (más arriba) se cierra y la fila queda bajo el nav sticky, se hace scroll suave para reencuadrarla.
+
+**3. Proyectos:** mismo patrón (`ProjectCard.vue`). Compacto: número, marca, tipo/rol, nombre, descripción, stack (5 + "+N"), pista. Expandido: "Trabajo realizado", "Resultados", stack completo, link. **Amadia no es expandible a propósito:** solo tiene descripción y 4 tecnologías, no hay nada más que mostrar y un panel vacío sería peor que ninguno — se ve compacto y sin pista de interacción. Se expande solo cuando se le agregue contenido real. Nota: no existe un campo "problema/contexto" ni "arquitectura" como tal en los datos; lo más cercano son `responsibilities` (incluyen los patrones Adapter/Strategy) y `achievements`, y eso es lo que se usa. No inventé descripciones cortas: la compacta de notify-engine es su `summary` completo (3 líneas).
+
+**4. Motion — un solo lenguaje:** una curva (`--ease-soft`, sin overshoot) y tres duraciones (250ms hover, 450ms expandir, 800ms entradas), definidas en `tailwind.config.ts`/`main.css`. Entradas = 24–28px + opacity (antes 12–16px, imperceptible). Hover = 2–4px o subrayado que se dibuja (`.link-line`, transform). El reveal on scroll dejó de ir por sección entera (las filas de abajo ya estaban visibles cuando el usuario llegaba a ellas, por eso no se notaba) y ahora va por bloque: eyebrow, título, párrafos, cada fila, con stagger. La directiva `v-reveal` ahora acepta delay, no oculta lo que ya está en pantalla al cargar (evitaba un flash) y suelta su `transition` al terminar para no retrasar los hovers.
+
+**5. Fondo con vida (`TheBackground.vue`, nuevo):** tres capas suaves, todo `transform`/`opacity`: (a) el grid se desliza una celda (48px) en 48s, en loop sin costura; (b) parallax de scroll (`animation-timeline: scroll()`, CSS puro, sin JS; navegadores sin soporte lo ignoran); (c) 6 cruces `+` sobre intersecciones del grid que aparecen y desaparecen (periodos que dividen los 48s, así están en opacity 0 cuando el loop reinicia); más un push-in muy lento de la foto del hero dentro de su marco (40s, alternate). El drift anterior animaba `background-position`, que repinta cada frame; ahora corre en el compositor. El grid pasó a una capa `fixed` con `z-index: -10` entre el `body` y el contenido (antes vivía dentro del Hero y quedaba por encima del contenido de otras secciones). Para que el movimiento se note subí un poco la opacidad de las líneas (~0.21 → ~0.31). `prefers-reduced-motion`: sin drift, sin parallax, sin pulsos, sin push-in, sin entradas, accordion instantáneo.
+
+**Bug encontrado en el camino:** mi clase `.collapse` chocaba con la utilidad `collapse` de Tailwind (`visibility: collapse`) y el panel expandido quedaba invisible — se renombró a `.disclosure`.
+
+**Verificado:** lint + typecheck + build limpios (build 2.92MB / 748KB gzip, antes 2.87MB / 736KB). Con Chrome headless (dev y build de producción): sin errores de consola, sin overflow horizontal en 1440/820/390px, un-solo-abierto, Enter/Space, `inert`, ES y EN, menú móvil, y `prefers-reduced-motion` (todas las animaciones en `none`, contenido visible). Frame deltas durante scroll en headless por software: p50 16.7ms.
+
+**No verificado (necesita ojos y un dispositivo real):** fluidez percibida del fondo en un móvil físico, y si la intensidad del movimiento te parece bien (los valores están al inicio de `TheBackground.vue`, son fáciles de bajar/subir).
+
 ## Fase 8 — Content lock
 **Estado:** pendiente — experiencia exacta ✅, y proyectos a mostrar ✅ (solo notify-engine + Amadia, decidido 2026-09-21). Sigue bloqueada por: bio de About definitiva, datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF, foto final del hero.
 
 ---
 
-## Siguiente paso
-Fase 8 — Content lock. Es la última fase y depende 100% de Diego, no de más código: bio definitiva de About, datos de contacto reales (Email/WhatsApp/LinkedIn/GitHub), CV en PDF real (hoy `/cv/diego-amado-cv.pdf` no existe), foto final del hero (hoy es placeholder de IA), y decidir el dominio real (`NUXT_PUBLIC_SITE_URL`) para poder abrir `robots.txt` al crawling. Mientras tanto, el sitio ya es funcional, accesible y con SEO técnico completo — solo le falta contenido real.
+## Pendientes abiertos
+
+**Bloqueados por contenido tuyo (Fase 8 — content lock):**
+- Bio definitiva de About (hoy es el draft de `content.md` + una frase de aprendizaje continuo).
+- Datos de contacto reales: Email, WhatsApp, LinkedIn (GitHub ya se sabe: `github.com/soypiipe`). Hoy los botones de Contacto son `<a>` sin `href`.
+- CV en PDF real — hoy `/cv/diego-amado-cv.pdf` no existe y hay 3 links que apuntan ahí (hero, nav, contacto).
+- Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`.
+- Dominio real (`NUXT_PUBLIC_SITE_URL`) para abrir `robots.txt` al crawling (hoy bloquea todo a propósito).
+- Decidir cómo se lista React en el Stack (Diego lo tiene como "solo fundamentos").
+- Amadia: cuando tenga contenido real (contexto, resultado, links), agregarlo a `projects.ts` y la fila pasa a ser expandible sola.
+- Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.
+
+**Técnicos (no bloqueados, menor prioridad):**
+- Página 404/500 personalizada (`app/error.vue`) — anotada desde la Fase 2 y nunca hecha; hoy es la de Nuxt por defecto.
+- Performance (Lighthouse en build de producción, 2026-09-21: Perf 69 / A11y 100 / BP 100 / SEO 69): FCP ~4.1s y LCP ~5.3s bajo el throttling de Lighthouse; ~180KB de JS sin usar (hidratación de Nuxt); headers de cache de assets estáticos (~22KB). **Hay que re-medir** después de esta iteración: cambió el CSS, el fondo y el markup de Experiencia/Proyectos, y no se volvió a correr Lighthouse.
+- Verificación manual pendiente en navegador/dispositivo real: responsive visual fino y navegación por teclado completa (parcialmente cubierto por el test headless de esta iteración: Tab/Enter/Space en el accordion).
+- Si se agregan tecnologías nuevas con ícono, sumarlas a `clientBundle.icons` en `nuxt.config.ts` o no van a renderizar.
+
+**Siguiente paso:** Fase 8 depende de ti (contenido). Del lado técnico, lo más útil es re-correr Lighthouse y la página 404.

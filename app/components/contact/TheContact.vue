@@ -15,37 +15,37 @@ const actions = [
 </script>
 
 <template>
-  <section id="contacto" v-reveal class="border-t border-hairline">
+  <section id="contacto" class="border-t border-hairline">
     <div class="mx-auto max-w-7xl px-6 py-20 md:py-28">
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-        <div class="lg:col-span-3">
-          <div class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-secondary">
+        <div v-reveal class="lg:col-span-3">
+          <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-secondary">
             <span class="text-accent-hover">06.</span>
             <span>{{ t('contact.eyebrow') }}</span>
           </div>
         </div>
 
         <div class="lg:col-span-9">
-          <h2 class="mb-4 max-w-2xl font-sans text-3xl font-bold leading-tight tracking-tight text-primary sm:text-4xl">
+          <h2 v-reveal="80" class="mb-5 max-w-3xl font-sans text-4xl font-bold leading-[1.1] tracking-tight text-primary sm:text-5xl">
             {{ t('contact.heading') }}
           </h2>
-          <p class="mb-10 max-w-xl font-sans text-base text-secondary sm:text-lg">
+          <p v-reveal="160" class="mb-10 max-w-xl font-sans text-lg text-secondary sm:text-xl">
             {{ t('contact.supporting') }}
           </p>
 
-          <ul class="flex flex-wrap gap-4">
+          <ul v-reveal="240" class="flex flex-wrap gap-4">
             <li v-for="action in actions" :key="action.key">
               <a
                 aria-disabled="true"
-                class="inline-flex items-center gap-2 border border-hairline px-4 py-2.5 font-mono text-xs uppercase tracking-wide text-secondary/80"
+                class="inline-flex items-center gap-2.5 border border-hairline px-5 py-3 font-mono text-[13px] uppercase tracking-wide text-secondary/80"
               >
-                <Icon :name="action.icon" class="h-4 w-4 shrink-0" aria-hidden="true" />
+                <Icon :name="action.icon" class="h-[18px] w-[18px] shrink-0" aria-hidden="true" />
                 {{ t(`contact.actions.${action.key}`) }}
               </a>
             </li>
           </ul>
 
-          <p class="mt-4 font-mono text-xs text-secondary/80">
+          <p class="mt-5 font-mono text-[13px] text-secondary/80">
             {{ t('contact.pendingNote') }}
           </p>
         </div>

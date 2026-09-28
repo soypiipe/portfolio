@@ -1,6 +1,12 @@
 {
   "common": {
-    "present": "Presente"
+    "present": "Presente",
+    "showDetails": "Ver detalles",
+    "hideDetails": "Ocultar detalles",
+    "responsibilities": "Responsabilidades",
+    "work": "Trabajo realizado",
+    "results": "Resultados",
+    "technologies": "Tecnologías"
   },
   "nav": {
     "brand": "Diego Amado",
