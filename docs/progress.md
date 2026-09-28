@@ -279,6 +279,20 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 
 **Observación (no cambiada):** el título de la sección sigue siendo "Proyectos seleccionados" / "Selected projects" (plural) con un solo proyecto. Se dejó así por ahora porque es contenido ya aprobado; si se prefiere, pasarlo a singular o esperar a sumar un segundo proyecto.
 
+## Revisión de datos: nueva responsabilidad, ícono AWS y proyecto energy-ai (2026-09-28)
+
+**Estado:** ✅ completo. Diego editó `experience.ts` y `projects.ts` directamente (agregó una responsabilidad a Mia Advanced Systems, corrigió el slug del ícono de AWS ahí, y agregó el proyecto **energy-ai** completo). Pedido: revisar que ambos archivos estén en el formato correcto, sin tocar nada de código salvo lo estrictamente necesario para que lo nuevo funcione.
+
+**1. Formato de los dos archivos (solo estilo, cero contenido tocado):** la edición había quedado indentada a 4 espacios en el cuerpo de los arrays (`export const experience = [...]` / `export const projects = [...]`); el resto del repo usa 2 espacios (las interfaces del mismo archivo seguían en 2, así que solo el bloque de datos se re-indentó). También una comilla escapada (`didn\'t` dentro de comillas simples) se cambió a comillas dobles, que es como el resto del archivo ya resuelve los apóstrofes en inglés. `git diff` de ambos archivos queda limpio (solo indentación + esa comilla), lint/typecheck/build sin errores.
+
+**2. Bug real encontrado (no de formato) — verificado en navegador, no solo leído:** el nuevo `energy-ai` usa `nameKey: 'projects.energyAi.name'` y `kindKey: 'projects.energyAi.kind'`, pero esas claves no existían en `i18n/locales/es.json` ni `en.json`. Sin ellas, vue-i18n muestra la clave cruda como texto: la tarjeta salía con el título literal **"projects.energyAi.name"** y el tag **"PROJECTS.ENERGYAI.KIND"**. Capturado en captura de pantalla antes de arreglarlo. Diego eligió el tag "Prueba técnica" / "Technical test" (sin nombrar la empresa, para no exponer para quién fue la prueba). Agregado `projects.energyAi = { name: "energy-ai", kind: "Prueba técnica" / "Technical test" }` en ambos locales.
+
+**3. Íconos que no renderizaban — también verificado visualmente, no solo por inspección de código:** `@nuxt/icon` corre con `provider: 'none'` y una lista fija en `nuxt.config.ts` (los nombres de ícono vienen de datos dinámicos, el escaneo estático no los ve — ver comentario ahí). Sin estar en esa lista, el ícono no aparece: ni error de build ni de consola, simplemente el hueco queda vacío. Capturado antes de arreglar: el "AWS" de Mia Advanced Systems sin ícono, y en energy-ai, Go/PrimeVue/ECharts/JWT/Swagger sin ícono (5 de 10 tecnologías). Agregados a `clientBundle.icons`: `simple-icons:amazonwebservices`, `simple-icons:go`, `simple-icons:primevue`, `simple-icons:apacheecharts`, `simple-icons:swagger`, `lucide:key-round`. Bundle: 44 → 50 íconos, 73.05KB. Reverificado con captura tras el fix: los 10/10 íconos de energy-ai y el de AWS en Mia ya renderizan, en ES y en EN.
+
+**Detalle técnico del punto 3 (para no repetir la confusión):** el slug correcto de Simple Icons para AWS hoy es `amazonwebservices` — `amazonaws` **ya no existe** en la versión instalada de `@iconify-json/simple-icons` (se verificó contra el paquete). El cambio de Diego en `experience.ts` (Mia → `amazonwebservices`) fue la corrección correcta; lo que faltaba era sumarlo a la lista de `nuxt.config.ts`. **Bug pre-existente, encontrado de paso, no arreglado a propósito (fuera de lo pedido esta vez):** `app/data/stack.ts` (AWS de la sección Stack) y la entrada "AWS SQS" de notify-engine en `projects.ts` todavía usan el slug viejo `amazonaws` — ambos con el ícono en blanco ahora mismo. Queda anotado en pendientes.
+
+**4. Repo de energy-ai:** el link "Ver código" (`github.com/soypiipe/energy-ai`) ya apuntaba a la URL correcta; solo era un problema de visibilidad del repo (estaba privado — ver `00-mapa.md`). Diego lo puso en público, así que no se tocó nada en `projects.ts` para esto. **Pendiente aparte, en otro repo:** actualizar la nota "repo privado" de `00-mapa.md` (fuera del repo del portfolio, no se tocó aquí).
+
 ## Fase 8 — Content lock
 **Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional), About ✅ (2026-09-28). Falta solo la **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
 
@@ -295,7 +309,8 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 **Técnicos (no bloqueados, menor prioridad):**
 - Verificación manual pendiente en navegador/dispositivo real: responsive visual fino, navegación por teclado completa, y que el CV se descargue bien en móvil (iOS Safari abre PDFs en visor en vez de descargar, comportamiento normal del navegador).
 - Si cambia el CV: reemplazar los PDFs en `public/cv/` conservando los nombres (y, si se recolorea de nuevo, el rust es `#B9502C`).
-- Si se agregan tecnologías nuevas con ícono, sumarlas a `clientBundle.icons` en `nuxt.config.ts` o no van a renderizar.
+- Si se agregan tecnologías nuevas con ícono, sumarlas a `clientBundle.icons` en `nuxt.config.ts` o no van a renderizar (pasó dos veces ya — ver la sección de arriba).
+- **Arreglar el ícono de AWS roto en `app/data/stack.ts` (sección Stack) y en "AWS SQS" de notify-engine (`projects.ts`):** ambos usan el slug viejo `simple-icons:amazonaws`, que ya no existe en el paquete instalado. El slug correcto es `amazonwebservices` (ya está en `clientBundle.icons`); falta cambiar esas dos referencias y confirmar en pantalla.
 - Si se agrega un idioma: una línea en `cvHref` (`app/data/contact.ts`) + su PDF en `public/cv/`.
 - Rendimiento: no queda nada de bajo riesgo por mejorar (ver sección 4). Compresión del HTML de SSR (~145KB → ~39KB) depende del proxy/CDN del deploy: verificar que `gzip`/`br` esté activo ahí.
 

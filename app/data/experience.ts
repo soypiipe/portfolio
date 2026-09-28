@@ -60,13 +60,15 @@ export const experience: ExperienceEntry[] = [
         'Construí y mantuve servicios backend en NestJS y TypeScript: diseño de APIs REST, validación de datos y comunicación entre servicios en múltiples ambientes.',
         'Desarrollé funcionalidades de punta a punta con frontends en Vue y Angular: formularios complejos, tablas de datos, filtros y consumo de APIs en tiempo real.',
         'Desplegué y administré servicios de AWS (EC2, S3, ECR, Lambda, CloudFront) y configuré entornos de desarrollo y producción, en la nube y on-premise.',
-        'Diagnostiqué y resolví incidentes en producción relacionados con configuración, variables de entorno, conectividad entre servicios y comportamiento en runtime.'
+        'Diagnostiqué y resolví incidentes en producción relacionados con configuración, variables de entorno, conectividad entre servicios y comportamiento en runtime.',
+        'Actué como referente técnico del equipo: decisiones de arquitectura, revisión de código y acompañamiento a desarrolladores más junior.'
       ],
       en: [
         'Built and maintained NestJS/TypeScript backend services: REST API design, data validation and inter-service communication across multiple environments.',
         'Delivered end-to-end features with Vue and Angular frontends: complex forms, data tables, filtering and real-time API consumption.',
         'Deployed and managed AWS services (EC2, S3, ECR, Lambda, CloudFront) and configured development and production environments, both cloud and on-premise.',
-        'Diagnosed and resolved production incidents involving configuration, environment variables, service connectivity and runtime behaviour.'
+        'Diagnosed and resolved production incidents involving configuration, environment variables, service connectivity and runtime behaviour.',
+        "Acted as the team's technical reference: architecture decisions, code reviews and mentoring of more junior developers."
       ]
     },
     achievements: [
@@ -103,10 +105,11 @@ export const experience: ExperienceEntry[] = [
       { name: 'RabbitMQ', icon: 'simple-icons:rabbitmq' },
       { name: 'PostgreSQL', icon: 'simple-icons:postgresql' },
       { name: 'MySQL', icon: 'simple-icons:mysql' },
-      { name: 'MongoDB', icon: 'simple-icons:mongodb' },
       { name: 'Docker', icon: 'simple-icons:docker' },
       { name: 'GitHub Actions', icon: 'simple-icons:githubactions' },
-      { name: 'AWS', icon: 'simple-icons:amazonaws' },
+      { name: 'AWS', icon: 'simple-icons:amazonwebservices' },
+      { name: 'Nginx', icon: 'simple-icons:nginx' },
+      { name: 'Linux', icon: 'simple-icons:linux' },
       { name: 'Python', icon: 'simple-icons:python' }
     ],
     featured: true

@@ -135,7 +135,13 @@ export default defineNuxtConfig({
         'lucide:file-down',
         'lucide:webhook',
         'lucide:layers',
-        'lucide:arrow-left'
+        'lucide:arrow-left',
+        'lucide:key-round',
+        'simple-icons:amazonwebservices',
+        'simple-icons:go',
+        'simple-icons:primevue',
+        'simple-icons:apacheecharts',
+        'simple-icons:swagger'
       ]
     }
   }

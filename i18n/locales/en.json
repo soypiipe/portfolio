@@ -53,6 +53,10 @@
     "notifyEngine": {
       "name": "notify-engine",
       "kind": "Personal / portfolio project"
+    },
+    "energyAi": {
+      "name": "energy-ai",
+      "kind": "Technical test"
     }
   },
   "experience": {

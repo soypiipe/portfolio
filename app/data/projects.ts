@@ -108,11 +108,85 @@ export const projects: Project[] = [
       { name: 'Resend', icon: 'simple-icons:resend' },
       { name: 'Slack API', icon: 'simple-icons:slack' }
     ],
-    // Solo el repo — "case study" del JSON original era el mismo repo con
-    // #readme, no un destino distinto, así que un solo link evita redundancia.
-    // liveDemo venía null, se omite.
     links: [
       { label: { es: 'Ver código', en: 'View code' }, url: 'https://github.com/soypiipe/notify-engine' }
+    ]
+  },
+  {
+    id: 'energy-ai',
+    nameKey: 'projects.energyAi.name',
+    kindKey: 'projects.energyAi.kind',
+    role: { es: 'Autor único, de punta a punta', en: 'Solo author, end-to-end' },
+    startDate: '2026-09',
+    endDate: '2026-09',
+    current: false,
+    summary: {
+      es: 'Plataforma de gestión energética que convierte lecturas de medidores eléctricos en decisiones operativas: detecta anomalías con un motor estadístico explicable, las prioriza y genera una explicación en lenguaje natural apoyada en un LLM que solo redacta, nunca decide.',
+      en: 'Energy management platform that turns electrical meter readings into operational decisions: detects anomalies with an explainable statistical engine, prioritizes them, and generates a natural-language explanation backed by an LLM that only drafts text, never decides.'
+    },
+    responsibilities: {
+      es: [
+        'Diseñé y construí de punta a punta un motor de detección de anomalías basado en estadística robusta (mediana y MAD por hora del día), sin machine learning, priorizando la explicabilidad frente a un modelo de caja negra.',
+        'Implementé una cola de trabajos sobre PostgreSQL (SELECT ... FOR UPDATE SKIP LOCKED) para el procesamiento asíncrono del análisis, evitando infraestructura de mensajería adicional que el volumen del proyecto no justificaba.',
+        'Diseñé la interfaz Explainer con dos implementaciones reales: una plantilla determinista y un cliente compatible con la API de OpenAI, con respaldo automático a la plantilla si el LLM falla o no hay clave configurada.',
+        'Construí el backend en Go con la librería estándar (sin framework web ni ORM) y el frontend en Vue 3 con TypeScript, PrimeVue y ECharts, empaquetados con Docker en una build multi-stage sobre una imagen distroless.'
+      ],
+      en: [
+        'Designed and built an anomaly-detection engine end-to-end using robust statistics (median and MAD per hour of day), with no machine learning, favoring explainability over a black-box model.',
+        "Implemented a job queue on top of PostgreSQL (SELECT ... FOR UPDATE SKIP LOCKED) for asynchronous analysis processing, avoiding extra messaging infrastructure that the project scale didn't justify.",
+        'Designed the Explainer interface with two real implementations: a deterministic template and an OpenAI-compatible LLM client, with automatic fallback to the template if the LLM fails or no key is configured.',
+        'Built the backend in Go using only the standard library (no web framework or ORM) and the frontend in Vue 3 with TypeScript, PrimeVue and ECharts, packaged with Docker in a multi-stage build on a distroless image.'
+      ]
+    },
+    achievements: [
+      {
+        title: { es: 'Detección explicable sin caja negra', en: 'Explainable detection, no black box' },
+        description: {
+          es: 'Un árbol de reglas basado en baseline por hora, z-score robusto y una razón de consistencia física (kWh / V·I·FP) clasifica cada caso — anomalía real, falso positivo o problema de calidad de datos — con evidencia numérica auditable en cada decisión.',
+          en: 'A rule tree based on hourly baselines, a robust z-score, and a physical consistency ratio (kWh / V·I·PF) classifies each case — real anomaly, false positive, or data-quality issue — with auditable numeric evidence behind every decision.'
+        },
+        metric: {
+          es: '4 de 4 anomalías reales detectadas, 0 falsos positivos en los 8 medidores restantes',
+          en: '4 of 4 real anomalies detected, 0 false positives across the other 8 meters'
+        }
+      },
+      {
+        title: { es: 'Cola de trabajos sin infraestructura adicional', en: 'Job queue with no extra infrastructure' },
+        description: {
+          es: 'El análisis se procesa de forma asíncrona con un worker en goroutine que reclama trabajo con SKIP LOCKED sobre PostgreSQL, sobrevive a reinicios y recupera ejecuciones atascadas — el patrón de cola sin sumar una pieza más al stack.',
+          en: 'Analysis runs asynchronously via a goroutine worker that claims work with SKIP LOCKED on PostgreSQL, survives restarts, and recovers stuck runs — the queue pattern without adding another moving piece to the stack.'
+        },
+        metric: {
+          es: 'Cero infraestructura de mensajería adicional',
+          en: 'Zero additional messaging infrastructure'
+        }
+      },
+      {
+        title: { es: 'LLM que redacta, nunca decide', en: 'LLM that drafts, never decides' },
+        description: {
+          es: 'El modelo de lenguaje solo recibe la evidencia ya calculada por el motor determinista y la convierte en texto legible; verifiqué cifra por cifra que las explicaciones generadas coinciden exactamente con la evidencia, y endurecí el prompt para evitar que sugiriera causas no verificadas.',
+          en: 'The language model only receives evidence already computed by the deterministic engine and turns it into readable text; I verified figure by figure that the generated explanations exactly match the underlying evidence, and hardened the prompt to prevent it from suggesting unverified causes.'
+        },
+        metric: {
+          es: '0 cifras inventadas en las explicaciones generadas',
+          en: '0 fabricated figures in generated explanations'
+        }
+      }
+    ],
+    technologies: [
+      { name: 'Go', icon: 'simple-icons:go' },
+      { name: 'PostgreSQL', icon: 'simple-icons:postgresql' },
+      { name: 'Vue', icon: 'simple-icons:vuedotjs' },
+      { name: 'TypeScript', icon: 'simple-icons:typescript' },
+      { name: 'PrimeVue', icon: 'simple-icons:primevue' },
+      { name: 'ECharts', icon: 'simple-icons:apacheecharts' },
+      { name: 'Docker', icon: 'simple-icons:docker' },
+      { name: 'JWT', icon: 'lucide:key-round' },
+      { name: 'OpenAI-compatible LLM API', icon: 'simple-icons:openai' },
+      { name: 'Swagger / OpenAPI', icon: 'simple-icons:swagger' }
+    ],
+    links: [
+      { label: { es: 'Ver código', en: 'View code' }, url: 'https://github.com/soypiipe/energy-ai' }
     ]
   }
 ]
