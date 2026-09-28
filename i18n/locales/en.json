@@ -32,7 +32,12 @@
   "about": {
     "eyebrow": "About",
     "heading": "More than writing code, I design systems.",
-    "body": "I'm a systems engineer and software developer. I'm interested in building solutions that combine development, automation and artificial intelligence to solve real problems in a clear, maintainable and efficient way. I keep learning constantly — new tools, new languages, new ways to solve the same problem better.",
+    "paragraphs": {
+      "p1": "I'm a systems engineer with more than six years of experience building software in production.",
+      "p2": "I work mainly on the backend with Node.js, NestJS and TypeScript: APIs, modular architecture and asynchronous systems built on message queues. I also work across infrastructure, with AWS, Docker and CI/CD pipelines, and on the frontend with Angular and Vue when a project needs it.",
+      "p3": "I've spent the last four years working remotely as my team's go-to person on technical matters, while still writing code myself. I care about software architecture and anything that makes a system simpler to understand and maintain.",
+      "p4": "I live in Santander, Colombia."
+    },
     "labels": {
       "analisis": "Analysis",
       "desarrollo": "Development",

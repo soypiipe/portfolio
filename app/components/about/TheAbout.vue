@@ -3,6 +3,7 @@ const { t } = useI18n()
 
 // Fixed, known set of keys — simpler and safer than tm()/rt() here, which
 // return the raw message node (not the resolved string) for object trees.
+const paragraphKeys = ['p1', 'p2', 'p3', 'p4'] as const
 const labelKeys = ['analisis', 'desarrollo', 'automatizacion', 'ia', 'aprendizaje'] as const
 </script>
 
@@ -24,11 +25,18 @@ const labelKeys = ['analisis', 'desarrollo', 'automatizacion', 'ia', 'aprendizaj
             {{ t('about.heading') }}
           </h2>
 
-          <p v-reveal="160" class="mb-10 max-w-2xl font-sans text-lg leading-relaxed text-secondary sm:text-xl sm:leading-relaxed">
-            {{ t('about.body') }}
-          </p>
+          <div class="mb-10 max-w-2xl space-y-5">
+            <p
+              v-for="(key, i) in paragraphKeys"
+              :key="key"
+              v-reveal="160 + i * 80"
+              class="font-sans text-lg leading-relaxed text-secondary sm:text-xl sm:leading-relaxed"
+            >
+              {{ t(`about.paragraphs.${key}`) }}
+            </p>
+          </div>
 
-          <ul v-reveal="240" class="flex flex-wrap gap-3" aria-label="Capacidades">
+          <ul v-reveal="520" class="flex flex-wrap gap-3" aria-label="Capacidades">
             <li
               v-for="key in labelKeys"
               :key="key"

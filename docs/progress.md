@@ -261,17 +261,25 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 
 **Estado:** ✅ resuelto. **Síntoma:** al llegar al final de la página (o al hacer clic en "Contacto" del nav) el link de Contacto no quedaba marcado; se quedaba en Stack. **Causa medida** (`TheNavigation.vue`): el scrollspy marca la sección que cruza una franja fija al 40% de la altura de la ventana (`rootMargin: -40% 0 -55% 0`). Contacto es la última sección y es corta (~406px + footer de 130px), así que en ventanas altas el scroll máximo de la página no alcanza para subirla hasta esa franja y nunca "cruzaba". Medido: 1440×900 → Contacto en y=364 (franja 360–405) ✅; 1920×1080 → y=544 (franja 432–486) ❌; 1440×1440 → y=904 (franja 576–648) ❌. **Arreglo (estándar para scrollspy):** si la página está scrolleada hasta el fondo (`innerHeight + scrollY >= scrollHeight - 2`), la sección activa es la última. Detalles: el callback del observer respeta ese estado; como el observer solo dispara al cruzar la franja, hay un listener `scroll`/`resize` (pasivo, solo actúa al *entrar o salir* del fondo) que marca la última sección al llegar al fondo y, al salir, vuelve a la sección que está sobre la franja; se limpia en `onUnmounted`. Sin dependencias, sin cambios visuales. **Verificado** (Chrome headless, build de producción, 1440×900, 1440×1080, 1920×1080, 1440×1440, 1280×720 y 390×844 con menú móvil): clic en Contacto → Contacto marcado en los 6; subir 250px → vuelve a la sección correcta; barridos completos ↑ y ↓ sin errores de consola. **Comportamiento previo que se mantiene (no es bug):** al *bajar*, una sección se marca hasta ~5% de pantalla antes de cruzar la línea del 40%, porque la franja mide 40–45% de alto.
 
+## About definitivo (2026-09-28)
+
+**Estado:** ✅ aplicado en ES y EN. Texto escrito por Diego (4 párrafos: quién es y años de experiencia; backend/infra/frontend; cuatro años en remoto como referente técnico + interés en arquitectura; ubicación). Se aplicó **tal cual** en español y se redactó la versión en inglés para que suene natural (no literal, sin guiones largos): "go-to person on technical matters" para "referente técnico", "I also work across infrastructure" para "me muevo en infraestructura". Reemplaza al draft de `content.md` (y a la frase de aprendizaje continuo que se había agregado). Ubicación pública confirmada: **Santander, Colombia** (`content.md` la tenía como pendiente). Implementación: `about.body` (un solo párrafo) pasó a `about.paragraphs.p1..p4`; `TheAbout.vue` los renderiza como 4 `<p>` con reveal escalonado (160 + 80ms por párrafo) y las etiquetas de capacidades entran después (520ms). Título, etiquetas, layout y estilos de párrafo sin cambios. Verificado en producción en 1280px (ES y EN) y 390px: sin overflow ni errores de consola.
+
+**Observaciones sobre el contenido (sin aplicar, decisión de Diego):**
+1. **IA y automatización:** el hero ("automatización e inteligencia artificial"), las etiquetas de About (Automatización, IA), el Stack (categoría IA) y Amadia (agente con IA, WhatsApp, RAG) las presentan como parte central, pero el texto de About es 100% backend/infra/frontend. Si se quiere que la página cuente una sola historia: agregar una frase real sobre IA (p. ej. lo de Amadia) o bajar el peso de IA/automatización en hero y etiquetas. Ambas opciones son válidas, depende del tipo de vacante que se busque.
+2. **Etiquetas de capacidades** (Análisis, Desarrollo, Automatización, IA, Aprendizaje continuo): son genéricas y no reflejan el texto nuevo. Alternativa más específica: Backend, Arquitectura, Sistemas asíncronos, Cloud y DevOps.
+3. **"Más de seis años":** las fechas de Experiencia empiezan en feb 2018 (~8 años a la fecha; ~7 desde el primer empleo no junior, jul 2019). "Más de seis" es verdadero y coincide con el CV, pero un reclutador que sume las fechas verá una diferencia; si se cambia, cambiarlo también en el CV.
+
 ## Fase 8 — Content lock
-**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine + Amadia), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional). Faltan solo: **bio definitiva de About** y **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
+**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine + Amadia), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional), About ✅ (2026-09-28). Falta solo la **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
 
 ---
 
 ## Pendientes abiertos
 
 **Bloqueados por contenido tuyo (Fase 8):**
-- Bio definitiva de About (hoy es el draft de `content.md` + una frase de aprendizaje continuo).
 - Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`, y prepararla con la receta de la sección de rendimiento (2 anchos, WebP/AVIF, `srcset`).
-- Dominio definitivo: cuando se decida, definir `NUXT_PUBLIC_SITE_URL` (build + runtime). **Abrir `robots.txt` al crawling** solo cuando estén la bio y la foto finales *y* el dominio sea el definitivo (ver arriba).
+- Dominio definitivo: cuando se decida, definir `NUXT_PUBLIC_SITE_URL` (build + runtime). **Abrir `robots.txt` al crawling** solo cuando la foto final esté puesta *y* el dominio sea el definitivo (ver arriba). La bio ya está.
 - Amadia: cuando tenga contenido real (contexto, resultado, links), agregarlo a `projects.ts` y la fila pasa a ser expandible sola.
 - Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.
 
@@ -282,4 +290,4 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - Si se agrega un idioma: una línea en `cvHref` (`app/data/contact.ts`) + su PDF en `public/cv/`.
 - Rendimiento: no queda nada de bajo riesgo por mejorar (ver sección 4). Compresión del HTML de SSR (~145KB → ~39KB) depende del proxy/CDN del deploy: verificar que `gzip`/`br` esté activo ahí.
 
-**Siguiente paso:** Fase 8 depende de ti (bio y foto). Del lado técnico no queda nada obligatorio.
+**Siguiente paso:** Fase 8 depende de ti (foto final; opcionalmente las 3 observaciones de contenido de la sección About). Del lado técnico no queda nada obligatorio.

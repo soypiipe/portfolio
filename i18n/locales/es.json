@@ -32,7 +32,12 @@
   "about": {
     "eyebrow": "Sobre mí",
     "heading": "Más que escribir código, diseño sistemas.",
-    "body": "Soy ingeniero de sistemas y desarrollador de software. Me interesa construir soluciones que combinen desarrollo, automatización e inteligencia artificial para resolver problemas reales de forma clara, mantenible y eficiente. Aprendo de forma constante — nuevas herramientas, nuevos lenguajes, nuevas formas de resolver el mismo problema mejor.",
+    "paragraphs": {
+      "p1": "Soy ingeniero de sistemas y llevo más de seis años construyendo software en producción.",
+      "p2": "Trabajo principalmente en backend con Node.js, NestJS y TypeScript: APIs, arquitectura modular y sistemas asíncronos con colas de mensajes. También me muevo en infraestructura, con AWS, Docker y pipelines de CI/CD, y en frontend con Angular y Vue cuando el proyecto lo necesita.",
+      "p3": "He trabajado los últimos cuatro años en remoto, como referente técnico de mi equipo y sin dejar de escribir código. Me interesa la arquitectura de software y todo lo que haga que un sistema sea más simple de entender y de mantener.",
+      "p4": "Vivo en Santander, Colombia."
+    },
     "labels": {
       "analisis": "Análisis",
       "desarrollo": "Desarrollo",

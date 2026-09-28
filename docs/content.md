@@ -12,7 +12,7 @@ Secondary:
 Ingeniero de Sistemas · Software Engineer
 
 Location:
-To be confirmed for public display.
+Santander, Colombia (confirmed by Diego for public display; it is the last line of About).
 
 ## Hero
 
@@ -46,13 +46,10 @@ Web development, automation and artificial intelligence for solving real-world p
 
 ## About
 
-Working draft:
-
-Más que escribir código, diseño sistemas.
-
-Soy ingeniero de sistemas y desarrollador de software. Me interesa construir soluciones que combinen desarrollo, automatización e inteligencia artificial para resolver problemas reales de forma clara, mantenible y eficiente.
-
-This is a draft. Replace with final approved biography before launch.
+Final text (2026-09-28) lives in `i18n/locales/es.json` and `en.json` under
+`about.paragraphs` (4 paragraphs: who he is, stack, remote/technical-reference
++ interests, location). Heading: "Más que escribir código, diseño sistemas." /
+"More than writing code, I design systems."
 
 ## Projects
 
