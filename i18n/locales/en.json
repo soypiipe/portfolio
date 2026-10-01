@@ -17,7 +17,11 @@
     "stack": "Stack",
     "contacto": "Contact",
     "cv": "Download CV",
-    "hablemos": "Let's talk"
+    "hablemos": "Let's talk",
+    "ariaMain": "Main",
+    "ariaMainMobile": "Main (mobile)",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "eyebrow": "Systems Engineer · Software Engineer",
@@ -44,7 +48,8 @@
       "asincronos": "Asynchronous systems",
       "cloud": "Cloud & DevOps",
       "ia": "AI"
-    }
+    },
+    "ariaLabel": "Capabilities"
   },
   "projects": {
     "eyebrow": "Projects",
@@ -101,6 +106,7 @@
   },
   "footer": {
     "role": "Systems Engineer · Software Engineer",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "ariaLabel": "Footer"
   }
 }

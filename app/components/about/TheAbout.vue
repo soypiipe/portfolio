@@ -36,7 +36,7 @@ const labelKeys = ['backend', 'arquitectura', 'asincronos', 'cloud', 'ia'] as co
             </p>
           </div>
 
-          <ul v-reveal="520" class="flex flex-wrap gap-3" aria-label="Capacidades">
+          <ul v-reveal="520" class="flex flex-wrap gap-3" :aria-label="t('about.ariaLabel')">
             <li
               v-for="key in labelKeys"
               :key="key"

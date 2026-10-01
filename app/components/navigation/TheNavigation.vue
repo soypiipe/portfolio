@@ -97,7 +97,7 @@ onMounted(() => {
       </NuxtLink>
 
       <!-- Desktop links -->
-      <nav aria-label="Principal" class="hidden items-center gap-8 font-mono text-[13px] tracking-wide text-secondary xl:flex">
+      <nav :aria-label="t('nav.ariaMain')" class="hidden items-center gap-8 font-mono text-[13px] tracking-wide text-secondary xl:flex">
         <a
           v-for="link in navLinks"
           :key="link.id"
@@ -147,10 +147,9 @@ onMounted(() => {
         class="flex h-10 w-10 items-center justify-center border border-hairline text-primary xl:hidden"
         :aria-expanded="isMobileOpen"
         aria-controls="mobile-menu"
-        aria-label="Abrir menú"
+        :aria-label="isMobileOpen ? t('nav.closeMenu') : t('nav.openMenu')"
         @click="isMobileOpen = !isMobileOpen"
       >
-        <span class="sr-only">Menú</span>
         <svg v-if="!isMobileOpen" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.5" />
         </svg>
@@ -168,7 +167,7 @@ onMounted(() => {
         id="mobile-menu"
         class="flex flex-col gap-6 border-t border-hairline bg-bg px-6 py-8 xl:hidden"
       >
-      <nav aria-label="Principal (móvil)" class="flex flex-col gap-5 font-mono text-base text-secondary">
+      <nav :aria-label="t('nav.ariaMainMobile')" class="flex flex-col gap-5 font-mono text-base text-secondary">
         <a
           v-for="link in navLinks"
           :key="link.id"

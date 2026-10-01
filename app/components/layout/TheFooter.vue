@@ -16,7 +16,7 @@ const year = new Date().getFullYear()
         </div>
       </div>
 
-      <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+      <nav :aria-label="t('footer.ariaLabel')" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         <a v-for="link in navLinks" :key="link.id" :href="link.href" class="link-line transition-colors hover:text-primary">
           {{ t(link.labelKey) }}
         </a>
