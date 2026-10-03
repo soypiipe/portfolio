@@ -316,7 +316,7 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 
 ## Fase 9 — Lanzamiento (plan, 2026-10-03)
 
-**Estado:** ⏳ pendiente. Restricción de Diego: **lo más económico posible** (sin empleo por ahora). El dominio definitivo es `diegoamado.dev` (aún no comprado). Único costo recurrente: el dominio (~12–15 USD/año, confirmar al comprar); hosting, HTTPS, CDN y despliegue continuo, gratis. Mientras no se compre, el sitio puede probarse gratis en un subdominio `*.pages.dev`.
+**Estado:** 🟡 en curso. Desplegado en Cloudflare Pages: `https://diegoamado.pages.dev` (2026-10-03, verificado: `/`, `/en`, sitemap, robots, CVs, 404 propio, brotli); falta el dominio. Restricción de Diego: **lo más económico posible** (sin empleo por ahora). El dominio definitivo es `diegoamado.dev` (aún no comprado). Único costo recurrente: el dominio (~12–15 USD/año, confirmar al comprar); hosting, HTTPS, CDN y despliegue continuo, gratis. Mientras no se compre, el sitio puede probarse gratis en un subdominio `*.pages.dev`.
 
 - [ ] Verificar que `diegoamado.dev` esté libre (plan B: `.com`/`.co`; el cambio en código es solo la variable de entorno)
 - [ ] Comprar el dominio a precio de costo (Cloudflare Registrar o Porkbun), sin extras de hosting ni correo
@@ -326,7 +326,8 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - [ ] Verificar en el dominio real: sitemap, robots, hreflang, canonical, PDFs del CV, Lighthouse; y que el HTML salga comprimido (gzip/br)
 - [ ] Abrir indexación (`Disallow:` en `server/routes/robots.txt.ts`) solo cuando lo anterior pase
 - [ ] Google Search Console (gratis) y enviar el sitemap
-- [ ] Opcional y gratis: `ogImage` desde la ilustración del hero; correo con el dominio vía Cloudflare Email Routing (reenvío a Outlook)
+- [x] `ogImage` (2026-10-03): `public/images/og.jpg`, 1200×630, ~100 KB (ilustración + nombre + cargo sobre fondo charcoal; sin el dominio escrito en la imagen, por si cambia), con `og:image`/`twitter:image`, ancho/alto y alt en ES/EN (`hero.ogImageAlt`). Sigue sin ir en el JSON-LD `Person` (no es una foto real)
+- [ ] Opcional y gratis: correo con el dominio vía Cloudflare Email Routing (reenvío a Outlook)
 
 ---
 

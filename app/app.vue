@@ -21,11 +21,18 @@ useHead(() => ({
 // (set via useSeoMeta in pages/index.vue) override these per-route.
 const canonicalUrl = computed(() => `${config.public.siteUrl}${route.fullPath}`)
 
+const ogImageUrl = `${config.public.siteUrl}/images/og.jpg`
+
 useSeoMeta({
   ogSiteName: site.name,
   ogType: 'website',
   ogUrl: canonicalUrl,
-  twitterCard: 'summary_large_image'
+  ogImage: ogImageUrl,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: t('hero.ogImageAlt'),
+  twitterCard: 'summary_large_image',
+  twitterImage: ogImageUrl
 })
 
 useHead({

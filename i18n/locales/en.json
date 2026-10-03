@@ -31,7 +31,8 @@
     "ctaPrimary": "View projects",
     "ctaSecondary": "Download CV",
     "availability": "Available for new projects",
-    "photoAlt": "Pixel-art illustration of a developer seen from behind at a dual-monitor desk with code on screen, at dusk, with a dog resting on the rug and mountains outside the window"
+    "photoAlt": "Pixel-art illustration of a developer seen from behind at a dual-monitor desk with code on screen, at dusk, with a dog resting on the rug and mountains outside the window",
+    "ogImageAlt": "Diego Amado, systems engineer and software engineer, next to an illustration of his workspace"
   },
   "about": {
     "eyebrow": "About",
