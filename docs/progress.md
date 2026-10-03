@@ -302,14 +302,24 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 **No se encontró nada más pendiente** fuera de lo ya documentado en "Pendientes abiertos" (foto del hero, dominio definitivo, Amadia, Miattend, verificación manual en dispositivo real).
 
 ## Fase 8 — Content lock
-**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional), About ✅ (2026-09-28). Falta solo la **foto final del hero**; y, para abrir a buscadores, que el dominio sea el definitivo.
+**Estado:** casi cerrada — experiencia ✅, proyectos a mostrar ✅ (solo notify-engine), contacto ✅ (Email/WhatsApp/LinkedIn/GitHub), CV ✅ (PDFs ES/EN, según idioma), dominio ✅ (provisional), About ✅ (2026-09-28). Imagen del hero ✅ (2026-10-03). Falta solo que el dominio sea el definitivo para abrir a buscadores, que el dominio sea el definitivo.
+
+## Imagen definitiva del hero (2026-10-03)
+
+**Estado:** ✅ hecho. Diego confirmó que `hero-ai.png` (ilustración pixel-art generada con IA, 1254×1254, 1.9 MB) es la imagen definitiva.
+- **Optimización:** AVIF (q55), WebP y JPEG (q78) en 2 anchos (800 y 1254) con ImageMagick, sin metadata. 48–83 KB en AVIF, 71–134 KB en WebP, vs 1.9 MB del PNG. `<picture>` con `srcset`/`sizes` (AVIF → WebP → JPEG), `width`/`height` reales (1254×1254), `fetchpriority="high"`, `eager`. El PNG original se movió fuera del repo (`~/hero-originales-backup/`); placeholders anteriores eliminados.
+- **Encuadre:** el marco pasó de 4:3 a **1:1** (`aspect-square`) para no recortar la composición (perro abajo a la izquierda, monitores al centro). El resto del hero queda igual; verificado en 1440px y 390px.
+- **Filtro:** se quitó el `grayscale/contrast/brightness`; con esta imagen dejaba los tonos naranja/azul casi grises. Los colores cálidos combinan con el rust.
+- **Rótulos:** "PLACEHOLDER // POR REEMPLAZAR" → "AI ILLUSTRATION" (honesto: no es una foto real). `photoAlt` reescrito en ES/EN para describir la escena real.
+- **Verificado:** lint, typecheck y build con código 0 (2.94 MB / 752 kB gzip); las 6 variantes se sirven con `cache-control: max-age=86400`.
+- **Nota:** el CLAUDE.md del proyecto describe una "fotografía cinemática"; la imagen final es ilustración. Decisión de Diego; no se cambió esa guía.
 
 ---
 
 ## Pendientes abiertos
 
 **Bloqueados por contenido tuyo (Fase 8):**
-- Foto final del hero (hoy es placeholder de IA, marcado en UI). Al tenerla: quitar el rótulo "PLACEHOLDER // POR REEMPLAZAR", agregar `ogImage` y `image` al JSON-LD `Person`, y prepararla con la receta de la sección de rendimiento (2 anchos, WebP/AVIF, `srcset`).
+- ~~Foto final del hero~~ resuelto (ver sección abajo). Sigue siendo una ilustración IA, así que **no** va en `image` del JSON-LD `Person`; `ogImage` es opcional y no se agregó.
 - Dominio definitivo: cuando se decida, definir `NUXT_PUBLIC_SITE_URL` (build + runtime). **Abrir `robots.txt` al crawling** solo cuando la foto final esté puesta *y* el dominio sea el definitivo (ver arriba). La bio ya está.
 - Amadia (fuera de Proyectos desde 2026-09-28, aún sin primer cliente): cuando tenga primer cliente o resultados que se puedan afirmar, volver a agregarla en `app/data/projects.ts` (el historial de git conserva la entrada, con sus textos en `projects.amadia.*` de i18n) y la fila pasa a ser compacta/no expandible hasta que tenga contexto, resultado y links. Si vuelve `lucide:sparkles`, agregarlo otra vez a `clientBundle.icons`.
 - Miattend sigue fuera de Proyectos por decisión tuya (2026-09-21), pero sigue real en `content.md`.

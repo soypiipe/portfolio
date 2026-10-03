@@ -87,23 +87,34 @@ const { pick } = useLocalized()
               <span class="text-secondary/80 tracking-widest">REF · IA</span>
             </div>
 
-            <div class="relative aspect-[4/3] overflow-hidden border border-hairline bg-bg">
+            <div class="relative aspect-square overflow-hidden border border-hairline bg-bg">
               <picture>
-                <source srcset="/images/hero-placeholder-ai.webp" type="image/webp">
+                <source
+                  type="image/avif"
+                  srcset="/images/hero-800.avif 800w, /images/hero-1254.avif 1254w"
+                  sizes="(min-width: 1024px) 520px, calc(100vw - 80px)"
+                >
+                <source
+                  type="image/webp"
+                  srcset="/images/hero-800.webp 800w, /images/hero-1254.webp 1254w"
+                  sizes="(min-width: 1024px) 520px, calc(100vw - 80px)"
+                >
                 <img
-                  src="/images/hero-placeholder-ai.jpg"
+                  src="/images/hero-1254.jpg"
+                  srcset="/images/hero-800.jpg 800w, /images/hero-1254.jpg 1254w"
+                  sizes="(min-width: 1024px) 520px, calc(100vw - 80px)"
                   :alt="t('hero.photoAlt')"
-                  width="1200"
-                  height="896"
+                  width="1254"
+                  height="1254"
                   loading="eager"
                   fetchpriority="high"
-                  class="hero-photo h-full w-full object-cover grayscale-[92%] contrast-[108%] brightness-[97%]"
+                  class="hero-photo h-full w-full object-cover"
                 >
               </picture>
             </div>
 
             <div class="mt-2 flex items-center justify-between border-t border-hairline px-1 pt-2 font-mono text-[11px] text-secondary">
-              <span class="text-secondary/80">PLACEHOLDER // POR REEMPLAZAR</span>
+              <span class="text-secondary/80">AI ILLUSTRATION</span>
               <span class="font-mono text-accent-hover">EST. 2025</span>
             </div>
           </div>
