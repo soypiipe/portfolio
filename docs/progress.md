@@ -314,6 +314,20 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - **Verificado:** lint, typecheck y build con código 0 (2.94 MB / 752 kB gzip); las 6 variantes se sirven con `cache-control: max-age=86400`.
 - **Nota:** el CLAUDE.md del proyecto describe una "fotografía cinemática"; la imagen final es ilustración. Decisión de Diego; no se cambió esa guía.
 
+## Fase 9 — Lanzamiento (plan, 2026-10-03)
+
+**Estado:** ⏳ pendiente. Restricción de Diego: **lo más económico posible** (sin empleo por ahora). El dominio definitivo es `diegoamado.dev` (aún no comprado). Único costo recurrente: el dominio (~12–15 USD/año, confirmar al comprar); hosting, HTTPS, CDN y despliegue continuo, gratis. Mientras no se compre, el sitio puede probarse gratis en un subdominio `*.pages.dev`.
+
+- [ ] Verificar que `diegoamado.dev` esté libre (plan B: `.com`/`.co`; el cambio en código es solo la variable de entorno)
+- [ ] Comprar el dominio a precio de costo (Cloudflare Registrar o Porkbun), sin extras de hosting ni correo
+- [ ] Hosting en Cloudflare Pages (plan gratuito, conectado al repo, despliega con cada push a `main`). **Por verificar:** que el preset de Nitro para Cloudflare mantenga `sitemap.xml`, `robots.txt` y `/en`; si no, prerenderizar
+- [ ] Definir `NUXT_PUBLIC_SITE_URL=https://diegoamado.dev` en build y runtime
+- [ ] Conectar el dominio (+ redirección `www` → raíz) y confirmar HTTPS
+- [ ] Verificar en el dominio real: sitemap, robots, hreflang, canonical, PDFs del CV, Lighthouse; y que el HTML salga comprimido (gzip/br)
+- [ ] Abrir indexación (`Disallow:` en `server/routes/robots.txt.ts`) solo cuando lo anterior pase
+- [ ] Google Search Console (gratis) y enviar el sitemap
+- [ ] Opcional y gratis: `ogImage` desde la ilustración del hero; correo con el dominio vía Cloudflare Email Routing (reenvío a Outlook)
+
 ---
 
 ## Pendientes abiertos
@@ -331,4 +345,4 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - Si se agrega un idioma: una línea en `cvHref` (`app/data/contact.ts`) + su PDF en `public/cv/`.
 - Rendimiento: no queda nada de bajo riesgo por mejorar (ver sección 4). Compresión del HTML de SSR (~145KB → ~39KB) depende del proxy/CDN del deploy: verificar que `gzip`/`br` esté activo ahí.
 
-**Siguiente paso:** Fase 8 depende de ti (foto final; opcionalmente las 3 observaciones de contenido de la sección About). Del lado técnico no queda nada obligatorio.
+**Siguiente paso:** Fase 9 (lanzamiento): comprar el dominio y desplegar. Fase 8 está cerrada salvo las observaciones opcionales de contenido de About.

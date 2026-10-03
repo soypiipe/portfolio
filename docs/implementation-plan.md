@@ -117,3 +117,17 @@ Before launch, request/verify:
 - final public location wording
 
 Do not publish invented placeholders.
+
+## Phase 9 — Launch (lowest cost)
+
+Constraint: spend as little as possible. Only recurring cost = the domain (~USD 12–15/year, to be confirmed at purchase). Hosting, HTTPS, CDN and CI/CD are free.
+
+- [ ] Check `diegoamado.dev` availability (fallback: `.com` / `.co`)
+- [ ] Buy the domain at cost (Cloudflare Registrar or Porkbun; no hosting/email add-ons)
+- [ ] Host on Cloudflare Pages free tier (git-connected, deploys on push to `main`); verify the Nitro preset (`cloudflare_pages`) keeps `sitemap.xml`/`robots.txt` and the `/en` routes working, or prerender
+- [ ] Set `NUXT_PUBLIC_SITE_URL=https://diegoamado.dev` (build and runtime)
+- [ ] Connect the custom domain (+ `www` → apex redirect), confirm HTTPS
+- [ ] Verify on the real domain: sitemap, robots, hreflang, canonical, CV PDFs, Lighthouse
+- [ ] Open crawling (`Disallow:` in `server/routes/robots.txt.ts`) only after the above passes
+- [ ] Google Search Console (free) + submit sitemap
+- [ ] Optional, free: `ogImage` from the hero illustration; domain email via Cloudflare Email Routing (forwarding)
