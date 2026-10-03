@@ -323,7 +323,7 @@ Lo que seguí sin poder verificar: responsive visual real (no tomé screenshots,
 - [ ] Hosting en Cloudflare Pages (plan gratuito, conectado al repo, despliega con cada push a `main`). **Por verificar:** que el preset de Nitro para Cloudflare mantenga `sitemap.xml`, `robots.txt` y `/en`; si no, prerenderizar
 - [ ] Definir `NUXT_PUBLIC_SITE_URL=https://diegoamado.dev` en build y runtime
 - [ ] Conectar el dominio (+ redirección `www` → raíz) y confirmar HTTPS
-- [ ] Verificar en el dominio real: sitemap, robots, hreflang, canonical, PDFs del CV, Lighthouse; y que el HTML salga comprimido (gzip/br)
+- [x] Verificado en `diegoamado.pages.dev` (2026-10-03): sitemap, robots, hreflang, canonical, PDFs del CV, 404 propio y HTML con brotli. **Lighthouse en producción real (3 corridas cada uno):** móvil Performance 79–85 (FCP 2.6s, LCP 3.3–3.4s, TBT 200–380ms, CLS 0), escritorio **100** (FCP 0.6s, LCP 0.7s, CLS 0); Accessibility 100 y Best Practices 100 en ambos; SEO 69 por el `Disallow: /` deliberado. Móvil igual que antes (83–86 local): la ilustración nueva no empeoró el LCP. Falta repetir al conectar el dominio definitivo
 - [ ] Abrir indexación (`Disallow:` en `server/routes/robots.txt.ts`) solo cuando lo anterior pase
 - [ ] Google Search Console (gratis) y enviar el sitemap
 - [x] `ogImage` (2026-10-03): `public/images/og.jpg`, 1200×630, ~100 KB (ilustración + nombre + cargo sobre fondo charcoal; sin el dominio escrito en la imagen, por si cambia), con `og:image`/`twitter:image`, ancho/alto y alt en ES/EN (`hero.ogImageAlt`). Sigue sin ir en el JSON-LD `Person` (no es una foto real)
