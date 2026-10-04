@@ -33,3 +33,6 @@ logs
 .windsurf/
 CLAUDE.local.md
 *.claude-scratch*
+
+# Perfiles temporales de Chrome que Lighthouse deja con rutas de Windows (WSL)
+C:*
