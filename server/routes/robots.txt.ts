@@ -3,11 +3,13 @@
 // this needs runtimeConfig.public.siteUrl the same way sitemap.xml.ts does.
 // Never a hardcoded domain guess.
 //
-// Deliberately blocking all crawling for now — content isn't locked yet
-// (About bio is still a draft, hero photo is an AI placeholder, contact
-// info isn't filled in — see docs/progress.md, Fase 8 "Content lock").
-// Flip `Disallow: /` to `Disallow:` once the site is actually ready to be
-// found and deployed to a real domain.
+// Crawling is still blocked. The original reasons (draft bio, placeholder
+// photo, missing contact info) no longer apply: the content is locked. What
+// remains is the indexing decision: Diego decided to OPEN it on the current
+// pages.dev domain (docs/DECISIONES.md, entry 008), pending a check that
+// Cloudflare Pages doesn't also send `X-Robots-Tag: noindex` (docs/PLAN.md,
+// Fase 9, first task). Until that task runs, keep `Disallow: /`; the change
+// is `Disallow:` (empty).
 export default defineEventHandler((event) => {
   const { siteUrl } = useRuntimeConfig(event).public
   setHeader(event, 'content-type', 'text/plain')

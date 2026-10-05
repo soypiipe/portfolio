@@ -7,11 +7,8 @@ const { t } = useI18n()
 // handled by a different branch of Nuxt's scrollBehavior and are unaffected.
 definePageMeta({ scrollToTop: false })
 
-// No ogImage on purpose: the only image on the site right now is the
-// hero's AI placeholder photo (visibly marked "PLACEHOLDER // POR
-// REEMPLAZAR" on the page) — using it as the social-share preview would
-// mean that text shows up when someone shares the link. Add ogImage once
-// the real photo exists (see docs/progress.md, Fase 8).
+// og:image / twitter:image are not set here: app.vue defines them for every
+// page (public/images/og.jpg, 1200x630). Only the per-page text goes here.
 useSeoMeta({
   title: () => `${t('hero.name')} — ${t('hero.eyebrow')}`,
   description: () => t('hero.statement'),

@@ -1,50 +1,37 @@
-# Diego Amado Portfolio — Claude Code Handoff
+# Diego Amado — Portfolio
 
-This folder contains the design and implementation brief for Claude Code.
+Personal site of Diego Amado, Systems Engineer / Software Engineer. One page,
+fully bilingual (Spanish is the primary language, English is a complete second
+locale), built to be fast, accessible and SEO-friendly.
 
-## Start here
+Live at <https://diegoamado.pages.dev>.
 
-Read in this order:
+## Stack
 
-1. `CLAUDE.md`
-2. `docs/ux-ui.md`
-3. `docs/architecture.md`
-4. `docs/content.md`
-5. `docs/implementation-plan.md`
+Nuxt 4, Vue 3, TypeScript, Tailwind CSS, `@nuxtjs/i18n`, `@nuxt/icon` and
+`@nuxt/fonts` (self-hosted fonts). Deployed on Cloudflare Pages.
 
-## Important
+## Run it
 
-The visual direction is already approved at concept level.
+```bash
+npm install
+npm run dev      # development server
+npm run build    # production build
+npm run lint
+```
 
-Do not redesign the concept unless explicitly requested.
+`NUXT_PUBLIC_SITE_URL` sets the absolute URL used for the canonical link,
+`hreflang`, Open Graph tags, `sitemap.xml` and `robots.txt`. Set it at build
+time and at runtime.
 
-The approved direction:
-- dark cinematic
-- editorial
-- technical
-- minimal
-- subtle animations
-- no gradients
-- no generic AI visual language
-- DA monogram in top-left
-- Diego Amado prominently named in the hero
-- dog as a subtle personal visual detail
-- Spanish + English
+## Structure
 
-## How Claude Code should work
-
-Do not implement every section in one shot.
-
-Start with Phase 0 and Phase 1 from `docs/implementation-plan.md`.
-
-After each phase:
-1. run checks
-2. inspect the result
-3. fix issues
-4. summarize changes
-5. continue only after the phase is coherent
-
-If information is missing, use a clearly marked placeholder instead of inventing it.
+- `app/` — Nuxt 4 source: components by section, composables, layout, plugins.
+- `app/data/` — typed content: projects, experience, stack, contact, navigation.
+- `i18n/locales/` — `es.json` and `en.json`.
+- `server/routes/` — dynamic `sitemap.xml` and `robots.txt`.
+- `public/` — images and the CV (one PDF per language).
+- `docs/` — plan, decisions and per-phase notes (in Spanish).
 
 ## License
 

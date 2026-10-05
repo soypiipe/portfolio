@@ -1,5 +1,7 @@
 # UX/UI Specification — Diego Amado Portfolio
 
+> Este es el spec de diseño original. Lo construido se desvió de él en algunos puntos (p. ej. el grid del fondo corre en 48 s, no 70 s; Experiencia es un accordion vertical, no un timeline horizontal). Esas desviaciones y su razón están en `DECISIONES.md`, que manda sobre este archivo.
+
 ## 1. Product concept
 
 The portfolio presents Diego Amado as a **modern software engineer who builds systems**, not simply as a developer listing technologies.
