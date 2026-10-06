@@ -12,6 +12,7 @@ Hoy el sitio sirve su sitemap, `hreflang` y canonical con `diegoamado.pages.dev`
 - **Esperar al dominio definitivo** (descartada). A favor: una sola identidad desde el primer día, sin duplicados ni migración. En contra: sin visibilidad en buscadores hasta comprar el dominio, y la compra depende del presupuesto, así que el plazo es abierto.
 - Detalle común: un `Disallow: /` no impide que Google muestre la URL sin descripción si alguien la enlaza.
 - **Condición previa:** comprobar con `curl -I` que Cloudflare Pages no agrega `X-Robots-Tag: noindex` en `pages.dev`. Si lo hace, el `robots.txt` no alcanza.
+- **Resultado (2026-10-05):** no la agrega. Se revisaron `/`, `/en`, `/robots.txt`, `/sitemap.xml` y el PDF del CV: 0 cabeceras `X-Robots-Tag`, y el HTML de `/` y `/en` no tiene `meta robots`. Solo `error.vue` (la 404) es `noindex`, a propósito. Con eso se abrió el `robots.txt` (`Disallow:` vacío) ese mismo día.
 - Cambio respecto al plan anterior: Search Console pasa a registrarse para `pages.dev` justo después de abrir, y el cambio de dirección queda para la migración al dominio.
 
 ### Nombre en el CV — pendiente

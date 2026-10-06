@@ -97,8 +97,9 @@ Los generales están en `METODOLOGIA.md`. Lo propio de este código:
   y 013).
 - No se inventa contenido: experiencia, proyectos, métricas, clientes,
   fotos ni datos de contacto. Lo que falta se marca como placeholder.
-- No se toca `Disallow: /` de `server/routes/robots.txt.ts` fuera de la
-  tarea de indexación de la Fase 9 (DECISIONES 008).
+- No se vuelve a bloquear el crawling ni se cambia `server/routes/robots.txt.ts`
+  sin una decisión nueva en `DECISIONES.md`: la indexación está abierta en
+  `pages.dev` desde el 2026-10-05 (DECISIONES 008).
 - No se pone la ilustración del hero en el campo `image` del JSON-LD
   `Person`: no es una foto real.
 - No se usa i18n "solo runtime" (`runtimeOnly`/`dropMessageCompiler`): rompe
@@ -108,8 +109,8 @@ Los generales están en `METODOLOGIA.md`. Lo propio de este código:
   3D ni animaciones que bloqueen la lectura o muevan el layout.
 - No se agrega una librería de motion, un `Button.vue` ni capas de
   abstracción mientras CSS y los componentes actuales alcancen.
-- No se indexa ni se redirige entre dominios sin pasar por las tareas de la
-  Fase 9.
+- No se redirige entre dominios ni se cambia `NUXT_PUBLIC_SITE_URL` sin
+  pasar por las tareas de dominio de la Fase 9.
 
 ## Ciclo de trabajo
 

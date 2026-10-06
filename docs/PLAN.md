@@ -121,8 +121,8 @@ gratuito, despliegue con cada push a `main`). Indexación decidida: abrir en
 `pages.dev` (ver `DECISIONES.md`, 008). Argumentos de las decisiones
 abiertas en `notas/09-lanzamiento.md`.
 
-- [ ] Verificar si Cloudflare Pages agrega `X-Robots-Tag: noindex` en `diegoamado.pages.dev` (con `curl -I`); si lo hace, el `robots.txt` no alcanza
-- [ ] Abrir indexación en `pages.dev`: `Disallow:` vacío en `server/routes/robots.txt.ts`, con el canonical actual (DECISIONES 008)
+- [x] Verificar si Cloudflare Pages agrega `X-Robots-Tag: noindex` en `diegoamado.pages.dev` (con `curl -I`); si lo hace, el `robots.txt` no alcanza
+- [x] Abrir indexación en `pages.dev`: `Disallow:` vacío en `server/routes/robots.txt.ts`, con el canonical actual (DECISIONES 008)
 - [ ] Registrar `diegoamado.pages.dev` en Google Search Console y enviar el sitemap
 - [ ] Decidir el nombre en el CV, LinkedIn y el sitio; registrar en `DECISIONES.md`
 - [x] Hosting en Cloudflare Pages con despliegue por push a `main`

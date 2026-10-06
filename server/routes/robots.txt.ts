@@ -3,18 +3,16 @@
 // this needs runtimeConfig.public.siteUrl the same way sitemap.xml.ts does.
 // Never a hardcoded domain guess.
 //
-// Crawling is still blocked. The original reasons (draft bio, placeholder
-// photo, missing contact info) no longer apply: the content is locked. What
-// remains is the indexing decision: Diego decided to OPEN it on the current
-// pages.dev domain (docs/DECISIONES.md, entry 008), pending a check that
-// Cloudflare Pages doesn't also send `X-Robots-Tag: noindex` (docs/PLAN.md,
-// Fase 9, first task). Until that task runs, keep `Disallow: /`; the change
-// is `Disallow:` (empty).
+// Crawling is open (empty `Disallow:`) on the current pages.dev domain, per
+// docs/DECISIONES.md, entry 008. Before opening it, Cloudflare Pages was
+// checked: it sends no `X-Robots-Tag` header and the HTML has no robots meta
+// (only the 404 page is `noindex`, on purpose). When the final domain
+// replaces pages.dev, see the migration task in docs/PLAN.md, Fase 9.
 export default defineEventHandler((event) => {
   const { siteUrl } = useRuntimeConfig(event).public
   setHeader(event, 'content-type', 'text/plain')
   return `User-agent: *
-Disallow: /
+Disallow:
 
 Sitemap: ${siteUrl}/sitemap.xml
 `

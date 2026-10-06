@@ -75,7 +75,7 @@ dominio no era el definitivo.
 evitar posicionar un dominio que luego cambiaría. Las razones de contenido ya
 no aplican. La decisión vigente es la 008.
 
-## 008 — Abrir la indexación en `pages.dev` (decidida, aún no ejecutada)
+## 008 — Abrir la indexación en `pages.dev` (decidida y ejecutada el 2026-10-05)
 
 **Fecha:** 2026-10-05.
 **Decisión:** abrir el sitio a buscadores en `diegoamado.pages.dev` con el
@@ -89,7 +89,9 @@ argumentos de las dos opciones están en `notas/09-lanzamiento.md`; Diego no
 agregó otra razón.
 **Condición previa:** verificar que Cloudflare Pages no envíe
 `X-Robots-Tag: noindex` en `pages.dev`; si lo envía, el `robots.txt` solo no
-alcanza. Es la primera tarea de la Fase 9 en `PLAN.md`.
+alcanza. **Verificada el 2026-10-05:** ninguna ruta (`/`, `/en`,
+`/robots.txt`, `/sitemap.xml`, el CV) devuelve esa cabecera y el HTML no trae
+`meta robots`; solo la página 404 es `noindex`, a propósito.
 
 ## 009 — Fondo animado de 48 s y excepción a "sin gradientes"
 
