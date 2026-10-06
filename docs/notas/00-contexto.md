@@ -21,4 +21,4 @@ Costo mínimo: el único gasto recurrente previsto es el dominio (~12–15 USD/a
 
 ## Documentación previa
 
-Antes de la migración el avance vivía en `progress.md`, el plan inicial en `implementation-plan.md`, y había `architecture.md` y `content.md`. Esos cuatro archivos quedan reemplazados por `PLAN.md`, `DECISIONES.md`, `notas/` y `CLAUDE.md`; su borrado es un paso aparte que decide Diego.
+Antes de la migración el avance vivía en `progress.md`, el plan inicial en `implementation-plan.md`, y había `architecture.md` y `content.md`. Esos cuatro archivos se reemplazaron por `PLAN.md`, `DECISIONES.md`, `notas/` y `CLAUDE.md`, y se eliminaron en un commit aparte; siguen disponibles en el historial de git. El texto de `progress.md` está repartido sin cambios en las notas 01 a 09.

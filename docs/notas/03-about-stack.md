@@ -1,5 +1,7 @@
 # Notas — Fase 3 — About y Stack
 
+Registro histórico. El estado real de las tareas está en docs/PLAN.md.
+
 > Texto movido **sin cambios** desde `docs/progress.md` en la migración a la
 > metodología (2026-10-05). Es un registro histórico: las casillas y los
 > "pendientes" que aparecen abajo son de esa fecha; el estado vigente está

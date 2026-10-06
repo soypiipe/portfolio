@@ -16,20 +16,19 @@ Hoy el sitio sirve su sitemap, `hreflang` y canonical con `diegoamado.pages.dev`
 
 ### Nombre en el CV — pendiente
 
-- El PDF del CV (ES y EN) dice "DIEGO FELIPE ARIZA AMADO"; el sitio y el JSON-LD usan "Diego Amado" (`progress.md`, sección del CV).
+- El PDF del CV (ES y EN) dice "DIEGO FELIPE ARIZA AMADO"; el sitio y el JSON-LD usan "Diego Amado" (ver `notas/08-contenido-definitivo.md`, sección del CV).
 - LinkedIn no se pudo verificar durante la migración.
 - Hay que decidir y que CV, LinkedIn y sitio no se contradigan. Opciones: cambiar el CV; mantener el nombre completo en el CV y agregar `alternateName` en el JSON-LD; o dejar la diferencia. Al decidir, va a `DECISIONES.md`.
 
-### "Más de seis años" — pendiente
+### "Más de seis años" — decidido
 
-- El About dice "más de seis años", y las fechas de Experiencia empiezan en feb 2018 (~8 años). Es verdadero y coincide con el CV, pero quien sume las fechas verá una diferencia.
-- Opción de Diego: **"desde 2018"**, porque es exacto y no se desactualiza.
-- Al elegirla: las fechas **no son estrictamente continuas** (Grupo Meiko termina en may 2019 e Interactivo empieza en jul 2019, dos meses de hueco), aunque "desde 2018" sigue siendo exacto como inicio. Además el `CLAUDE.md` de la raíz del segundo cerebro dice "en producción desde 2017": conviene reconciliar 2017 y 2018.
-- Se cambia en About y CV a la vez.
+El About conserva "más de seis años" y Experiencia da las fechas. Ver `DECISIONES.md`, 016. No queda tarea.
 
 ---
 
 ## Registro histórico (movido de `progress.md`)
+
+Registro histórico. El estado real de las tareas está en docs/PLAN.md.
 
 > Texto movido **sin cambios** desde `docs/progress.md` en la migración a la
 > metodología (2026-10-05). Es un registro histórico: las casillas y los
