@@ -109,7 +109,7 @@ tarea en la Fase 10.
 ese color; el texto no se tocó), con fondo blanco.
 **Alternativas descartadas:** un CV oscuro, a juego con el sitio.
 **Razón:** un CV se imprime y lo leen ATS y reclutadores; uno oscuro sería
-peor práctica. El PDF decía "Diego Felipe Ariza Amado": ver la decisión 017.
+peor práctica. El PDF lleva el nombre legal completo: ver la decisión 017.
 
 ## 011 — i18n "solo runtime" probado y revertido
 
@@ -164,16 +164,19 @@ repetirlas. El `CLAUDE.md` de la raíz del segundo cerebro se alineó
 ("más de 6 años de experiencia", antes "en producción desde 2017") para que
 no contradiga al sitio.
 
-## 017 — Nombre público: "Diego Amado"
+## 017 — Nombre: "Diego Amado" en el sitio, nombre legal completo en el CV
 
-**Fecha:** 2026-10-05.
-**Decisión:** el nombre público es "Diego Amado" en el CV, LinkedIn, el sitio
-y el JSON-LD `Person`. El nombre legal completo se usa solo donde sea
-legalmente necesario.
-**Alternativas descartadas:** mantener "Diego Felipe Ariza Amado" en el CV y
-agregar `alternateName` en el JSON-LD; dejar la diferencia entre CV y sitio.
-**Razón:** que CV, LinkedIn y sitio no se contradigan. LinkedIn y el sitio ya
-usaban "Diego Amado"; el CV era el único que decía otra cosa.
-**Pendiente de ejecución:** los PDF de `public/cv/` aún llevan el nombre
-completo en el encabezado; ver la tarea correspondiente en la Fase 9 de
-`PLAN.md`.
+**Fecha:** 2026-10-05 (corregida el mismo día).
+**Decisión:** el nombre público corto es "Diego Amado" en el sitio, LinkedIn
+y el JSON-LD `Person`. Los CV llevan el nombre legal completo, "Diego Felipe
+Ariza Amado", que es lo normal en un documento formal con dos apellidos. No
+hay contradicción y los PDF no se regeneran.
+**Alternativas descartadas:** poner el nombre corto también en el CV; agregar
+`alternateName` al JSON-LD; dejar el tema sin decidir.
+**Razón:** el CV es un documento formal y el nombre completo con ambos
+apellidos es lo esperable ahí; el sitio y LinkedIn son identidad pública y
+usan el nombre corto.
+**Corrección:** la primera versión de esta entrada decía que el nombre
+público corto también iba en el CV y abrió una tarea para reemplazar los PDF.
+Diego la corrigió el mismo día: los CV se publican con el nombre completo, tal
+como están.

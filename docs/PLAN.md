@@ -125,8 +125,8 @@ abiertas en `notas/09-lanzamiento.md`.
 - [x] Abrir indexación en `pages.dev`: `Disallow:` vacío en `server/routes/robots.txt.ts`, con el canonical actual (DECISIONES 008)
 - [x] Publicar el archivo de verificación de Search Console (`public/google8eb9aa2851eef5af.html` y la regla de `public/_redirects`)
 - [ ] Verificar la propiedad `diegoamado.pages.dev` en Google Search Console y enviar el sitemap
-- [x] Decidir el nombre en el CV, LinkedIn y el sitio; registrar en `DECISIONES.md` (017)
-- [ ] Reemplazar los PDF de `public/cv/` por las versiones con "Diego Amado" en el encabezado (conservar los nombres de archivo y la metadata)
+- [x] Decidir el nombre: corto en el sitio, LinkedIn y JSON-LD; completo en el CV (`DECISIONES.md`, 017)
+- [x] Publicar los CV con el nombre legal completo, sin regenerarlos (incluyen `diegoamado.pages.dev` en la línea de contacto)
 - [x] Hosting en Cloudflare Pages con despliegue por push a `main`
 - [x] Verificación en `pages.dev`: rutas, sitemap, robots, CV, 404 propio y Lighthouse
 - [x] `og.jpg` con `og:image` y `twitter:image`
@@ -150,6 +150,7 @@ abiertas en `notas/09-lanzamiento.md`.
 - [ ] Probar en un dispositivo móvil real, incluida la descarga del CV en iOS
 - [ ] Definir y agregar pruebas mínimas: smoke test de hidratación (ES y EN) en navegador real, y las verificaciones de íconos y claves i18n que hoy se hacen con scripts sueltos
 - [ ] Corregir el rango "sept de 2026 — sept de 2026" de energy-ai en `app/data/projects.ts`
+- [ ] Reponer la metadata de los PDF de `public/cv/`: título, autor y asunto, `DisplayDocTitle`, e idioma `es-CO` en el español (hoy ambos declaran `en-US` y el autor es "Un-named")
 - [ ] Mover `eslint` y `@nuxt/eslint` a `devDependencies` y verificar que el build de Cloudflare siga pasando
 - [ ] Agregar el script `typecheck` (`nuxt typecheck`) a `package.json`
 - [ ] Cubrir con una excepción escrita el `linear-gradient` del grid de `TheBackground.vue` (hoy solo `CursorGlow` está exceptuado)

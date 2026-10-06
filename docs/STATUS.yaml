@@ -45,11 +45,11 @@ fases:
   - numero: 9
     nombre: Lanzamiento
     estado: en_progreso
-    tareas: { total: 15, completadas: 7 }
+    tareas: { total: 15, completadas: 8 }
   - numero: 10
     nombre: Endurecimiento
     estado: no_iniciada
-    tareas: { total: 11, completadas: 0 }
+    tareas: { total: 12, completadas: 0 }
   - numero: 11
     nombre: Auditoría independiente
     estado: no_iniciada

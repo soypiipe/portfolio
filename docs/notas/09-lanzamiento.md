@@ -18,7 +18,7 @@ Hoy el sitio sirve su sitemap, `hreflang` y canonical con `diegoamado.pages.dev`
 
 ### Nombre en el CV — decidido
 
-El nombre público es "Diego Amado" en CV, LinkedIn, sitio y JSON-LD; el nombre legal completo solo donde sea legalmente necesario. Ver `DECISIONES.md`, 017. Falta reemplazar los PDF (tarea en `PLAN.md`): al 2026-10-05 el encabezado de ambos aún dice "DIEGO FELIPE ARIZA AMADO".
+"Diego Amado" en el sitio, LinkedIn y JSON-LD; el nombre legal completo en los CV, que es lo normal en un documento formal con dos apellidos. Ver `DECISIONES.md`, 017 (corregida el mismo día: una primera versión pedía el nombre corto también en el CV). Los PDF se publicaron como estaban; la única diferencia con la versión anterior es que agregan `diegoamado.pages.dev` a la línea de contacto. Su metadata es tarea de la Fase 10.
 
 ### "Más de seis años" — decidido
 
