@@ -45,7 +45,7 @@ fases:
   - numero: 9
     nombre: Lanzamiento
     estado: en_progreso
-    tareas: { total: 14, completadas: 6 }
+    tareas: { total: 15, completadas: 7 }
   - numero: 10
     nombre: Endurecimiento
     estado: no_iniciada

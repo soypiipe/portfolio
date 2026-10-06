@@ -109,8 +109,7 @@ tarea en la Fase 10.
 ese color; el texto no se tocó), con fondo blanco.
 **Alternativas descartadas:** un CV oscuro, a juego con el sitio.
 **Razón:** un CV se imprime y lo leen ATS y reclutadores; uno oscuro sería
-peor práctica. El PDF dice "Diego Felipe Ariza Amado": ver la tarea de
-decisión del nombre en la Fase 9.
+peor práctica. El PDF decía "Diego Felipe Ariza Amado": ver la decisión 017.
 
 ## 011 — i18n "solo runtime" probado y revertido
 
@@ -164,3 +163,17 @@ fechas se ven. No se usa "desde 2018" ni ninguna cifra con año de inicio.
 repetirlas. El `CLAUDE.md` de la raíz del segundo cerebro se alineó
 ("más de 6 años de experiencia", antes "en producción desde 2017") para que
 no contradiga al sitio.
+
+## 017 — Nombre público: "Diego Amado"
+
+**Fecha:** 2026-10-05.
+**Decisión:** el nombre público es "Diego Amado" en el CV, LinkedIn, el sitio
+y el JSON-LD `Person`. El nombre legal completo se usa solo donde sea
+legalmente necesario.
+**Alternativas descartadas:** mantener "Diego Felipe Ariza Amado" en el CV y
+agregar `alternateName` en el JSON-LD; dejar la diferencia entre CV y sitio.
+**Razón:** que CV, LinkedIn y sitio no se contradigan. LinkedIn y el sitio ya
+usaban "Diego Amado"; el CV era el único que decía otra cosa.
+**Pendiente de ejecución:** los PDF de `public/cv/` aún llevan el nombre
+completo en el encabezado; ver la tarea correspondiente en la Fase 9 de
+`PLAN.md`.

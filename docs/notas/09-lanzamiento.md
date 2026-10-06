@@ -16,11 +16,9 @@ Hoy el sitio sirve su sitemap, `hreflang` y canonical con `diegoamado.pages.dev`
 - **Archivo de verificación de Search Console (2026-10-06).** Se agregó `public/google8eb9aa2851eef5af.html` con la línea exacta que pide Google (53 bytes, sin HTML alrededor). Primer intento: la URL respondía **308** a `/google8eb9aa2851eef5af`, porque Cloudflare Pages quita la extensión `.html` de los archivos estáticos (no es Nuxt). Para que Google reciba un 200 en la URL exacta se agregó `public/_redirects` con un rewrite: `/google8eb9aa2851eef5af.html /google8eb9aa2851eef5af 200`. Nitro conserva ese archivo en el build de Cloudflare Pages (`dist/_redirects`). Verificado en producción: 200, cuerpo idéntico a la línea esperada, sin `Location`. Cualquier otro `.html` estático que se agregue a `public/` tendrá el mismo 308 y necesitará su propia regla.
 - Cambio respecto al plan anterior: Search Console pasa a registrarse para `pages.dev` justo después de abrir, y el cambio de dirección queda para la migración al dominio.
 
-### Nombre en el CV — pendiente
+### Nombre en el CV — decidido
 
-- El PDF del CV (ES y EN) dice "DIEGO FELIPE ARIZA AMADO"; el sitio y el JSON-LD usan "Diego Amado" (ver `notas/08-contenido-definitivo.md`, sección del CV).
-- LinkedIn no se pudo verificar durante la migración.
-- Hay que decidir y que CV, LinkedIn y sitio no se contradigan. Opciones: cambiar el CV; mantener el nombre completo en el CV y agregar `alternateName` en el JSON-LD; o dejar la diferencia. Al decidir, va a `DECISIONES.md`.
+El nombre público es "Diego Amado" en CV, LinkedIn, sitio y JSON-LD; el nombre legal completo solo donde sea legalmente necesario. Ver `DECISIONES.md`, 017. Falta reemplazar los PDF (tarea en `PLAN.md`): al 2026-10-05 el encabezado de ambos aún dice "DIEGO FELIPE ARIZA AMADO".
 
 ### "Más de seis años" — decidido
 
