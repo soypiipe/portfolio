@@ -22,7 +22,7 @@ iteración posteriores, que quedan dentro de la fase 6.
 **Estado:** completada
 
 - [x] Describir el problema y a quién le sirve (carta de presentación profesional, bilingüe)
-- [x] Inventariar el contenido a mostrar (hecho en `content.md`; hoy vive en `app/data/` e `i18n/`)
+- [x] Inventariar el contenido a mostrar (hecho en un `content.md` ya eliminado; hoy vive en `app/data/` e `i18n/`)
 - [x] Definir alcance: página única y concisa, sin secciones de relleno
 - [x] Listar restricciones: costo mínimo (solo el dominio), no inventar contenido, ES principal y EN completo
 
@@ -125,7 +125,6 @@ abiertas en `notas/09-lanzamiento.md`.
 - [ ] Abrir indexación en `pages.dev`: `Disallow:` vacío en `server/routes/robots.txt.ts`, con el canonical actual (DECISIONES 008)
 - [ ] Registrar `diegoamado.pages.dev` en Google Search Console y enviar el sitemap
 - [ ] Decidir el nombre en el CV, LinkedIn y el sitio; registrar en `DECISIONES.md`
-- [ ] Decidir la redacción de "más de seis años" (opción de Diego: "desde 2018"); aplicar en About y CV a la vez
 - [x] Hosting en Cloudflare Pages con despliegue por push a `main`
 - [x] Verificación en `pages.dev`: rutas, sitemap, robots, CV, 404 propio y Lighthouse
 - [x] `og.jpg` con `og:image` y `twitter:image`

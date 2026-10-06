@@ -3,8 +3,8 @@
 Decisiones con consecuencias: qué se decidió, qué se descartó y por qué. Si
 una decisión se revierte, se agrega una entrada nueva; no se borra la vieja.
 
-Reconstruido el 2026-10-05 al migrar a la metodología, a partir de
-`progress.md`, `ux-ui.md` y el código. Donde la razón no está escrita en
+Reconstruido el 2026-10-05 al migrar a la metodología, a partir del antiguo
+`progress.md` (hoy repartido en `notas/`), `ux-ui.md` y el código. Donde la razón no está escrita en
 ningún lado, dice `[RAZÓN NO DOCUMENTADA]`; no se inventó.
 
 ---
@@ -139,8 +139,8 @@ automatización, y el uso diario de IA, sin nombrar Amadia.
 despliegue por push a `main`.
 **Razón:** restricción de costo de Diego (sin empleo por ahora): el único
 costo recurrente previsto es el dominio.
-**Nota:** contradice `architecture.md`, que decía no acoplarse a un
-proveedor todavía.
+**Nota:** contradice el `architecture.md` original (ya eliminado), que decía
+no acoplarse a un proveedor todavía.
 
 ## 015 — Sin librería de motion
 
@@ -150,3 +150,15 @@ IntersectionObserver; no hay librería de animación.
 **Razón:** [RAZÓN NO DOCUMENTADA]. El mismo `CLAUDE.md` decía también
 preferir CSS y evitar dependencias innecesarias, pero no queda escrito que la
 ausencia de la librería fuera una decisión.
+
+## 016 — El About dice "más de seis años", sin año de inicio
+
+**Fecha:** 2026-10-05.
+**Decisión:** el About conserva "más de seis años" (ES) y "more than six
+years" (EN). El detalle cronológico lo da la sección Experiencia, donde las
+fechas se ven. No se usa "desde 2018" ni ninguna cifra con año de inicio.
+**Alternativas descartadas:** "desde 2018"; subir la cifra ("más de siete").
+**Razón:** las fechas ya viven en Experiencia, así que el About no necesita
+repetirlas. El `CLAUDE.md` de la raíz del segundo cerebro se alineó
+("más de 6 años de experiencia", antes "en producción desde 2017") para que
+no contradiga al sitio.

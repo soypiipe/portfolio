@@ -8,8 +8,8 @@ export interface ProjectLink {
 export interface Project {
   id: string
   nameKey: string
-  // Tag corto — viene del campo "Status" real de docs/content.md (proyecto
-  // real vs. propio), no una frase de contexto inventada.
+  // Tag corto (p. ej. "Prueba técnica"): una etiqueta real del proyecto,
+  // no una frase de contexto inventada.
   kindKey: string
   // Descripción corta vía i18n. Usada cuando `summary` no está presente.
   descriptionKey?: string
@@ -28,10 +28,10 @@ export interface Project {
   links?: ProjectLink[]
 }
 
-// Solo notify-engine, a pedido explícito de Diego. Miattend (2026-09-21) y
-// Amadia Technology (2026-09-28, aún sin primer cliente) quedan fuera por
-// ahora — siguen reales en docs/content.md y 00-mapa.md, solo no se muestran
-// en esta sección todavía.
+// Se muestran notify-engine y energy-ai. Miattend (2026-09-21) y Amadia
+// Technology (2026-09-28, aún sin primer cliente) quedan fuera por ahora —
+// siguen reales (ver 00-mapa.md y docs/DECISIONES.md, 005), solo no se
+// muestran en esta sección todavía.
 export const projects: Project[] = [
   {
     id: 'notify-engine',
