@@ -1,7 +1,7 @@
 # Generado por sync_status.py desde PLAN.md — no editar a mano
 proyecto: portfolio
 area: 02-personal
-actualizado: 2026-10-05
+actualizado: 2026-10-06
 fase_actual: 9
 fase_nombre: Lanzamiento
 estado: en_progreso
@@ -45,7 +45,7 @@ fases:
   - numero: 9
     nombre: Lanzamiento
     estado: en_progreso
-    tareas: { total: 15, completadas: 8 }
+    tareas: { total: 15, completadas: 9 }
   - numero: 10
     nombre: Endurecimiento
     estado: no_iniciada

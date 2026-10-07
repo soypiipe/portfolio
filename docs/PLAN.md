@@ -124,7 +124,7 @@ abiertas en `notas/09-lanzamiento.md`.
 - [x] Verificar si Cloudflare Pages agrega `X-Robots-Tag: noindex` en `diegoamado.pages.dev` (con `curl -I`); si lo hace, el `robots.txt` no alcanza
 - [x] Abrir indexación en `pages.dev`: `Disallow:` vacío en `server/routes/robots.txt.ts`, con el canonical actual (DECISIONES 008)
 - [x] Publicar el archivo de verificación de Search Console (`public/google8eb9aa2851eef5af.html` y la regla de `public/_redirects`)
-- [ ] Verificar la propiedad `diegoamado.pages.dev` en Google Search Console y enviar el sitemap
+- [x] Verificar la propiedad `diegoamado.pages.dev` en Google Search Console y enviar el sitemap
 - [x] Decidir el nombre: corto en el sitio, LinkedIn y JSON-LD; completo en el CV (`DECISIONES.md`, 017)
 - [x] Publicar los CV con el nombre legal completo, sin regenerarlos (incluyen `diegoamado.pages.dev` en la línea de contacto)
 - [x] Hosting en Cloudflare Pages con despliegue por push a `main`
